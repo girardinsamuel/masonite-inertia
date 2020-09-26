@@ -1,0 +1,16 @@
+venv
+venv2
+.vscode
+.idea/
+build/
+.pypirc
+.coverage
+coverage.xml
+.pytest_*
+**/*__pycache__*
+**/*.DS_Store*
+**.pyc
+dist
+.env
+*.db
+masonite.egg-info
