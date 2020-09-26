@@ -18,4 +18,3 @@ for key, value in container.providers.items():
 
 if __name__ == '__main__':
     application.run()
-

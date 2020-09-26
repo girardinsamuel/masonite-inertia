@@ -14,7 +14,7 @@ import os
 |
 """
 
-DRIVER = os.getenv('STORAGE_DRIVER', 'disk')
+DRIVER = os.getenv("STORAGE_DRIVER", "disk")
 
 """
 |--------------------------------------------------------------------------
@@ -26,14 +26,12 @@ DRIVER = os.getenv('STORAGE_DRIVER', 'disk')
 """
 
 DRIVERS = {
-    'disk': {
-        'location': 'storage/uploads'
+    "disk": {"location": "storage/uploads"},
+    "s3": {
+        "client": os.getenv("S3_CLIENT", "AxJz..."),
+        "secret": os.getenv("S3_SECRET", "HkZj..."),
+        "bucket": os.getenv("S3_BUCKET", "s3bucket"),
     },
-    's3': {
-        'client': os.getenv('S3_CLIENT', 'AxJz...'),
-        'secret': os.getenv('S3_SECRET', 'HkZj...'),
-        'bucket': os.getenv('S3_BUCKET', 's3bucket'),
-    }
 }
 
 
@@ -54,9 +52,9 @@ DRIVERS = {
 
 STATICFILES = {
     # folder          # template alias
-    'storage/static': 'static/',
-    'storage/compiled': 'static/',
-    'storage/uploads': 'static/',
+    # 'storage/static': 'static/',
+    "storage/compiled": "static/",
+    "storage/uploads": "static/",
 }
 
 """
@@ -79,11 +77,7 @@ STATICFILES = {
 """
 
 SASSFILES = {
-    'importFrom': [
-        'storage/static'
-    ],
-    'includePaths': [
-        'storage/static/sass'
-    ],
-    'compileTo': 'storage/compiled'
+    "importFrom": ["storage/static"],
+    "includePaths": ["storage/static/sass"],
+    "compileTo": "storage/compiled",
 }

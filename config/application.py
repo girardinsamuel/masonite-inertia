@@ -13,7 +13,7 @@ import os
 |
 """
 
-NAME = 'Inertia'
+NAME = "Masonite 2.3"
 
 """
 |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ NAME = 'Inertia'
 |
 """
 
-DEBUG = os.getenv('APP_DEBUG', False)
+DEBUG = os.getenv("APP_DEBUG", False)
 
 """
 |--------------------------------------------------------------------------
@@ -40,7 +40,7 @@ DEBUG = os.getenv('APP_DEBUG', False)
 |
 """
 
-KEY = os.getenv('KEY', 'wzWfd04IxEjyoyNHN9M-pizOO4TYOnWUoxBqjO61FCA=')
+KEY = os.getenv("KEY", "wzWfd04IxEjyoyNHN9M-pizOO4TYOnWUoxBqjO61FCA=")
 
 """
 |--------------------------------------------------------------------------
@@ -51,7 +51,7 @@ KEY = os.getenv('KEY', 'wzWfd04IxEjyoyNHN9M-pizOO4TYOnWUoxBqjO61FCA=')
 |
 """
 
-URL = 'http://localhost:8000'
+URL = "http://localhost:8000"
 
 """
 |--------------------------------------------------------------------------
@@ -73,7 +73,7 @@ BASE_DIRECTORY = os.getcwd()
 |
 """
 
-STATIC_ROOT = os.path.join(BASE_DIRECTORY, 'storage')
+STATIC_ROOT = os.path.join(BASE_DIRECTORY, "storage")
 
 """
 |--------------------------------------------------------------------------
@@ -87,5 +87,5 @@ STATIC_ROOT = os.path.join(BASE_DIRECTORY, 'storage')
 """
 
 AUTOLOAD = [
-    'app',
+    "app",
 ]

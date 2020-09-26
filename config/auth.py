@@ -17,19 +17,14 @@ be authenticated.
 """
 
 AUTH = {
-    'defaults': {
-        'guard': env('AUTH_GUARD', 'web')
-    },
-    'guards': {
-        'web': {
-            'driver': 'cookie',
-            'model': User,
-            'drivers': { # 'cookie', 'jwt'
-                'jwt': {
-                    'reauthentication': True,
-                    'lifetime': '5 minutes'
-                }
-            }
+    "defaults": {"guard": env("AUTH_GUARD", "web")},
+    "guards": {
+        "web": {
+            "driver": "cookie",
+            "model": User,
+            "drivers": {  # 'cookie', 'jwt'
+                "jwt": {"reauthentication": True, "lifetime": "5 minutes"}
+            },
         },
-    }
+    },
 }

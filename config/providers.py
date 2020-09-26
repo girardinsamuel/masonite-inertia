@@ -16,8 +16,9 @@ from masonite.providers import (
     CacheProvider,
     CsrfProvider,
 )
-from masonite.inertia import  InertiaProvider
 
+from masonite.inertia import InertiaProvider
+from app.providers.MyAppProvider import MyAppProvider
 """
 |--------------------------------------------------------------------------
 | Providers List
@@ -40,7 +41,6 @@ PROVIDERS = [
     StatusCodeProvider,
     # WhitenoiseProvider,
     ViewProvider,
-
     # Optional Framework Providers
     # SassProvider,
     # MailProvider,
@@ -54,7 +54,6 @@ PROVIDERS = [
 
     # Third Party Providers
     InertiaProvider,
-
     # Application Providers
-
+    MyAppProvider,
 ]

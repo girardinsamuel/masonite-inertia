@@ -6,6 +6,9 @@ from app.http.middleware.AuthenticationMiddleware import AuthenticationMiddlewar
 from app.http.middleware.CsrfMiddleware import CsrfMiddleware
 from app.http.middleware.LoadUserMiddleware import LoadUserMiddleware
 
+
+from masonite.inertia import InertiaMiddleware
+
 """
 |--------------------------------------------------------------------------
 | HTTP Middleware
@@ -20,7 +23,8 @@ from app.http.middleware.LoadUserMiddleware import LoadUserMiddleware
 HTTP_MIDDLEWARE = [
     LoadUserMiddleware,
     CsrfMiddleware,
-    ResponseMiddleware
+    ResponseMiddleware,
+    InertiaMiddleware,
 ]
 
 """
@@ -39,5 +43,5 @@ HTTP_MIDDLEWARE = [
 """
 
 ROUTE_MIDDLEWARE = {
-    'auth':  AuthenticationMiddleware,
+    "auth": AuthenticationMiddleware,
 }

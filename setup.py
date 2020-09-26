@@ -9,11 +9,12 @@ setup(
     packages=[
         "masonite.inertia",
         "masonite.inertia.providers",
-        "masonite.inertia.controllers",
+        "masonite.inertia.middleware",
         "masonite.inertia.commands",
+        "masonite.inertia.core",
     ],
     package_dir={"": "src"},
-    description="Inertia",
+    description="Masonite adapter for Inertia.js",
     long_description="Server-side Masonite adapter for Inertia.js",
     # The project's main homepage.
     url="https://github.com/girardinsamuel/masonite-inertia",
@@ -53,7 +54,7 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     # What does your project relate to?
-    keywords="Masonite, Python, Emails, Debug, Development",
+    keywords="Masonite, Python, Inertia.js, Adapter",
     # List run-time dependencies here.  These will be installed by pip when
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
@@ -73,9 +74,9 @@ setup(
     # If there are data files included in your packages that need to be
     # installed, specify them here.  If using Python 2.6 or less, then these
     # have to be included in MANIFEST.in as well.
-    package_data={
-        # 'templates/index.html': [],
-    },
+    ## package_data={
+    ##     'sample': [],
+    ## },
     # Although 'package_data' is the preferred approach, in some case you may
     # need to place data files outside of your packages. See:
     # http://docs.python.org/3.4/distutils/setupscript.html#installing-additional-files # noqa
