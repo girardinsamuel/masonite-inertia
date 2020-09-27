@@ -196,6 +196,11 @@ Congratulations! You have now setup Inertia in our project! For more information
 
 Please read the [Contributing Documentation](CONTRIBUTING.md) here.
 
+**CONTRIBUTORS**
+
+- [josephmancuso](https://github.com/josephmancuso)
+- [girardinsamuel](https://github.com/girardinsamuel)
+
 ## License
 
 Masonite Inertia is open-sourced software licensed under the [MIT license](LICENSE).
