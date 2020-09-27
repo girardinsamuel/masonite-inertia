@@ -13,7 +13,6 @@ class InertiaMiddleware:
 
     def before(self):
         self.request.is_inertia = self.request.header("HTTP_X_INERTIA")
-
         if (
             self.request.is_inertia
             and self.request.method == "GET"

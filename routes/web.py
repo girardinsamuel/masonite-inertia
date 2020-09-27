@@ -1,7 +1,8 @@
 """ Web Routes """
-from masonite.routes import Get
+from masonite.routes import Get, Post
 
 ROUTES = [
-    Get("/", "InertiaController@inertia"),
-    Get("/helloworld", "InertiaController@helloworld"),
+    Get("/", "InertiaController@inertia").name("home"),
+    Post("/error", "InertiaController@inertia_with_error").name("home.error"),
+    Get("/helloworld", "InertiaController@helloworld").name("helloworld"),
 ]

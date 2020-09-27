@@ -22,6 +22,7 @@
     "dependencies": {
         "@inertiajs/inertia": "^0.2.1",
         "@inertiajs/inertia-vue": "^0.2.0",
-        "vue": "^2.6.12"
+        "vue": "^2.6.12",
+        "ziggy-js": "^0.9.4"
     }
 }

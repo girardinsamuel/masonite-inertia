@@ -2,8 +2,16 @@ import html
 import json
 from masonite.helpers.routes import flatten_routes
 from masonite.response import Responsable
-
+from masonite.helpers import config
 from masonite.inertia.core.InertiaAssetVersion import inertia_asset_version
+
+
+def load_lazy_props(d):
+    for k, v in d.items():
+        if isinstance(v, dict):
+            load_lazy_props(v)
+        elif callable(v):
+            d[k] = v()
 
 
 class InertiaResponse(Responsable):
@@ -11,15 +19,19 @@ class InertiaResponse(Responsable):
         self.container = container
         self.request = self.container.make("Request")
         self.view = self.container.make("View")
-        self.root_view = "app"
+        self.root_view = config("inertia.root_view")
         self.shared_props = {}
         self.rendered_template = ""
-        self.load_routes()
+        # parameters
+        self.include_flash_messages = config("inertia.include_flash_messages")
+        self.include_routes = config("inertia.include_routes")
+        if self.include_routes:
+            self._load_routes()
 
     def set_root_view(self, root_view):
         self.root_view = root_view
 
-    def load_routes(self):
+    def _load_routes(self):
         from routes.web import ROUTES
 
         self.routes = {}
@@ -45,26 +57,22 @@ class InertiaResponse(Responsable):
 
     def get_page_data(self, component, props):
         # merge shared props with page props (lazy props are resolved now)
-        props = {**self.get_props(props), **self.get_shared_props()}
-
-        def load_lazy_props(d):
-            for k, v in d.items():
-                if isinstance(v, dict):
-                    load_lazy_props(v)
-                elif callable(v):
-                    d[k] = v()
-
+        props = {**self.get_props(props, component), **self.get_shared_props()}
         load_lazy_props(props)
 
-        return {
+        page_data = {
             "component": self.get_component(component),
             "props": props,
             "url": self.request.path,
             "version": inertia_asset_version(),
-            "routes": self.routes,
         }
+        if self.include_routes:
+            page_data.update({"routes": self.routes})
+
+        return page_data
 
     def get_shared_props(self, key=None):
+        """Get all Inertia shared props or the one with the given key."""
         if key:
             return self.shared_props.get(key, None)
         else:
@@ -76,39 +84,40 @@ class InertiaResponse(Responsable):
         else:
             self.shared_props.update({key: value})
 
-    def get_props(self, props):
+    def get_props(self, all_props, component):
         """Get props to return to the page:
         - when partial reload, required return 'only' props
         - add adapter props along view props (errors, message, auth ...)"""
-        only_props = self.request.header("X-Inertia-Partial-Data")
+
+        # partial reload feature
+        only_props = self.request.header("HTTP_X_INERTIA_PARTIAL_DATA")
         if (
             only_props
-            and self.request.header("X-Inertia-Partial-Component") == self.component
+            and self.request.header("HTTP_X_INERTIA_PARTIAL_COMPONENT") == component
         ):
-            # WIP
-            pass
+            props = {}
+            for key in all_props:
+                if key in only_props:
+                    props.update({key: all_props[key]})
+        else:
+            props = all_props
 
         # add adapter data to props
-        props.update({"errors": self.get_errors()})
         props.update({"auth": self.get_auth()})
-        props.update({"messages": self.get_messages()})
-        props.update({"routes": self.routes})
+        if self.include_flash_messages:
+            props.update({"errors": self.get_errors()})
+            props.update({"messages": self.get_messages()})
+        if self.include_routes:
+            props.update({"routes": self.routes})
         return props
 
     def get_auth(self):
         user = self.request.user()
-
         csrf = self.request.get_cookie("csrf_token", decrypt=False)
-
         self.request.cookie("XSRF-TOKEN", csrf, http_only=False, encrypt=False)
-
         if not user:
             return {"user": None}
-
         user.__hidden__ = ["password", "remember_token"]
-        # @josephmancuso, what is self meta attribute ? It gives me error when querying user
-        # user.set_appends(["meta"])
-
         return {"user": user.serialize()}
 
     def get_messages(self):
