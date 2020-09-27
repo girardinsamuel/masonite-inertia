@@ -16,3 +16,4 @@ dist
 masonite.egg-info
 node_modules
 storage/compiled/
+storage/logs/
