@@ -13,9 +13,6 @@ class InertiaController(Controller):
 
     def inertia(self, view: InertiaResponse):
         def lazy_prop():
-            import pdb
-
-            pdb.set_trace()
             return "6"
 
         return view.render("Index", {"user": "Sam", "lazy": lazy_prop})
@@ -25,4 +22,6 @@ class InertiaController(Controller):
         return request.redirect("/")
 
     def helloworld(self, view: InertiaResponse):
-        return view.render("HelloWorld", {"first_name": "Sam"})
+        return view.render("HelloWorld", {"first_name": "Sam"}).with_root_view(
+            "spa_view_2"
+        )

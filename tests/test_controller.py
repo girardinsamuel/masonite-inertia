@@ -11,11 +11,9 @@ class TestInertiaController(TestCase):
 
     def test_test(self):
         # assert self.get("/app").hasMiddleware("inertia")
-        view = self.get("/helloworld")
-        view.request.header("HTTP_X_INERTIA", True)
+        # view = self.get("/helloworld")
+        # view.request.header("HTTP_X_INERTIA", True)
 
-        response = view.response
-        request = view.request
-        import pdb
-
-        pdb.set_trace()
+        # response = view.response
+        # request = view.request
+        pass

@@ -31,6 +31,10 @@ class InertiaResponse(Responsable):
     def set_root_view(self, root_view):
         self.root_view = root_view
 
+    def with_root_view(self, root_view):
+        self.root_view = root_view
+        return self
+
     def _load_routes(self):
         from routes.web import ROUTES
 
