@@ -50,11 +50,12 @@ class InertiaResponse(Responsable):
         props = {**self.get_props(props), **self.get_shared_props()}
 
         def load_lazy_props(d):
-            for k,v in d.items():
+            for k, v in d.items():
                 if isinstance(v, dict):
                     load_lazy_props(v)
                 elif callable(v):
                     d[k] = v()
+
         load_lazy_props(props)
 
         return {
@@ -87,9 +88,13 @@ class InertiaResponse(Responsable):
             : $this->props
         """
         import pdb
+
         pdb.set_trace()
         only_props = self.request.header("X-Inertia-Partial-Data")
-        if only_props and self.request.header("X-Inertia-Partial-Component") == self.component:
+        if (
+            only_props
+            and self.request.header("X-Inertia-Partial-Component") == self.component
+        ):
             pass
 
         # add adapter data to props

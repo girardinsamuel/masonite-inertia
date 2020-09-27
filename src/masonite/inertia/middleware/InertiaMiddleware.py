@@ -22,7 +22,6 @@ class InertiaMiddleware:
             self.request.header("X-Inertia-Location", self.request.path)
             return self.response.view("", status=409)
 
-
     def after(self):
         if self.request.is_inertia:
             self.request.header("Vary", "Accept")
@@ -34,4 +33,3 @@ class InertiaMiddleware:
                 and self.request.is_status(302)
             ):
                 self.request.status(303)
-

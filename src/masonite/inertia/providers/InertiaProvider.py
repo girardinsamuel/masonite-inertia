@@ -22,9 +22,7 @@ class InertiaProvider(ServiceProvider):
         self.register_view_helper(view)
 
     def register_view_helper(self, view):
-        view.share({
-            "inertia": inertia
-        })
+        view.share({"inertia": inertia})
         # snippets_path = os.path.join(os.path.dirname(__file__), "../snippets")
         # app_path = os.path.join(snippets_path, "static")
 
