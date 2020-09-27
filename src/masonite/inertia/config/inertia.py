@@ -6,7 +6,7 @@ import os
 | Mix Manifest
 |--------------------------------------------------------------------------
 |
-| Absolute path to mix-manifest.json location. It's needed for computing 
+| Absolute path to mix-manifest.json location. It's needed for computing
 | js assets version.
 |
 | default: root directory
