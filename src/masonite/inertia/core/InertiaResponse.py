@@ -1,11 +1,9 @@
 import html
 import json
-import os
-
-from masonite.inertia.core.InertiaAssetVersion import inertia_asset_version
-from masonite.helpers import compact
 from masonite.helpers.routes import flatten_routes
 from masonite.response import Responsable
+
+from masonite.inertia.core.InertiaAssetVersion import inertia_asset_version
 
 
 class InertiaResponse(Responsable):
@@ -79,22 +77,15 @@ class InertiaResponse(Responsable):
             self.shared_props.update({key: value})
 
     def get_props(self, props):
-        # if partial reload, only use given props
-        """
-                $only = array_filter(explode(',', $request->header('X-Inertia-Partial-Data')));
-
-        $props = ($only && $request->header('X-Inertia-Partial-Component') === $this->component)
-            ? Arr::only($this->props, $only)
-            : $this->props
-        """
-        import pdb
-
-        pdb.set_trace()
+        """Get props to return to the page:
+        - when partial reload, required return 'only' props
+        - add adapter props along view props (errors, message, auth ...)"""
         only_props = self.request.header("X-Inertia-Partial-Data")
         if (
             only_props
             and self.request.header("X-Inertia-Partial-Component") == self.component
         ):
+            # WIP
             pass
 
         # add adapter data to props
