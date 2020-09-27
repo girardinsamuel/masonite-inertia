@@ -1,7 +1,8 @@
 <template>
   <div>
     <h1>Hello World {{ first_name }}</h1>
-    <inertia-link href="/">< Go back</inertia-link>
+    <inertia-link :href="route('home')">< Go back</inertia-link>
+    <p>current: {{ route().current() }}</p>
   </div>
 </template>
 

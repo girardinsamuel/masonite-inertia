@@ -3,8 +3,8 @@
     <h1>Hello {{ user }}</h1>
     <p>Lazy: {{ lazy }}</p>
     <p>ERRORS: {{ $page.messages.error }}</p>
-    <inertia-link href="/helloworld">
-      <!-- <inertia-link :href="route('helloworld')"> -->
+    <!-- <inertia-link href="/helloworld"> -->
+    <inertia-link :href="route('helloworld')">
       Go to Hello World
     </inertia-link>
     <input type="text" placeholder="preserved state data" v-model="preserved" />
