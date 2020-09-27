@@ -31,8 +31,15 @@ You can find the legacy Inertia PingCRM demo with Masonite here [demo](https://g
 
 ## Features
 
-- _Add your package main features here_
-- _and here_
+Almost all features of the official server-side adapters are present 😃
+
+- Shared data
+- Partial reloads
+- Lazy loaded props
+- Set root view in a provider
+- Set root view per view
+- Enable sharing Masonite routes (prefer using [masonite-js-routes](https://github.com/girardinsamuel/masonite-js-routes))
+- Enable sharing Masonite flash messages
 
 ## Official Masonite Documentation
 

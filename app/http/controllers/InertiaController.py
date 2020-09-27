@@ -1,8 +1,9 @@
 """Inertia Demo Controller"""
 from masonite.controllers import Controller
-from masonite.inertia import InertiaResponse
 from masonite.view import View
 from masonite.request import Request
+
+from masonite.inertia import InertiaResponse
 
 
 class InertiaController(Controller):
@@ -22,6 +23,4 @@ class InertiaController(Controller):
         return request.redirect("/")
 
     def helloworld(self, view: InertiaResponse):
-        return view.render("HelloWorld", {"first_name": "Sam"}).with_root_view(
-            "spa_view_2"
-        )
+        return view.render("HelloWorld", {"first_name": "Sam"}, "spa_view_2")

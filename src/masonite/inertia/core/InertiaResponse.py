@@ -31,10 +31,6 @@ class InertiaResponse(Responsable):
     def set_root_view(self, root_view):
         self.root_view = root_view
 
-    def with_root_view(self, root_view):
-        self.root_view = root_view
-        return self
-
     def _load_routes(self):
         from routes.web import ROUTES
 
@@ -43,7 +39,7 @@ class InertiaResponse(Responsable):
             if route.named_route:
                 self.routes.update({route.named_route: route.route_url})
 
-    def render(self, component, props={}):
+    def render(self, component, props={}, custom_root_view=None):
         page_data = self.get_page_data(component, props)
 
         if self.request.is_inertia:
@@ -51,7 +47,8 @@ class InertiaResponse(Responsable):
             return self
 
         self.rendered_template = self.view(
-            self.root_view, {"page": html.escape(json.dumps(page_data))}
+            custom_root_view if custom_root_view else self.root_view,
+            {"page": html.escape(json.dumps(page_data))},
         ).rendered_template
 
         return self

@@ -3,18 +3,18 @@ import { InertiaApp } from "@inertiajs/inertia-vue";
 import route from "ziggy-js";
 // import { Ziggy } from "./ziggy";
 
-Vue.mixin({
-  methods: {
-    route: (name, params, absolute) =>
-      route(name, params, absolute, window.Ziggy),
-  },
-});
+// Vue.mixin({
+//   methods: {
+//     route: (name, params, absolute) =>
+//       route(name, params, absolute, window.Ziggy),
+//   },
+// });
+// OR
+// Vue.prototype.$route = (...args) => route(...args).url();
 
 Vue.use(InertiaApp);
 
 const app = document.getElementById("app");
-
-// Vue.prototype.$route = (...args) => route(...args).url();
 
 new Vue({
   render: (h) =>
