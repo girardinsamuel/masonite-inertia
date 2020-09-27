@@ -27,7 +27,7 @@ Inertia is a new approach to building classic server-driven web apps. From their
 Inertia requires an adapter for each backend framework.
 
 This repo contains the Masonite server-side adapter for [Inertia.js](https://inertiajs.com/).
-You can find the legacy Inertia PingCRM demo with Masonite here [demo](https://github.com/girardinsamuel/pingcrm-masonite).
+[Work In Progress] You can find the legacy Inertia PingCRM demo with Masonite here [demo](https://github.com/girardinsamuel/pingcrm-masonite).
 
 ## Features
 
@@ -122,7 +122,7 @@ Then, if you want you can quicky scaffold a Vue app with two components to test 
 python craft publish InertiaProvider --tag app
 ```
 
-## Usage
+## Usage [Doc In Progress]
 
 ### How to use Inertia.js with Masonite adapter
 
