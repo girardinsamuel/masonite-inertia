@@ -1,11 +1,14 @@
-from setuptools import setup, find_packages
+from setuptools import setup
+
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
 setup(
     name="masonite-inertia",
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version="0.0.1",
+    version="0.1.0",
     packages=[
         "masonite.inertia",
         "masonite.inertia.providers",
@@ -14,8 +17,9 @@ setup(
         "masonite.inertia.core",
     ],
     package_dir={"": "src"},
-    description="Masonite adapter for Inertia.js",
-    long_description="Server-side Masonite adapter for Inertia.js",
+    description="Server-side Masonite adapter for Inertia.js",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     # The project's main homepage.
     url="https://github.com/girardinsamuel/masonite-inertia",
     # Author details
@@ -69,7 +73,7 @@ setup(
     # $ pip install your-package[dev,test]
     extras_require={
         "test": ["coverage", "pytest", "pytest-cov", "coveralls"],
-        "dev": ["black", "flake8", "twine>=1.5.0"]
+        "dev": ["black", "flake8", "twine>=1.5.0", "wheel"]
     },
     # If there are data files included in your packages that need to be
     # installed, specify them here.  If using Python 2.6 or less, then these

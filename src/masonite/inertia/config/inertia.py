@@ -1,12 +1,13 @@
-"""Inertia Settings"""
+"""Masonite Inertia Settings"""
+import os
 
 """
 |--------------------------------------------------------------------------
-| A Heading of The Setting Being Set
+| Mix Manifest
 |--------------------------------------------------------------------------
 |
-| A quick description
+| Absolute path to mix-manifest.json location
 |
 """
 
-SETTING = "some value"
+PUBLIC_PATH = os.getcwd()

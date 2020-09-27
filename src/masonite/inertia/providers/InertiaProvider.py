@@ -1,5 +1,4 @@
 """A InertiaProvider Service Provider."""
-import os
 from masonite.provider import ServiceProvider
 from masonite.view import View
 

@@ -191,4 +191,4 @@ Please read the [Contributing Documentation](CONTRIBUTING.md) here.
 
 ## License
 
-Inertia is open-sourced software licensed under the [MIT license](LICENSE).
+Masonite Inertia is open-sourced software licensed under the [MIT license](LICENSE).

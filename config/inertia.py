@@ -1,15 +1,13 @@
-"""Masonite Inertia Settings."""
-
+"""Masonite Inertia Settings"""
 import os
 
 """
 |--------------------------------------------------------------------------
-| Resource Locations
+| Mix Manifest
 |--------------------------------------------------------------------------
 |
-| Define where CSS files are located.
+| Absolute path to mix-manifest.json location
 |
 """
 
-PATH = os.getcwd() + "/resources"
-PUBLIC_PATH = os.getcwd() + "/storage/static"
+PUBLIC_PATH = os.getcwd()
