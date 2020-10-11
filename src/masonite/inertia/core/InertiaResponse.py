@@ -56,7 +56,13 @@ class InertiaResponse(Responsable):
     def location(self, url):
         # TODO: make request with 409 code and X-Inertia-Location: url header
         self.request.header("X-Inertia-Location", url)
-        return self.response.view("", status=409)
+        self.request.status(409)
+        # self.rendered_template = self.view("").rendered_template
+        # self.rendered_template = self.view(
+        #     custom_root_view if custom_root_view else self.root_view,
+        #     {"page": html.escape(json.dumps(page_data))},
+        # ).rendered_template
+        return self
 
     def get_response(self):
         return self.rendered_template
