@@ -24,3 +24,6 @@ class InertiaController(Controller):
 
     def helloworld(self, view: InertiaResponse):
         return view.render("HelloWorld", {"first_name": "Sam"}, "spa_view_2")
+
+    def external(self, view: InertiaResponse):
+        return view.location("https://inertiajs.com")

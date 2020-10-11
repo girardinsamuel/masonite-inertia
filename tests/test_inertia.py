@@ -2,11 +2,17 @@ from masonite.testing import TestCase
 from masonite.routes import Get
 
 
-class TestPackage(TestCase):
+class TestInertiaResponse(TestCase):
     def setUp(self):
         super().setUp()
-        self.routes(only=[Get("/app", "InertiaController@inertia")])
+        self.routes(
+            only=[
+                Get("/app", "InertiaController@inertia"),
+                Get("/external", "InertiaController@external"),
+            ]
+        )
 
-    def test_test(self):
-        # assert self.get("/app").hasMiddleware("inertia")
-        assert self.get("/app").ok()
+    def test_location(self):
+        view = self.get("/external")
+        view.assertIsStatus(409)
+        view.assertHeaderIs("X-Inertia-Location", "https://inertiajs.com")
