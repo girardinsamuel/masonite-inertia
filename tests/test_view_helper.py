@@ -11,6 +11,7 @@ class TestPackage(TestCase):
             only=[
                 Get("/app", "InertiaController@inertia"),
                 Get("/helloworld", "InertiaController@helloworld"),
+                Get("/custom-id", "TestController@custom_id"),
             ]
         )
 
@@ -30,3 +31,6 @@ class TestPackage(TestCase):
         assert self.get("/helloworld").assertContains(
             "data-page='{&quot;component&quot;: &quot;HelloWorld&quot;,"
         )
+
+    def test_inertia_helper_with_custom_div_id(self):
+        assert self.get("/custom-id").assertContains("id='my_app'")
