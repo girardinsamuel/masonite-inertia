@@ -16,6 +16,9 @@
     <inertia-link href="/error" method="post" preserve-state>
       Post
     </inertia-link>
+    <inertia-link href="/external">
+      External link with location method
+    </inertia-link>
   </div>
 </template>
 
