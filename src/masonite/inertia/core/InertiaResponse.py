@@ -22,7 +22,6 @@ def load_lazy_props(d, request):
 class InertiaResponse(Responsable):
     def __init__(self, container):
         self.container = container
-        # self.request = self.container.make("Request")
         self.view = self.container.make("View")
         self.root_view = config("inertia.root_view")
         self.shared_props = {}
