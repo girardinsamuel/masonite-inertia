@@ -2,7 +2,7 @@ import html
 import json
 from inspect import signature
 from masonite.helpers.routes import flatten_routes
-from masonite.response import Responsable, Response
+from masonite.response import Responsable
 from masonite.helpers import config
 from masonite.inertia.core.InertiaAssetVersion import inertia_asset_version
 
@@ -44,7 +44,7 @@ class InertiaResponse(Responsable):
                 self.routes.update({route.named_route: route.route_url})
 
     def render(self, component, props={}, custom_root_view="app"):
-        request = self.container.make('Request')
+        request = self.container.make("Request")
         page_data = self.get_page_data(component, props)
 
         if request.is_inertia:
@@ -60,13 +60,9 @@ class InertiaResponse(Responsable):
 
     def location(self, url):
         # TODO: make request with 409 code and X-Inertia-Location: url header
-        self.request.header("X-Inertia-Location", url)
-        self.request.status(409)
-        # self.rendered_template = self.view("").rendered_template
-        # self.rendered_template = self.view(
-        #     custom_root_view if custom_root_view else self.root_view,
-        #     {"page": html.escape(json.dumps(page_data))},
-        # ).rendered_template
+        response = self.container.make("Response")
+        response.header("X-Inertia-Location", url)
+        response.status(409)
         return self
 
     def get_response(self):
@@ -74,7 +70,7 @@ class InertiaResponse(Responsable):
 
     def get_page_data(self, component, props):
         # merge shared props with page props (lazy props are resolved now)
-        request = self.container.make('Request')
+        request = self.container.make("Request")
         props = {**self.get_props(props, component), **self.get_shared_props()}
 
         # lazy load props and make request available to props being lazy loaded
@@ -109,7 +105,7 @@ class InertiaResponse(Responsable):
         - when partial reload, required return 'only' props
         - add adapter props along view props (errors, message, auth ...)"""
 
-        request = self.container.make('Request')
+        request = self.container.make("Request")
 
         # partial reload feature
         only_props = request.header("HTTP_X_INERTIA_PARTIAL_DATA")
@@ -134,7 +130,7 @@ class InertiaResponse(Responsable):
         return props
 
     def get_auth(self):
-        request = self.container.make('Request')
+        request = self.container.make("Request")
         user = request.user()
         csrf = request.get_cookie("csrf_token", decrypt=False)
         request.cookie("XSRF-TOKEN", csrf, http_only=False, encrypt=False)
@@ -144,7 +140,7 @@ class InertiaResponse(Responsable):
         return {"user": user.serialize()}
 
     def get_messages(self):
-        request = self.container.make('Request')
+        request = self.container.make("Request")
         return {
             "success": (request.session.get("success") or ""),
             "error": (request.session.get("error") or ""),
@@ -154,7 +150,7 @@ class InertiaResponse(Responsable):
         }
 
     def get_errors(self):
-        request = self.container.make('Request')
+        request = self.container.make("Request")
         return request.session.get("errors") or {}
 
     def get_component(self, component):
