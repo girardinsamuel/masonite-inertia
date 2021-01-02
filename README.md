@@ -29,7 +29,7 @@ Inertia requires an adapter for each backend framework.
 This repo contains the Masonite server-side adapter for [Inertia.js](https://inertiajs.com/).
 You can find the legacy Inertia PingCRM demo with Masonite here [demo (WIP)](https://github.com/girardinsamuel/pingcrm-masonite).
 
-This package will be soon compatible with both Masonite 2.X and Masonite 3.X.
+This package is compatible with both Masonite 2.X and Masonite 3.X [see below](#installation).
 
 ## Features
 
@@ -57,7 +57,7 @@ Also be sure to join the [Slack channel](http://slack.masoniteproject.com/)!
 
 To get started you will need the following:
 
-- Masonite 3.X.X (coming soon, use `masonite-inertia>=3.0`) or Masonite 2.3.X (use `masonite-inertia>=2.X<3.0`)
+- Masonite 3.X.X (use `masonite-inertia>=3.0`) or Masonite 2.3.X (use `masonite-inertia>=2.X<3.0`)
 - Laravel Mix installed (new Masonite 2.3 projects come with this installed already)
 - a Node.js environment (npm or yarn)
 
