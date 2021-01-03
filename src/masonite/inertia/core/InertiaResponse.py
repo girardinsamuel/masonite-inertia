@@ -142,16 +142,16 @@ class InertiaResponse(Responsable):
     def get_messages(self):
         request = self.container.make("Request")
         return {
-            "success": (request.session.get("success") or ""),
-            "error": (request.session.get("error") or ""),
-            "danger": (request.session.get("danger") or ""),
-            "warning": (request.session.get("warning") or ""),
-            "info": (request.session.get("info") or ""),
+            "success": (request.session.get_flashed("success") or ""),
+            "error": (request.session.get_flashed("error") or ""),
+            "danger": (request.session.get_flashed("danger") or ""),
+            "warning": (request.session.get_flashed("warning") or ""),
+            "info": (request.session.get_flashed("info") or ""),
         }
 
     def get_errors(self):
         request = self.container.make("Request")
-        return request.session.get("errors") or {}
+        return request.session.get_flashed("errors") or {}
 
     def get_component(self, component):
         return html.escape(component)
