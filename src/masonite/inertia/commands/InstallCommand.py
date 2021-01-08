@@ -1,7 +1,6 @@
 """A InstallCommand Command."""
 from cleo import Command
 import os
-import os
 import shutil
 
 
