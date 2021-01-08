@@ -2,7 +2,7 @@ import html
 import json
 from inspect import signature
 from masonite.helpers.routes import flatten_routes
-from masonite.response import Responsable
+from masonite.response import Responsable, Response
 from masonite.helpers import config
 from masonite.inertia.core.InertiaAssetVersion import inertia_asset_version
 
@@ -60,7 +60,7 @@ class InertiaResponse(Responsable):
 
     def location(self, url):
         # TODO: make request with 409 code and X-Inertia-Location: url header
-        response = self.container.make("Response")
+        response = self.container.make(Response)
         response.header("X-Inertia-Location", url)
         response.status(409)
         return self
