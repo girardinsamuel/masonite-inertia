@@ -1,20 +1,22 @@
 """A TestController Module."""
-
-from masonite.request import Request
-from masonite.view import View
 from masonite.controllers import Controller
+from masonite.inertia import InertiaResponse
 
 
 class TestController(Controller):
     """TestController Controller Class."""
 
-    def __init__(self, request: Request):
-        """TestController Initializer
+    def custom_id(self, view: InertiaResponse):
+        return view.render("Index", custom_root_view="test_custom_id")
 
-        Arguments:
-            request {masonite.request.Request} -- The Masonite Request class.
-        """
-        self.request = request
+    def lazy_view(self, view: InertiaResponse):
+        def get_count():
+            return 2
 
-    def show(self, view: View):
-        return view.render("test")
+        return view.render("Index", {"count": get_count})
+
+    def lazy_view_with_request(self, view: InertiaResponse):
+        def is_authenticated(request):
+            return request.user()
+
+        return view.render("Index", {"is_authenticated": is_authenticated})

@@ -1,17 +1,22 @@
 import html
 import json
+from inspect import signature
 from masonite.helpers.routes import flatten_routes
 from masonite.response import Responsable
 from masonite.helpers import config
 from masonite.inertia.core.InertiaAssetVersion import inertia_asset_version
 
 
-def load_lazy_props(d):
+def load_lazy_props(d, request):
     for k, v in d.items():
         if isinstance(v, dict):
-            load_lazy_props(v)
+            load_lazy_props(v, request)
         elif callable(v):
-            d[k] = v()
+            # evaluate prop and pass request if prop accept it
+            if len(signature(v).parameters) > 0:
+                d[k] = v(request)
+            else:
+                d[k] = v()
 
 
 class InertiaResponse(Responsable):
@@ -70,7 +75,9 @@ class InertiaResponse(Responsable):
     def get_page_data(self, component, props):
         # merge shared props with page props (lazy props are resolved now)
         props = {**self.get_props(props, component), **self.get_shared_props()}
-        load_lazy_props(props)
+
+        # lazy load props and make request available to props being lazy loaded
+        load_lazy_props(props, self.request)
 
         page_data = {
             "component": self.get_component(component),

@@ -4,6 +4,15 @@
 
 When contributing to this repository, **please first discuss the change you wish to make via issue, email, or any other method with the owners or contributors of this repository** before making a change 😃 . Thank you !
 
+## Versions
+This package aims to support (for now) both Masonite 2.X and Masonite 3.X versions.
+There are two branches for each:
+- [master](https://github.com/girardinsamuel/masonite-inertia): `>= 3.X.X` for Masonite 3
+- [2.X](https://github.com/girardinsamuel/masonite-inertia/tree/2.X): `>= 2.X.X` Masonite 2.X
+
+New features will be added to Masonite 3 in priority, I will try to maintain important features in Masonite 2.X
+Bug fixes will be done in both versions.
+
 ## Getting Started
 
 ### Get the code
