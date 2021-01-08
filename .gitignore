@@ -1,5 +1,6 @@
 venv
 venv2
+.python-version
 .vscode
 .idea/
 build/
