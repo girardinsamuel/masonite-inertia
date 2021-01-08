@@ -2,28 +2,18 @@
   "private": true,
   "scripts": {
     "dev": "npx mix",
-    "development": "npx mix",
-    "watch": "npx mix watch",
-    "hot": "npx mix hot",
-    "prod": "npx mix --production",
-    "production": "npx mix --production"
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "production": "mix --production"
   },
   "devDependencies": {
-    "@vue/compiler-sfc": "^3.0.0",
-    "axios": "^0.19",
-    "cross-env": "^5.1",
-    "laravel-mix": "^6.0.0-beta.5",
-    "lodash": "^4.17.13",
-    "resolve-url-loader": "^2.3.1",
-    "sass": "^1.15.2",
-    "sass-loader": "^7.1.0",
-    "vue-loader": "^16.0.0-beta.8",
-    "vue-template-compiler": "^2.6.10"
-  },
-  "dependencies": {
-    "@inertiajs/inertia": "^0.4.0",
-    "@inertiajs/inertia-vue3": "^0.1.0",
-    "vue": "^3.0.0",
-    "ziggy-js": "^0.9.4"
+    "axios": "^0.21.1",
+    "cross-env": "^5.2.1",
+    "laravel-mix": "^6.0.5",
+    "lodash": "^4.17.20",
+    "postcss": "^8.2.1",
+    "resolve-url-loader": "^3.1.2"
   }
 }
