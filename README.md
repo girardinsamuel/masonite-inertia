@@ -110,7 +110,7 @@ HTTP_MIDDLEWARE = [
 Then install the package to get the `config/inertia.py` in your project:
 
 ```bash
-python craft inertia:install
+python craft install:inertia
 ```
 
 **Scaffold a base Vue app and a template (optional)**
