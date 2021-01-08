@@ -23,9 +23,10 @@ class TestPackage(TestCase):
 
     def test_inertia_helper_is_in_page_if_inertia_route(self):
         """Check if beginning of what helper outputs is in the page"""
-        assert self.get("/app").assertContains("id='app'")
-        assert self.get("/app").assertContains(
-            "data-page='{&quot;component&quot;: &quot;Index&quot;,"
+        response = self.get("/app")
+        assert response.assertContains('id="app"')
+        assert response.assertContains(
+            'data-page="{&quot;component&quot;: &quot;Index&quot;,'
         )
         # check at another route an other component is given
         assert self.get("/helloworld").assertContains(

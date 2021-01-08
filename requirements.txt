@@ -1,4 +1,6 @@
-masonite>=2.3,<2.4
+# masonite>=2.3,<2.4
+# until masonite 3 released
+git+https://github.com/MasoniteFramework/masonite@develop
 masonite-logging>=1.0,<2.0
 masonite-validation>=3.0,<4.0
 masonite-js-routes==0.3.0

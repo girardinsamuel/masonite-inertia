@@ -2,6 +2,7 @@
 
 from masonite.providers import (
     AppProvider,
+    RequestHelpersProvider,
     AuthenticationProvider,
     BroadcastProvider,
     CacheProvider,
@@ -34,6 +35,8 @@ learn more more about Service Providers in our documentation
 PROVIDERS = [
     # Framework Providers
     AppProvider,
+    RequestHelpersProvider,
+    CsrfProvider,
     AuthenticationProvider,
     SessionProvider,
     RouteProvider,
