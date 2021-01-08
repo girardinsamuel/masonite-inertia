@@ -27,7 +27,7 @@ PUBLIC_PATH = os.getcwd()
 | default: app
 """
 
-ROOT_VIEW = "spa_view"
+ROOT_VIEW = "app"
 
 """
 |--------------------------------------------------------------------------
