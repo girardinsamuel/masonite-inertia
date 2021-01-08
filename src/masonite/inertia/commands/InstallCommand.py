@@ -15,6 +15,4 @@ class InstallCommand(Command):
     """
 
     def handle(self):
-        create_or_append_config(
-            os.path.join(package_directory, "../snippets/config/inertia.py")
-        )
+        create_or_append_config(os.path.join(package_directory, "../config/inertia.py"))
