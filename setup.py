@@ -11,6 +11,7 @@ setup(
     version="3.0.0a1",
     packages=[
         "masonite.inertia",
+        "masonite.inertia.config",
         "masonite.inertia.providers",
         "masonite.inertia.middleware",
         "masonite.inertia.commands",

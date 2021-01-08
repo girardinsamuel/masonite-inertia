@@ -11,6 +11,9 @@ init: ## Install package dependencies
 	pip install .
 	# install dev dependencies (see setup.py)
 	pip install masonite-inertia[test,dev]
+	# force correct version of cleo for tests for now
+	pip install cleo==0.8.1
+
 test: ## Run package tests
 	python -m pytest tests
 ci: ## [CI] Run package tests and lint
