@@ -68,6 +68,7 @@ pip install masonite-inertia
 **Install NPM dependencies**
 
 First we'll need to install some NPM packages (we are using Vue here as frontend framework and `inertia-vue` as Inertia.js client-side adapter):
+You can find more info on this on [Inertia.js documentation](https://inertiajs.com/client-side-setup).
 
 ```
 $ npm install vue @inertiajs/inertia @inertiajs/inertia-vue
@@ -107,18 +108,31 @@ HTTP_MIDDLEWARE = [
 ]
 ```
 
-Then install the package to get the `config/inertia.py` in your project:
+Finally publish the package configuration (to get `config/inertia.py`) to your project:
 
 ```bash
 python craft install:inertia
 ```
 
-**Scaffold a base Vue app and a template (optional)**
-Then, if you want you can quicky scaffold a Vue app with two components to test Inertia behaviour by running the publish command :
+Congratulations! You have now setup Inertia in your project! For more information on how to use Inertia.js got to its [documentation](https://inertiajs.com/installation).
 
+
+## Install demo (optional)
+To get started quickly, you can scaffold a demo to your project, by running:
 ```
-python craft publish InertiaProvider --tag app
+python craft inertia:demo
 ```
+
+This will automatically :
+- publish a demo controller
+- publish two routes
+- create a demo view
+- update npm dependencies and webpack.mix.js
+- create Vue 3 demo app in `resources/js`
+
+Then run `npm install && npm run watch` and start the server `python craft serve`.
+
+Finally browse to `http://localhost:8000/inertia` 🚀!
 
 ## Usage [Doc In Progress]
 
@@ -126,13 +140,7 @@ python craft publish InertiaProvider --tag app
 
 We will create two routes and a controller which will load the two components scaffolded with previous command and see Inertia.js behaviour. In order to create Inertia response in our Controller, we are going to use newly available response `InertiaResponse`. And that's it !
 
-We can quickly create this demo (routes & controller) with the publish command :
-
-```
-$ python craft publish InertiaProvider --tag demo
-```
-
-or you can create it manually:
+If you scaffolded the inertia demo you will already have the files, else:
 
 ```
 $ craft controller InertiaController
@@ -187,8 +195,6 @@ Home Page
 ```
 
 Click on the link you can now see `HelloWorld` without page refresh !!!!
-
-Congratulations! You have now setup Inertia in our project! For more information on how to use Inertia.js got to its [documentation](https://inertiajs.com/installation).
 
 ## Contributing
 
