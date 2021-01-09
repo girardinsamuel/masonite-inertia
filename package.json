@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "axios": "^0.21.1",
-    "cross-env": "^5.2.1",
+    "cross-env": "^7.0.3",
     "laravel-mix": "^6.0.5",
     "lodash": "^4.17.20",
     "postcss": "^8.2.1",
