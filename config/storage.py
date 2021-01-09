@@ -55,5 +55,6 @@ STATICFILES = {
     # folder          # template alias
     "storage/static": "static/",
     "storage/compiled": "static/",
+    "public": "public/",
     "storage/uploads": "static/",
 }
