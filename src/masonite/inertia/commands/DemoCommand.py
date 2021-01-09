@@ -25,7 +25,7 @@ class DemoCommand(Command):
         packages["@inertiajs/progress"] = "^0.2.4"
         packages["vue"] = "^3.0.5"
         packages["@vue/compiler-sfc"] = "^3.0.5"
-        packages["@vue-loader"] = "^16.1.2"
+        packages["vue-loader"] = "^16.1.2"
         return packages
 
     def _update_packages(self, dev=True):
