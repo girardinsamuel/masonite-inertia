@@ -18,11 +18,13 @@ jobs:
       - name: Install dependencies
         run: |
           make init
-      - name: Test with pytest and Build coverage
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Test with pytest
         run: |
           make coverage
+      - name: Publish coverage
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: make publish_coverage
   lint:
     runs-on: ubuntu-latest
     name: Lint
