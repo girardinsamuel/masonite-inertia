@@ -122,13 +122,16 @@ To get started quickly, you can scaffold a demo to your project, by running:
 ```
 python craft inertia:demo
 ```
+You should create a new git branch or have a clean repository before scaffolding the demo
+so that you can see what changes have been made.
 
 This will automatically :
 - publish a demo controller
 - publish two routes
 - create a demo view
-- update npm dependencies and webpack.mix.js
-- create Vue 3 demo app in `resources/js`
+- update npm dependencies
+- override your webpack.mix.js file
+- publish demo app in `resources/js`
 
 Then run `npm install && npm run watch` and start the server `python craft serve`.
 
