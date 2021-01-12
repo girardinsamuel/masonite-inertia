@@ -26,6 +26,8 @@ class DemoCommand(Command):
         packages["vue"] = "^3.0.5"
         packages["@vue/compiler-sfc"] = "^3.0.5"
         packages["vue-loader"] = "^16.1.2"
+        packages["laravel-mix"] = "^6.0.9"
+        packages["postcss"] = "^8.2.4"
         return packages
 
     def _update_packages(self, dev=True):
