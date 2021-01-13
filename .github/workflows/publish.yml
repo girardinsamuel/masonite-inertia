@@ -1,26 +1,44 @@
-# name: Release version
+name: Publish release
 
-# on:
-#   release:
-#     types: [created]
+on:
+  release:
+    types: [created]
 
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2.3.4
-#         with:
-#           fetch-depth: 0
-      # - name: Set up Python
-      #   uses: actions/setup-python@v2.2.1
-      #   with:
-      #     python-version: "3.x"
-      # - name: Install dependencies
-      #   run: |
-      #     make init
-      # - name: Build and publish
-      #   env:
-      #     TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-      #     TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-      #   run: |
-      #     make publish
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # The branch checked out here is the one the tag/release has been created on
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+      - name: Install dependencies
+        run: |
+          make init
+      - name: Bump only if tests are passing
+        run: |
+          make test
+      - name: Bump version from release
+        shell: bash
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          # convert refs/tags/v1.2.3 to 1.2.3
+          VERSION=$(echo $GITHUB_REF | sed 's#.*/v##')
+          # here last arg is mandatory but not used (cf https://github.com/c4urself/bump2version/issues/22)
+          bump2version --verbose --new-version $VERSION patch
+      # this won't trigger an other workflow because github token is used and not personal_access_token
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+      - name: Build and publish
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: |
+          make publish

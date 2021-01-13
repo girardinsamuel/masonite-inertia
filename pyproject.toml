@@ -1,8 +1,0 @@
-[tool.commitizen]
-name = "cz_conventional_commits"
-version = "3.1.1"
-version_files = [
-    "setup.py:version",
-    "pyproject.toml:version"
-]
-bump_message = "release $current_version → $new_version [skip-ci]"
