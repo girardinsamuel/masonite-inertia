@@ -30,22 +30,46 @@ class DemoCommand(Command):
         packages["postcss"] = "^8.2.4"
         return packages
 
+    def _compare_version(self, version1, version2):
+        versions1 = [int(v) for v in version1.split(".")]
+        versions2 = [int(v) for v in version2.split(".")]
+        for i in range(max(len(versions1), len(versions2))):
+            v1 = versions1[i] if i < len(versions1) else 0
+            v2 = versions2[i] if i < len(versions2) else 0
+            if v1 > v2:
+                return 1
+            elif v1 < v2:
+                return -1
+        return 0
+
     def _update_packages(self, dev=True):
         """Update the "package.json" file."""
         if not os.path.exists(os.path.realpath("package.json")):
             return
 
         configuration_key = "devDependencies" if dev else "dependencies"
-
+        # read all dependencies
         packages = {}
+        list_deps = []
         with open(os.path.realpath("package.json"), "r+") as f:
             packages = json.load(f)
-            packages[configuration_key] = self.update_package_array(
-                packages[configuration_key] if configuration_key in packages else {}
-            )
-            f.seek(0)  # Rewind to beginning of file
-            f.truncate()
-            f.write(json.dumps(packages, sort_keys=True, indent=4))
+            list_deps = {
+                **packages.get("devDependencies", {}),
+                **packages.get("dependencies", {}),
+            }
+            # f.seek(0)  # Rewind to beginning of file
+            # f.truncate()
+            # f.write(json.dumps(packages, sort_keys=True, indent=4))
+        needed = self.update_package_array()
+        to_install = ""
+        # to_install = {}
+        for dep, version in needed.items():
+            if dep not in list_deps.keys():
+                to_install += f"{dep}@{version[1:]} "
+            elif self._compare_version(version[1:], list_deps[dep][1:]):
+                to_install += f"{dep}@{version[1:]} "
+
+        return to_install
 
     def _update_webpack_configuration(self):
         """Copy webpack.mix.js file into application"""
@@ -84,9 +108,7 @@ class DemoCommand(Command):
         # scaffold app (.js and vue components)
         self._add_assets()
         # update dependencies
-        self._update_packages()
+        to_install = self._update_packages()
         self._update_webpack_configuration()
         self.info("Inertia demo has been installed successfully.")
-        self.comment(
-            'Please run "npm install && npm run dev" to compile your fresh scaffolding.'
-        )
+        self.comment(f"Please run 'npm install {to_install}'")
