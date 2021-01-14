@@ -39,3 +39,16 @@ updates:
       - "build"
     # Allow up to 10 open pull requests for pip dependencies
     open-pull-requests-limit: 10
+
+  # Maintain dependencies for pip
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    assignees:
+      - "girardinsamuel"
+    labels:
+      - "build"
+    target-branch: master
+    # Allow up to 10 open pull requests for pip dependencies
+    open-pull-requests-limit: 10
