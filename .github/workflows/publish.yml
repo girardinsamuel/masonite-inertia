@@ -1,0 +1,45 @@
+name: Publish release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # The branch checked out here is the one the tag/release has been created on
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+      - name: Install dependencies
+        run: |
+          make init
+      - name: Bump only if tests are passing
+        run: |
+          make test
+      - name: Bump version from release
+        shell: bash
+        env:
+            VERSION: ${{ github.event.release.tag_name }}
+        run: |
+          VERSION_NUMBER=$(echo ${VERSION:1})
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          # here last arg is mandatory but not used (cf https://github.com/c4urself/bump2version/issues/22)
+          bump2version --no-tag --new-version $VERSION_NUMBER patch
+      # this won't trigger an other workflow because github token is used and not PAT
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.event.release.target_commitish }}  # name of release target branch
+      - name: Build and publish
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: |
+          make publish

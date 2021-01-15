@@ -10,7 +10,7 @@ init: ## Install package dependencies
 	# install package
 	pip install .
 	# install dev dependencies (see setup.py)
-	pip install masonite-inertia[test,dev]
+	pip install 'masonite-inertia[test,dev]'
 	# force correct version of cleo for tests for now
 	pip install cleo==0.8.1
 
@@ -25,8 +25,6 @@ format: ## Format code with Black
 	black src/masonite/inertia
 coverage: ## Run package tests with coverage report
 	python -m pytest --cov-report term --cov-report xml --cov=src/masonite/inertia tests
-publish_coverage: ## Publish coverage to coveralls
-	python -m coveralls
 publish: ## Publish package to pypi
 	python setup.py sdist bdist_wheel
 	twine upload dist/*

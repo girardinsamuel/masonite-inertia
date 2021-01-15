@@ -8,7 +8,7 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version="3.1.1",
+    version="3.1.2",
     packages=[
         "masonite.inertia",
         "masonite.inertia.config",
@@ -75,7 +75,7 @@ setup(
     # $ pip install your-package[dev,test]
     extras_require={
         "test": ["coverage", "pytest", "pytest-cov", "coveralls"],
-        "dev": ["black", "flake8", "twine>=1.5.0", "wheel"],
+        "dev": ["black", "flake8", "twine>=1.5.0", "wheel", "bumpversion"],
     },
     # If there are data files included in your packages that need to be
     # installed, specify them here.  If using Python 2.6 or less, then these
