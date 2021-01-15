@@ -1,6 +1,6 @@
 name: Test Application
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   build:
