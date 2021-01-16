@@ -6,3 +6,21 @@ The existing documentation is really good but documents only official Laravel an
 
 This documentation is a work in progress  ! Coming soon in January 2021 !
 
+## Installation
+
+{% tabs %}
+{% tab title="Masonite 3" %}
+```text
+pip install masonite-inertia
+```
+{% endtab %}
+
+{% tab title="Masonite 2" %}
+```text
+pip install 'masonite-inertia < 3'
+```
+{% endtab %}
+{% endtabs %}
+
+
+
