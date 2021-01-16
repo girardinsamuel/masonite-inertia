@@ -7,6 +7,8 @@
 
 * [Routing](the-basics/routing.md)
 * [Responses](the-basics/responses.md)
+* [Redirects](the-basics/redirects.md)
+* [Forms](the-basics/forms.md)
 
 ## Advanced
 
