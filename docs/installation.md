@@ -7,7 +7,7 @@
 
 ## Installation
 
-Install the Inertia server-side adapter in your project.
+Install the latest Inertia server-side adapter in your project
 
 {% tabs %}
 {% tab title="Masonite 3" %}
@@ -22,6 +22,11 @@ pip install 'masonite-inertia < 3'
 ```
 {% endtab %}
 {% endtabs %}
+
+{% hint style="warning" %}
+`masonite-inertia 2.X`versions are for Masonite 2.  
+`masonite-inertia 3.X`versions are for Masonite 3.
+{% endhint %}
 
 Add `InertiaProvider` to your project
 

@@ -18,9 +18,7 @@ Throughout the documentation, you will see that code examples are the same as th
 
 ## Masonite 2 and 3
 
-For now both compatibility with both Masonite 3 and 2 is supported. 
-
-New features will be added for Masonite 3 in priority.
+For now both compatibility with both Masonite 3 and 2 is supported through different versions. New features will be added for Masonite 3 in priority.
 
 The documentation is however written with Masonite 3 examples, but it should not have impact as examples are really simple. If there are strong differences between versions then you will see.
 
