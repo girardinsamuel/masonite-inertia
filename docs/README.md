@@ -34,11 +34,11 @@ Code example for Masonite 2
 {% endtab %}
 {% endtabs %}
 
-If you want to help me maintaining this package, feel free to [contribute](contribute.md).
+If you want to help me maintaining this package, feel free to [contribute](development/contribute.md).
 
 ## Official Inertia adapters
 
 I am tracking new features and improvements added to official laravel-inertia adapter. I am trying to port those features on this adapter as well when I can.
 
-Most important features are available in this adapter. The latest one might not be there but feel free to [open an issue](https://github.com/girardinsamuel/masonite-inertia/issues/new) for it and to [help me developing](contribute.md) this package !
+Most important features are available in this adapter. The latest ones might not be there but feel free to [open an issue](https://github.com/girardinsamuel/masonite-inertia/issues/new) for it and [any help](development/contribute.md) is welcome !
 

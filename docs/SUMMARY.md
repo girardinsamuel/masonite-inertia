@@ -18,9 +18,7 @@
 
 ## Development
 
----
-
 * [Changelog](https://github.com/girardinsamuel/masonite-inertia/blob/next-minor/CHANGELOG.md)
-* [Contribute](contribute.md)
-* [Support](support.md)
+* [Contribute](development/contribute.md)
+* [Support](development/support.md)
 
