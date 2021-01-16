@@ -30,6 +30,8 @@ You can find the legacy Inertia PingCRM demo with Masonite here [demo (WIP)](htt
 
 This package is compatible with both Masonite 2.X and Masonite 3.X.
 
+A [new documentation 📚](https://samuelgirardin.gitbook.io/masonite-inertia) is coming in January 2021, stay tuned !
+
 ## Features
 
 Almost all features of the official server-side adapters are present 😃
