@@ -1,10 +1,20 @@
 # Introduction and installation
 
-Documentation for [masonite-inertia](https://github.com/girardinsamuel/masonite-inertia) adapter for MasoniteFramework and [Inertia.js](https://inertiajs.com/).
+{% hint style="warning" %}
+WORK IN PROGRESS ! Coming soon in January 2021, stay tuned !
+{% endhint %}
 
-The existing documentation is really good but documents only official Laravel and Rails server side adapters. You will find mostly the same content but written for MasoniteFramework !
+Welcome to the documentation for [masonite-inertia](https://github.com/girardinsamuel/masonite-inertia) adapter for [MasoniteFramework](https://docs.masoniteproject.com/) and [Inertia.js](https://inertiajs.com/). 
 
-This documentation is a work in progress  ! Coming soon in January 2021 !
+## Why an other doc ?
+
+The existing documentation is really good but documents only official Laravel and Rails server side adapters. Here, you will find mostly the same content but written for MasoniteFramework ! 
+
+This documentation is off course based on official [Inertia.js documentation](https://inertiajs.com/), but will only explains how to use Inertia.js with MasoniteFramework and won't explain again how to configure and use it client-side as it's already covered in official documentation.
+
+{% hint style="info" %}
+Throughout the documentation, you will see that code examples are the same as the official server-side documentation in order to ease the understanding. If something is not clear please first go to official documentation to check if more details are given.
+{% endhint %}
 
 ## Requirements
 

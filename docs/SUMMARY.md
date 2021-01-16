@@ -6,8 +6,10 @@
 ## The basics
 
 * [Routing](the-basics/routing.md)
+* [Responses](the-basics/responses.md)
 
 ## Advanced
 
 * [Configuration](advanced/configuration.md)
+* [Root view](advanced/root-view.md)
 
