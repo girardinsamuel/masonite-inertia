@@ -9,12 +9,14 @@
 * [Routing](the-basics/routing.md)
 * [Responses](the-basics/responses.md)
 * [Redirects](the-basics/redirects.md)
-* [Forms](the-basics/forms.md)
+* [Validation](the-basics/forms.md)
+* [Shared data](the-basics/shared-data.md)
 
 ## Advanced
 
 * [Configuration](advanced/configuration.md)
 * [Root view](advanced/root-view.md)
+* [Partial reloads](advanced/partial-reloads.md)
 
 ## Development
 
