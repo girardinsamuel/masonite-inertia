@@ -1,6 +1,7 @@
 # Table of contents
 
-* [Introduction and installation](README.md)
+* [Introduction](README.md)
+* [Installation](installation.md)
 * [Demo app](demo-app.md)
 
 ## The basics
@@ -14,4 +15,12 @@
 
 * [Configuration](advanced/configuration.md)
 * [Root view](advanced/root-view.md)
+
+## Development
+
+---
+
+* [Changelog](https://github.com/girardinsamuel/masonite-inertia/blob/next-minor/CHANGELOG.md)
+* [Contribute](contribute.md)
+* [Support](support.md)
 

@@ -1,4 +1,4 @@
-# Introduction and installation
+# Introduction
 
 {% hint style="warning" %}
 WORK IN PROGRESS ! Coming soon in January 2021, stay tuned !
@@ -16,68 +16,29 @@ This documentation is off course based on official [Inertia.js documentation](ht
 Throughout the documentation, you will see that code examples are the same as the official server-side documentation in order to ease the understanding. If something is not clear please first go to official documentation to check if more details are given.
 {% endhint %}
 
-## Requirements
+## Masonite 2 and 3
 
-* a Masonite 3 or 2.X project
-* a Node.js environment
+For now both compatibility with both Masonite 3 and 2 is supported. 
 
-## Installation
+New features will be added for Masonite 3 in priority.
 
-Install the Inertia server-side adapter in your project.
+The documentation is however written with Masonite 3 examples, but it should not have impact as examples are really simple. If there are strong differences between versions then you will see.
 
 {% tabs %}
 {% tab title="Masonite 3" %}
-```text
-pip install masonite-inertia
-```
+Code example for Masonite 3
 {% endtab %}
 
 {% tab title="Masonite 2" %}
-```text
-pip install 'masonite-inertia < 3'
-```
+Code example for Masonite 2
 {% endtab %}
 {% endtabs %}
 
-Add `InertiaProvider` to your project
+If you want to help me maintaining this package, feel free to [contribute](contribute.md).
 
-{% code title="config/providers.py" %}
-```python
-# ...
-from masonite.inertia import InertiaProvider
+## Official Inertia adapters
 
-PROVIDERS = [
-    # ...
-    
-    # Third Party Providers
-    InertiaProvider,
-]
-```
-{% endcode %}
+I am tracking new features and improvements added to official laravel-inertia adapter. I am trying to port those features on this adapter as well when I can.
 
-Add `InertiaMiddleware` to your project
-
-{% code title="config/middleware.py" %}
-```python
-# ...
-from masonite.inertia import InertiaMiddleware
-
-HTTP_MIDDLEWARE = [
-    LoadUserMiddleware,
-    CsrfMiddleware,
-    #...
-    InertiaMiddleware,
-]
-```
-{% endcode %}
-
-Finally publish the package configuration file to your project
-
-```python
-python craft install:inertia
-```
-
-You should now have a configuration file `config/inertia.py` .
-
-You're ready to start working with Inertia !
+Most important features are available in this adapter. The latest one might not be there but feel free to [open an issue](https://github.com/girardinsamuel/masonite-inertia/issues/new) for it and to [help me developing](contribute.md) this package !
 
