@@ -2,23 +2,7 @@
 
 ### Sharing errors/success messages
 
-In order for your server-side validation errors to be available client-side, Masonite adapter shares flash messages **automatically** through an `errors` prop and a  `success` prop.
-
-It means that when you flash a message in session in your controller, the message will be available client-side \(in your e.g. Vue.js component\).
-
-```python
-self.request.session.flash("success", "User created.")
-self.request.session.flash("errors", "An error occured.")
-```
-
-With the Vue adapter you would then access the messages with
-
-```javascript
-$page.props.success  // == "User created."
-$page.props.errors  // == "An error occured."
-```
-
-You can disable flash messages automatic sharing in [inertia configuration](../advanced/configuration.md) by setting  `INCLUDE_FLASH_MESSAGES` to `False`.
+In order for your server-side validation errors to be available client-side, Masonite adapter shares flash messages **automatically.** You can find more information in [Shared data ](shared-data.md#flash-messages)section.
 
 ### Sharing form validation errors
 
