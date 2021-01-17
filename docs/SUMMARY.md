@@ -17,6 +17,11 @@
 * [Configuration](advanced/configuration.md)
 * [Root view](advanced/root-view.md)
 * [Partial reloads](advanced/partial-reloads.md)
+* [Authorization](advanced/authorization.md)
+* [CSRF protection](advanced/csrf-protection.md)
+* [Error handling](advanced/error-handling.md)
+* [Assets versioning](advanced/assets-versioning.md)
+* [Server-side rendering](advanced/server-side-rendering.md)
 
 ## Development
 
