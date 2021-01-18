@@ -9,8 +9,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    assignees:
-      - "girardinsamuel"
     labels:
       - "build"
     # Allow up to 10 open pull requests for npm dependencies
@@ -21,8 +19,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    assignees:
-      - "girardinsamuel"
     labels:
       - "build"
     # Allow up to 10 open pull requests for npm dependencies
@@ -32,9 +28,7 @@ updates:
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
-      interval: "daily"
-    assignees:
-      - "girardinsamuel"
+      interval: "weekly"
     labels:
       - "build"
     # Allow up to 10 open pull requests for pip dependencies
