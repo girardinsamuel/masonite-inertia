@@ -132,11 +132,11 @@ class InertiaResponse(Responsable):
     def get_auth(self):
         request = self.container.make("Request")
         user = request.user()
+        # TODO: is cookie not automatically added ??
         csrf = request.get_cookie("csrf_token", decrypt=False)
         request.cookie("XSRF-TOKEN", csrf, http_only=False, encrypt=False)
         if not user:
             return {"user": None}
-        user.__hidden__ = ["password", "remember_token"]
         return {"user": user.serialize()}
 
     def get_messages(self):
