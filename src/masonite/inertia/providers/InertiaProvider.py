@@ -15,9 +15,12 @@ class InertiaProvider(Provider):
         self.application = application
 
     def register(self):
-        self.app.bind("Inertia", InertiaResponse(self.application))
-        self.app.bind("InstallCommand", InstallCommand())
-        self.app.bind("DemoCommand", DemoCommand())
+        self.application.bind("Inertia", InertiaResponse(self.application))
+        self.application.bind("config.inertia", "masonite.inertia.config.inertia")
+        self.application.make("commands").add(
+            InstallCommand(),
+            DemoCommand()
+        )
 
     def boot(self, view: View):
         self.register_view_helper(view)

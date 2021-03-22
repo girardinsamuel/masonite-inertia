@@ -1,34 +1,29 @@
-from masonite.request import Request
-from masonite.response import Response
-
 from masonite.inertia.core.InertiaAssetVersion import inertia_asset_version
 
 
 class InertiaMiddleware:
     """Inertia Middleware to check whether this is an Inertia request."""
 
-    def __init__(self, request: Request, response: Response):
-        self.request = request
-        self.response = response
-
-    def before(self):
-        self.request.is_inertia = self.request.header("X_INERTIA")
+    def before(self, request, response):
+        request.is_inertia = request.header("X_INERTIA")
         if (
-            self.request.is_inertia
-            and self.request.method == "GET"
-            and self.request.header("X_INERTIA_VERSION") != inertia_asset_version()
+            request.is_inertia
+            and request.get_request_method() == "GET"
+            and request.header("X_INERTIA_VERSION") != inertia_asset_version(request.app)
         ):
-            self.request.header("X-Inertia-Location", self.request.path)
-            return self.response.view("", status=409)
+            request.header("X-Inertia-Location", request.get_path())
+            return response.view("", status=409)
 
-    def after(self):
-        if self.request.is_inertia:
-            self.response.header("Vary", "Accept")
-            self.response.header("X-Inertia", 'true')
+    def after(self, request, response):
+
+
+        if request.is_inertia:
+            response.header("Vary", "Accept")
+            response.header("X-Inertia", 'true')
 
             # use 303 response code when redirecting from PUT, PATCH, DELETE requests
             if (
-                self.request.method in ["PUT", "PATCH", "DELETE"]
-                and self.response.is_status(302)
+                request.get_request_method() in ["PUT", "PATCH", "DELETE"]
+                and response.is_status(302)
             ):
-                self.response.status(303)
+                response.status(303)

@@ -1,9 +1,9 @@
 import html
 import json
 from inspect import signature
-from masonite.helpers import flatten
-from masonite.response import Responsable, Response
-from masonite.helpers import config
+from masonite.utils.helpers import flatten
+from masonite.response import Response
+from masonite.utils.structures import load
 from masonite.inertia.core.InertiaAssetVersion import inertia_asset_version
 
 
@@ -19,16 +19,15 @@ def load_lazy_props(d, request):
                 d[k] = v()
 
 
-class InertiaResponse(Responsable):
-    def __init__(self, container):
-        self.container = container
-        self.view = self.container.make("View")
-        self.root_view = config("inertia.root_view")
+class InertiaResponse:
+    def __init__(self, application):
+        self.application = application
+        self.root_view = load("inertia.root_view")
         self.shared_props = {}
         self.rendered_template = ""
         # parameters
-        self.include_flash_messages = config("inertia.include_flash_messages")
-        self.include_routes = config("inertia.include_routes")
+        self.include_flash_messages = load("inertia.include_flash_messages")
+        self.include_routes = load("inertia.include_routes")
         if self.include_routes:
             self._load_routes()
 
@@ -44,23 +43,26 @@ class InertiaResponse(Responsable):
                 self.routes.update({route.named_route: route.route_url})
 
     def render(self, component, props={}, custom_root_view="app"):
-        request = self.container.make("Request")
+        request = self.application.make("request")
         page_data = self.get_page_data(component, props)
 
         if request.is_inertia:
-            self.rendered_template = json.dumps(page_data)
-            return self
+            # self.rendered_template = json.dumps(page_data)
+            return json.dumps(page_data)
 
-        self.rendered_template = self.view(
+        # self.rendered_template = self.view(
+        #     custom_root_view if custom_root_view else self.root_view,
+        #     {"page": html.escape(json.dumps(page_data))},
+        # ).rendered_template
+
+        return self.application.make("view").render(
             custom_root_view if custom_root_view else self.root_view,
-            {"page": html.escape(json.dumps(page_data))},
-        ).rendered_template
-
-        return self
+            {"page": html.escape(json.dumps(page_data))}
+        )
 
     def location(self, url):
         # TODO: make request with 409 code and X-Inertia-Location: url header
-        response = self.container.make(Response)
+        response = Response(self.application)
         response.header("X-Inertia-Location", url)
         response.status(409)
         return self
@@ -70,7 +72,7 @@ class InertiaResponse(Responsable):
 
     def get_page_data(self, component, props):
         # merge shared props with page props (lazy props are resolved now)
-        request = self.container.make("Request")
+        request = self.application.make("request")
         props = {**self.get_props(props, component), **self.get_shared_props()}
 
         # lazy load props and make request available to props being lazy loaded
@@ -79,8 +81,8 @@ class InertiaResponse(Responsable):
         page_data = {
             "component": self.get_component(component),
             "props": props,
-            "url": request.path,
-            "version": inertia_asset_version(),
+            "url": request.get_path(),
+            "version": inertia_asset_version(self.application),
         }
         if self.include_routes:
             page_data.update({"routes": self.routes})
@@ -105,7 +107,7 @@ class InertiaResponse(Responsable):
         - when partial reload, required return 'only' props
         - add adapter props along view props (errors, message, auth ...)"""
 
-        request = self.container.make("Request")
+        request = self.application.make("request")
 
         # partial reload feature
         only_props = request.header("HTTP_X_INERTIA_PARTIAL_DATA")
@@ -130,17 +132,19 @@ class InertiaResponse(Responsable):
         return props
 
     def get_auth(self):
-        request = self.container.make("Request")
-        user = request.user()
+        request = self.application.make("request")
+        # user = request.user()
+        user = self.application.make("auth").guard("web").user()
         # TODO: is cookie not automatically added ??
-        csrf = request.get_cookie("csrf_token", decrypt=False)
-        request.cookie("XSRF-TOKEN", csrf, http_only=False, encrypt=False)
+        # csrf = request.cookie("csrf_token")
+        # request.cookie("XSRF-TOKEN", csrf, http_only=False, encrypt=False)
+        request.cookie("XSRF-TOKEN", request.cookie("csrf_token"))
         if not user:
             return {"user": None}
         return {"user": user.serialize()}
 
     def get_messages(self):
-        request = self.container.make("Request")
+        request = self.application.make("request")
         return {
             "success": (request.session.get_flashed("success") or ""),
             "error": (request.session.get_flashed("error") or ""),
@@ -150,7 +154,7 @@ class InertiaResponse(Responsable):
         }
 
     def get_errors(self):
-        request = self.container.make("Request")
+        request = self.application.make("request")
         return request.session.get_flashed("errors") or {}
 
     def get_component(self, component):
