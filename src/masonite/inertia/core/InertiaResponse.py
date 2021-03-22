@@ -1,7 +1,7 @@
 import html
 import json
 from inspect import signature
-from masonite.helpers.routes import flatten_routes
+from masonite.helpers import flatten
 from masonite.response import Responsable, Response
 from masonite.helpers import config
 from masonite.inertia.core.InertiaAssetVersion import inertia_asset_version
@@ -39,7 +39,7 @@ class InertiaResponse(Responsable):
         from routes.web import ROUTES
 
         self.routes = {}
-        for route in flatten_routes(ROUTES):
+        for route in flatten(ROUTES):
             if route.named_route:
                 self.routes.update({route.named_route: route.route_url})
 
