@@ -96,6 +96,16 @@ class InertiaResponse:
         else:
             return self.shared_props
 
+    def version(self, version):
+        self.version = version
+
+    def get_version(self):
+        if callable(self.version):
+            version = self.version()
+        else:
+            version = self.version
+        return str(version)
+
     def share(self, key, value=None):
         if isinstance(key, dict):
             self.shared_props = {**self.shared_props, **key}
