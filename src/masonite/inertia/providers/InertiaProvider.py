@@ -1,11 +1,11 @@
 """A InertiaProvider Service Provider."""
 from masonite.providers import Provider
-from masonite.views import View
+from masonite.utils.structures import load
 
-from masonite.inertia.core.InertiaResponse import InertiaResponse
-from masonite.inertia.commands.InstallCommand import InstallCommand
-from masonite.inertia.commands.DemoCommand import DemoCommand
-from masonite.inertia.helpers import inertia
+from ..core.Inertia import Inertia
+from ..commands.InstallCommand import InstallCommand
+from ..commands.DemoCommand import DemoCommand
+from ..testing import InertiaTestingResponse
 
 
 class InertiaProvider(Provider):
@@ -15,15 +15,17 @@ class InertiaProvider(Provider):
         self.application = application
 
     def register(self):
-        self.application.bind("Inertia", InertiaResponse(self.application))
         self.application.bind("config.inertia", "masonite.inertia.config.inertia")
+        inertia = Inertia(self.application, load(self.application.make("config.inertia")))
+        self.application.bind("inertia", inertia)
         self.application.make("commands").add(
             InstallCommand(),
             DemoCommand()
         )
+        self.application.make("tests.response").add(InertiaTestingResponse)
 
-    def boot(self, view: View):
-        self.register_view_helper(view)
 
-    def register_view_helper(self, view):
-        view.share({"inertia": inertia})
+    def boot(self):
+        # Does not work ?
+        # self.application.make("view").share({"inertia": inertia})
+        pass
