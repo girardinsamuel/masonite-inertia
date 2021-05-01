@@ -1,7 +1,7 @@
 # Introduction
 
 {% hint style="warning" %}
-Documentation updates in progress for Masonite 4
+WIP for Masonite 4
 {% endhint %}
 
 Welcome to the documentation for [masonite-inertia](https://github.com/girardinsamuel/masonite-inertia) adapter for [MasoniteFramework](https://docs.masoniteproject.com/) and [Inertia.js](https://inertiajs.com/).
@@ -18,21 +18,11 @@ Throughout the documentation, you will see that code examples are the same as th
 
 ## Masonite 4
 
-## Masonite 2 and 3
+This adapter is compatible with Masonite 4 when using `4.X` version.
 
-For now both compatibility with Masonite 3 and 2 is supported through different versions. New features will be added for Masonite 3 in priority.
+## Masonite 3
 
-The documentation is however written with Masonite 3 examples, but it should not have impact as examples are really simple. If there are strong differences between versions then you will see.
-
-{% tabs %}
-{% tab title="Masonite 3" %}
-Code example for Masonite 3
-{% endtab %}
-
-{% tab title="Masonite 2" %}
-Code example for Masonite 2
-{% endtab %}
-{% endtabs %}
+Old versions compatibles with Masonite 3 are available but won't receive new features anymore (us `3.X` version).
 
 If you want to help me maintaining this package, feel free to [contribute](development/contribute.md).
 
