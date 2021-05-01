@@ -26,6 +26,10 @@ class TestInertiaMiddleware(TestCase):
             Route.get("/basic", "TestController@basic").name("testing.basic"),
         )
 
+    def tearDown(self):
+        super().tearDown()
+        self.application.make("inertia").version("")
+
     def create_request(self, url, method="GET"):
         request = Request(generate_wsgi({"PATH_INFO": url, "REQUEST_METHOD": method}))
         request.app = self.application

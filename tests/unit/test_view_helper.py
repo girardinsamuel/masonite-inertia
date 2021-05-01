@@ -11,6 +11,12 @@ class TestInertiaViewHelper(TestCase):
             Route.get("/root-with-helper", "TestController@custom_root"),
             Route.get("/custom-id", "TestController@custom_id"),
         )
+        # set predictable version for unit testing
+        self.application.make("inertia").version("123")
+
+    def tearDown(self):
+        super().tearDown()
+        self.application.make("inertia").version("")
 
     def test_helper_directly(self):
         page_data = {"page": "test"}
@@ -21,7 +27,7 @@ class TestInertiaViewHelper(TestCase):
     def test_helper_renders_page_data_correctly_inside_template(self):
         response = self.get("/root-with-helper")
         response.assertContains(
-            '<div id=\'app\' data-page=\'"{&quot;component&quot;: &quot;Index&quot;, &quot;props&quot;: {&quot;auth&quot;: {&quot;user&quot;: &quot;&quot;}, &quot;errors&quot;: {}}, &quot;url&quot;: &quot;/root-with-helper&quot;, &quot;version&quot;: &quot;ac7241db5a4caa9d6e1b57fbb9dfdb99&quot;}"\'></div>'
+            '<div id=\'app\' data-page=\'"{&quot;component&quot;: &quot;Index&quot;, &quot;props&quot;: {&quot;auth&quot;: {&quot;user&quot;: &quot;&quot;}, &quot;errors&quot;: {}}, &quot;url&quot;: &quot;/root-with-helper&quot;, &quot;version&quot;: &quot;123&quot;}"\'></div>'
         )
 
     def test_can_customize_app_id_through_helper(self):

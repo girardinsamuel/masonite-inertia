@@ -20,11 +20,12 @@ class TestInertiaResponse(TestCase):
             Route.get("/lazy", "TestController@with_lazy_props").name("testing.with_lazy_props"),
         )
 
-        # set predictable inertia assets version for testing
-        from masonite.utils.structures import load
-        import hashlib
-        assets_url = load(self.application.make("config.inertia")).PUBLIC_PATH
-        self.version_ref = hashlib.md5(assets_url.encode()).hexdigest()
+        # set predictable version for unit testing
+        self.application.make("inertia").version("123")
+
+    def tearDown(self):
+        super().tearDown()
+        self.application.make("inertia").version("")
 
     def create_request(self, url, method="GET"):
         request = Request(generate_wsgi({"PATH_INFO": url, "REQUEST_METHOD": method}))
@@ -41,7 +42,8 @@ class TestInertiaResponse(TestCase):
         return test_response
 
     def test_server_response(self):
-        self.get("/basic").assertViewHas("page", {
+        response = self.get("/basic")
+        response.assertViewHas("page", {
             "component": "Index",
             "props": {
                 "user": "Sam",
@@ -49,12 +51,13 @@ class TestInertiaResponse(TestCase):
                 "errors": {}
             },
             "url": "/basic",
-            "version": self.version_ref
+            "version": "123"
         }).assertViewIs("app")
 
     def test_server_response_renders_data_in_template(self):
-        self.get("/basic").assertContains(
-            '<div id="app" data-page="{&quot;component&quot;: &quot;Index&quot;, &quot;props&quot;: {&quot;user&quot;: &quot;Sam&quot;, &quot;auth&quot;: {&quot;user&quot;: &quot;&quot;}, &quot;errors&quot;: {}, &quot;test&quot;: &quot;key2&quot;}, &quot;url&quot;: &quot;/basic&quot;, &quot;version&quot;: &quot;ac7241db5a4caa9d6e1b57fbb9dfdb99&quot;}"></div>'
+        response = self.get("/basic")
+        response.assertContains(
+            '<div id="app" data-page="{&quot;component&quot;: &quot;Index&quot;, &quot;props&quot;: {&quot;user&quot;: &quot;Sam&quot;, &quot;auth&quot;: {&quot;user&quot;: &quot;&quot;}, &quot;errors&quot;: {}}, &quot;url&quot;: &quot;/basic&quot;, &quot;version&quot;: &quot;123&quot;}"></div>'
         )
 
     def test_xhr_response(self):
@@ -69,7 +72,7 @@ class TestInertiaResponse(TestCase):
                 "errors": {},
             },
             "url": "/basic",
-            "version": self.version_ref
+            "version": "123"
         })
 
     def test_xhr_partial_response(self):

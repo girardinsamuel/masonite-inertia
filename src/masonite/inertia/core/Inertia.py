@@ -1,9 +1,11 @@
 import html
 import json
 from inspect import signature
-from src.masonite.inertia.core.Lazy import LazyProp
 from masonite.utils.helpers import flatten
 from masonite.utils.structures import load
+
+from src.masonite.inertia.core.Lazy import LazyProp
+from .InertiaResponse import InertiaResponse
 
 
 def load_callable_props(d, request):
@@ -62,10 +64,14 @@ class Inertia:
             response.header("Vary", "Accept")
             return response.json(page_data)
 
-        return self.application.make("view").render(
-            custom_root_view if custom_root_view else self.root_view,
-            {"page": html.escape(json.dumps(page_data))}
-        )
+        # return self.application.make("view").render(
+        #     custom_root_view if custom_root_view else self.root_view,
+        #     {"page": html.escape(json.dumps(page_data))}
+        # )
+        return InertiaResponse(
+            self.application,
+            page_data,
+            custom_root_view if custom_root_view else self.root_view).render()
 
     def location(self, url):
         response = self.application.make("response")
@@ -143,8 +149,8 @@ class Inertia:
         # add adapter data to props
         props.update({"auth": self.get_auth()})
 
-        if self.config.INCLUDE_FLASH_MESSAGES:
-            props.update({"messages": self.get_messages()})
+        # if self.config.INCLUDE_FLASH_MESSAGES:
+        #     props.update({"messages": self.get_messages()})
         if self.config.INCLUDE_ROUTES:
             props.update({"routes": self.routes})
         return props
@@ -167,8 +173,8 @@ class Inertia:
 
     def get_errors(self):
         session = self.application.make("session").driver("cookie")
-        import pdb;pdb.set_trace()
         return session.get_error_messages()
 
     def get_component(self, component):
+        # TODO: check if escaping before here is needed
         return html.escape(component)

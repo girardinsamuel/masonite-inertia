@@ -22,11 +22,6 @@ class TestInertiaAssertions(TestCase):
 
             ),
         )
-        # set predictable inertia assets version for testing
-        from masonite.utils.structures import load
-        import hashlib
-        assets_url = load(self.application.make("config.inertia")).PUBLIC_PATH
-        self.version_ref = hashlib.md5(assets_url.encode()).hexdigest()
 
     def test_assert_is_inertia(self):
         self.get("/hello-world").assertIsInertia()
@@ -44,7 +39,9 @@ class TestInertiaAssertions(TestCase):
         self.get("/hello-world").assertInertia().url("/hello-world")
 
     def test_version(self):
-        self.get("/hello-world").assertInertia().version(self.version_ref)
+        self.application.make("inertia").version("123456")
+        self.get("/hello-world").assertInertia().version("123456")
+        self.application.make("inertia").version("")  # reset
 
     def test_missing(self):
         response = self.get("/hello-world").assertInertia()

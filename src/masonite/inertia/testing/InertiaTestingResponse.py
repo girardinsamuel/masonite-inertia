@@ -1,4 +1,6 @@
 import pytest
+import json
+import html
 from masonite.utils.structures import Dot
 
 
@@ -63,7 +65,7 @@ class InertiaTest:
 class InertiaTestingResponse:
 
     def assertInertiaComponent(self, component):
-        return self
+        return self.response.original.component == component
 
     def assertInertiaHasProp(self, prop, value=None):
         # TODO with nested props too
