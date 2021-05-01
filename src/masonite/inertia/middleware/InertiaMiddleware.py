@@ -2,6 +2,7 @@ import hashlib
 import os
 from masonite.middleware import Middleware
 from masonite.utils.structures import load
+
 # from masonite.utils.location import public_path
 from ..helpers import inertia as inertia_view_helper
 
@@ -9,6 +10,7 @@ from ..helpers import inertia as inertia_view_helper
 # TODO: move this as a PR into M4
 def public_path(relative_path, absolute=True):
     from os.path import join, abspath
+
     """Build the absolute path to the given relative_path assuming it exists in the configured
     migrations location. The relative path can be returned instead by setting absolute=False."""
     relative_dir = join("tests/integrations/public", relative_path)
@@ -28,7 +30,6 @@ class InertiaMiddleware(Middleware):
         inertia.set_root_view(self.set_root_view(request))
         request.app.make("view").share({"inertia": inertia_view_helper})
 
-
     def after(self, request, response):
         self.check_version(request, response)
         response = self.change_redirect_code(request, response)
@@ -43,7 +44,11 @@ class InertiaMiddleware(Middleware):
         """In the event that the assets change, initiate a client-side location visit
         to force an update."""
         inertia = request.app.make("inertia")
-        version_header = request.header("X-Inertia-Version").value if request.header("X-Inertia-Version") else ""
+        version_header = (
+            request.header("X-Inertia-Version").value
+            if request.header("X-Inertia-Version")
+            else ""
+        )
         if (
             self.is_inertia_request(request)
             and request.get_request_method() == "GET"
@@ -58,7 +63,11 @@ class InertiaMiddleware(Middleware):
         return response
 
     def change_redirect_code(self, request, response):
-        if self.is_inertia_request(request) and response.is_status(302) and request.get_request_method() in ("PUT", "PATCH", "DELETE"):
+        if (
+            self.is_inertia_request(request)
+            and response.is_status(302)
+            and request.get_request_method() in ("PUT", "PATCH", "DELETE")
+        ):
             response.status(303)
         return response
 

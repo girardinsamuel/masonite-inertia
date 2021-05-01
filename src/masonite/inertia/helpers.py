@@ -1,6 +1,6 @@
-# from jinja2 import Markup  soon deprecated
 from markupsafe import Markup
 import json
+
 
 def inertia(page_data, app_id="app"):
     """Inertia view helper to render a div with page data required by client-side

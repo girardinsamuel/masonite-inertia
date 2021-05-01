@@ -6,14 +6,15 @@ from src.masonite.inertia.helpers import inertia as inertia_helper
 
 
 class InertiaResponse(View):
-
     def __init__(self, container, page_data, root_view):
-    # def __init__(self, component, props, root_view="app", version=None):
-    #     self.component = component
-    #     self.props = props
-    #     self.root_view = root_view
-    #     self.version = version
         super().__init__(container)
+        # TODO: check if more clean like this ?
+        # Maybe also use it to render as JSON for inertia initiated ?
+        # def __init__(self, component, props, root_view="app", version=None):
+        #     self.component = component
+        #     self.props = props
+        #     self.root_view = root_view
+        #     self.version = version
 
         # inertia specifics
         self.component = page_data["component"]
