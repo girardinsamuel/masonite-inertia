@@ -19,8 +19,11 @@
 </template>
 
 <script>
+import Layout from "@/Layout"
+
 export default {
   name: "LazyProps",
+  layout: Layout,
   props: {
     basic: String,
     callable: Number,

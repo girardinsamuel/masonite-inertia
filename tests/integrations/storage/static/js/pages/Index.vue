@@ -2,8 +2,6 @@
   <div class="container mx-auto p-4">
     <h1 class="text-2xl text-center mb-10">Welcome {{ user }} on Inertia/Masonite playground</h1>
 
-    <p>Inertia Page data: {{ $page.props }}</p>
-
     <div class="flex items-center space-x-2">
       <inertia-link href="/inertia/page-2" as="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
         Hello World
@@ -36,8 +34,11 @@
 </template>
 
 <script>
+import Layout from "@/Layout"
+
 export default {
   name: "Index",
+  layout: Layout,
   props: {
     user: {
       type: String,

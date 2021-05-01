@@ -17,11 +17,11 @@ class InertiaController(Controller):
     def basic(self, request: Request):
         """Inertia home page"""
         # we can also resolve inertia in app container
-        return request.app.make("inertia").render("Index", {"user": "Sam"})
+        return request.app.make("inertia").render("Index", {"user": "User 1"})
 
     def second_page(self, view: Inertia):
         """Inertia second page"""
-        return view.render("HelloWorld", {"first_name": "Sam"})
+        return view.render("HelloWorld", {"first_name": "John"})
 
     def states(self, view: Inertia):
         return view.render("States", {"name": "Initial name"})

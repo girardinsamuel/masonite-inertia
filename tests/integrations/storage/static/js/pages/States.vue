@@ -12,8 +12,11 @@
 </template>
 
 <script>
+import Layout from "@/Layout"
+
 export default {
   name: "States",
+  layout: Layout,
   props: {
     name: String,
   },

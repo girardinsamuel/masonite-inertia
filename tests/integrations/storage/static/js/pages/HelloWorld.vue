@@ -6,8 +6,11 @@
 </template>
 
 <script>
+import Layout from "@/Layout"
+
 export default {
   name: "HelloWorld",
+  layout: Layout,
   props: {
     first_name: String,
   },
