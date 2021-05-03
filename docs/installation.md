@@ -2,7 +2,7 @@
 
 ## Requirements
 
-* a Masonite 3 or 2.X project
+* a Masonite 4 or 3 project
 * a Node.js environment
 
 ## Installation
@@ -24,7 +24,7 @@ pip install 'masonite-inertia < 3'
 {% endtabs %}
 
 {% hint style="warning" %}
-`masonite-inertia 2.X`versions are for Masonite 2.  
+`masonite-inertia 4.X`versions are for Masonite 4.  
 `masonite-inertia 3.X`versions are for Masonite 3.
 {% endhint %}
 
@@ -37,7 +37,7 @@ from masonite.inertia import InertiaProvider
 
 PROVIDERS = [
     # ...
-    
+
     # Third Party Providers
     InertiaProvider,
 ]

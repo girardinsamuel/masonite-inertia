@@ -6,7 +6,7 @@ WIP for Masonite 4
 
 Welcome to the documentation for [masonite-inertia](https://github.com/girardinsamuel/masonite-inertia) adapter for [MasoniteFramework](https://docs.masoniteproject.com/) and [Inertia.js](https://inertiajs.com/).
 
-## Why an other doc ?
+## Why an other documentation ?
 
 The existing documentation is really good but documents only official **Laravel** and **Rails** server side adapters. Here, you will find mostly the same content but written for [MasoniteFramework](https://docs.masoniteproject.com/) !
 
@@ -22,7 +22,7 @@ This adapter is compatible with Masonite 4 when using `4.X` version.
 
 ## Masonite 3
 
-Old versions compatibles with Masonite 3 are available but won't receive new features anymore (us `3.X` version).
+Old versions compatibles with Masonite 3 are available but won't receive new features anymore \(use`3.X` version\).
 
 If you want to help me maintaining this package, feel free to [contribute](development/contribute.md).
 
@@ -31,3 +31,4 @@ If you want to help me maintaining this package, feel free to [contribute](devel
 I am tracking new features and improvements added to official laravel-inertia adapter. I am trying to port those features on this adapter as well when I can.
 
 Most important features are available in this adapter. The latest ones might not be there but feel free to [open an issue](https://github.com/girardinsamuel/masonite-inertia/issues/new) for it and [any help](development/contribute.md) is welcome !
+

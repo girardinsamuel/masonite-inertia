@@ -14,7 +14,7 @@ Here the url to create a user is generated in the controller and sent to client 
 
 ```python
 class UsersController(Controller):
-    
+
     def index(self, view: InertiaResponse):
         return view.render(
             "Users/Index",
@@ -23,12 +23,11 @@ class UsersController(Controller):
                 "create_url": # TODO
             },
         )
-
 ```
 
 ### Generated as JSON and include in view
 
-You can also generate all your routes \(or a selection\) as a JSON payload that you will include into your view. 
+You can also generate all your routes \(or a selection\) as a JSON payload that you will include into your view.
 
 To help you in the process you can use the small package [masonite-js-routes](https://github.com/girardinsamuel/masonite-js-routes). It provides a `routes()` helper that you can use in your view to include the routes client-side. After installing the package you just have to add this to your view.
 
@@ -41,7 +40,7 @@ To help you in the process you can use the small package [masonite-js-routes](ht
 ```
 {% endcode %}
 
-It will actually generate this 
+It will actually generate this
 
 ```javascript
 var Routes = {
