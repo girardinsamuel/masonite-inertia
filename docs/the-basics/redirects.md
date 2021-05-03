@@ -11,27 +11,27 @@ app/http/controllers/UsersController.py
 
 
 class UsersController(Controller):
-    
-    def index(self, view:InertiaResponse):
+
+    def index(self, view: Inertia):
         return view.render("Users/Index", {
             "users": User.all().serialize()
         })
-    
-    def store(self, view:InertiaResponse):
+
+    def store(self, view: Inertia, response: Response):
         errors = self.request.validate(
             validate.required(["name", "email"]),
             validate.length(["name", "email"], max=50),
             validate.email("email")
         )
         if errors:
-            return self.request.redirect_to("users.create")
+            return response.redirect("users.create")
                 .with_errors(errors)
                 .with_input()
-        
-        return self.request.redirect_to("users")
+
+        return response.redirect("users")
 ```
 
-### External redirects
+## External redirects
 
 Sometimes it's necessary to:
 

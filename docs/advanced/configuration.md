@@ -1,6 +1,12 @@
+---
+description: Via the configuration file and/or a custom middleware.
+---
+
 # Configuration
 
-The package can be configured via `config/inertia.py` configuration file.
+### Configuration file
+
+The package can be globally configured via `config/inertia.py` configuration file.
 
 <table>
   <thead>
@@ -51,6 +57,24 @@ The package can be configured via `config/inertia.py` configuration file.
     </tr>
   </tbody>
 </table>
+
+### Overriding Middleware
+
+The \`InertiaMiddleware\` can be overriden to define the root view and the way assets version is computed. You just have to create a middleware in your app inheriting from the \`InertiaMiddleware\` class.
+
+```text
+from masonite.inertia import InertiaMiddleware
+
+class CustomMiddleware(InertiaMiddleware):
+    
+    root_view = "other_app"
+    
+    def version(self, request):
+         return "123"
+ 
+```
+
+Then include this middleware in the HTTP middleware instead of the original one.
 
 
 
