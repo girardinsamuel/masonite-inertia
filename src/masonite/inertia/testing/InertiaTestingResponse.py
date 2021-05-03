@@ -1,14 +1,11 @@
 import pytest
-import json
-import html
 from masonite.utils.structures import Dot
+
+NOT_FOUND = "#inertia1234567890"
 
 
 class InertiaTest:
-
-    not_found = "inertia1234567890"
-
-    def __init__(self, component, url, props={}, version=""):
+    def __init__(self, component, url, props={}, root_view="app", version=""):
         self._component = component
         self._url = url
         self._props = props
@@ -22,25 +19,24 @@ class InertiaTest:
         return self
 
     def has(self, key, value=None):
-        # assert key in self._props
-        corresponding_value = Dot().dict_dot(key, self._props, self.not_found)
-        assert corresponding_value != self.not_found
+        corresponding_value = Dot().dict_dot(key, self._props, NOT_FOUND)
+        assert corresponding_value != NOT_FOUND
 
         if value:
             assert corresponding_value == value
 
         return self
 
-    def contains(self, key, count=None):
-        corresponding_value = Dot().dict_dot(key, self._props, self.not_found)
-        assert corresponding_value != self.not_found
+    def hasCount(self, key, count=None):
+        corresponding_value = Dot().dict_dot(key, self._props, NOT_FOUND)
+        assert corresponding_value != NOT_FOUND
         if count:
             assert len(corresponding_value) == count
         return self
 
     def missing(self, key):
-        corresponding_value = Dot().dict_dot(key, self._props, self.not_found)
-        assert corresponding_value == self.not_found
+        corresponding_value = Dot().dict_dot(key, self._props, NOT_FOUND)
+        assert corresponding_value == NOT_FOUND
         return self
 
     def url(self, url):
@@ -53,29 +49,21 @@ class InertiaTest:
 
     def dump(self):
         from pprint import pprint
+
         pprint(vars(self))
         return self
 
     def dd(self):
         self.dump()
-        pytest.fail("test stopped because of die and dump call dd()")
+        pytest.fail("Inertia: test stopped when calling dd()")
         return self
 
 
 class InertiaTestingResponse:
-
-    def assertInertiaComponent(self, component):
-        return self.response.original.component == component
-
-    def assertInertiaHasProp(self, prop, value=None):
-        # TODO with nested props too
-        return self
-
-    def assertInertiaMissingProp(self, prop):
-        return self
-
-    def assertInertiaPropsExact(self, props):
-        return self
+    @property
+    def _inertia_response(self):
+        """Get InertiaResponse instance."""
+        return self.response.original
 
     def assertIsInertia(self):
         self.assertViewHas("page.component")
@@ -84,17 +72,53 @@ class InertiaTestingResponse:
         self.assertViewHas("page.version")
         return self
 
-    def assertInertiaPropCount(self, prop, count):
+    def assertInertiaComponent(self, component):
+        assert self._inertia_response.component == component
         return self
 
-    def assertInertia(self):
+    def assertInertiaHasProp(self, key, value=None):
+        corresponding_value = Dot().dict_dot(
+            key, self._inertia_response.props, NOT_FOUND
+        )
+        assert corresponding_value != NOT_FOUND
+
+        if value:
+            assert corresponding_value == value
+        return self
+
+    def assertInertiaMissingProp(self, key):
+        corresponding_value = Dot().dict_dot(
+            key, self._inertia_response.props, NOT_FOUND
+        )
+        assert corresponding_value == NOT_FOUND
+        return self
+
+    def assertInertiaPropCount(self, key, count):
+        corresponding_value = Dot().dict_dot(
+            key, self._inertia_response.props, NOT_FOUND
+        )
+        assert corresponding_value != NOT_FOUND
+        if count:
+            assert len(corresponding_value) == count
+        return self
+
+    def assertInertiaVersion(self, version):
+        assert self._inertia_response.version == version
+        return self
+
+    def assertInertiaRootView(self, view):
+        assert self._inertia_response.root_view == view
+        return self
+
+    def withInertia(self):
         """This will ensure that response is inertia and returns a special object on which
-        Inertia specific assertions can be made."""
+        Inertia handy assertions can be made."""
         self.assertIsInertia()
-        data = self.response.original.dictionary["page"]
+        inertia_response = self.response.original
         return InertiaTest(
-            data["component"],
+            inertia_response.component,
             self.request.get_path(),
-            data["props"],
-            data["version"]
+            inertia_response.props,
+            inertia_response.root_view,
+            inertia_response.version,
         )
