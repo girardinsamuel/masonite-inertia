@@ -22,6 +22,7 @@
 * [Error handling](advanced/error-handling.md)
 * [Assets versioning](advanced/assets-versioning.md)
 * [Server-side rendering](advanced/server-side-rendering.md)
+* [Testing](advanced/testing.md)
 
 ## Development
 

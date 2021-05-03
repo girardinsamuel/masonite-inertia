@@ -62,19 +62,20 @@ The package can be globally configured via `config/inertia.py` configuration fil
 
 The \`InertiaMiddleware\` can be overriden to define the root view and the way assets version is computed. You just have to create a middleware in your app inheriting from the \`InertiaMiddleware\` class.
 
-```text
+
+
+{% code title="app/http/middleware/HandleInertiaRequests.py" %}
+```python
 from masonite.inertia import InertiaMiddleware
 
-class CustomMiddleware(InertiaMiddleware):
+class HandleInertiaRequests(InertiaMiddleware):
     
     root_view = "other_app"
     
     def version(self, request):
          return "123"
- 
 ```
+{% endcode %}
 
 Then include this middleware in the HTTP middleware instead of the original one.
-
-
 
