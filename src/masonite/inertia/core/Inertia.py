@@ -2,7 +2,7 @@ import html
 import json
 from inspect import signature
 from masonite.utils.helpers import flatten
-from masonite.utils.structures import load
+from masonite.utils.structures import load, Dot
 
 from src.masonite.inertia.core.Lazy import LazyProp
 from .InertiaResponse import InertiaResponse
@@ -71,7 +71,8 @@ class Inertia:
         return InertiaResponse(
             self.application,
             page_data,
-            custom_root_view if custom_root_view else self.root_view).render()
+            custom_root_view if custom_root_view else self.root_view,
+        ).render()
 
     def location(self, url):
         response = self.application.make("response")
@@ -122,6 +123,14 @@ class Inertia:
         else:
             self.shared_props.update({key: value})
 
+    def flush_shared(self):
+        self.shared_props = {}
+
+    def get_shared(self, key=None, default=None):
+        if key:
+            return Dot().dot(key, self.shared_props, default)
+        return self.shared_props
+
     def get_props(self, all_props, component):
         """Get props to return to the page:
         - when partial reload, required return 'only' props
@@ -131,11 +140,13 @@ class Inertia:
 
         # partial reload feature
         only_props_header = request.header("X-Inertia-Partial-Data")
-        partial_component_header = request.header("X-Inertia-Partial-Component") or {"name": ""}
+        partial_component_header = request.header("X-Inertia-Partial-Component") or {
+            "name": ""
+        }
         is_partial = only_props_header and partial_component_header.value == component
         props = {}
 
-        if (is_partial):
+        if is_partial:
             only_props = only_props_header.value
             for key in all_props:
                 if key in only_props:
