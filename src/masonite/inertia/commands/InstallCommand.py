@@ -2,26 +2,10 @@
 from cleo import Command
 import os
 import shutil
+from masonite.utils.location import config_path
 
 
 package_root = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-
-
-def create_if_not_exists(location, name=False):
-    if name:
-        file_name = name
-    else:
-        file_name = os.path.basename(location)
-
-    # import it into the config directory
-    config_directory = os.path.join(os.getcwd(), "config")
-
-    # if file does not exist
-    if not os.path.isfile(config_directory + "/" + file_name):
-        shutil.copyfile(location, config_directory + "/" + file_name)
-        print("\033[92mConfiguration File Created!\033[0m")
-    else:
-        print("\033[93mConfiguration File Already Exists!\033[93m")
 
 
 class InstallCommand(Command):
@@ -32,4 +16,12 @@ class InstallCommand(Command):
     """
 
     def handle(self):
-        create_if_not_exists(os.path.join(package_root, "config/inertia.py"))
+        # publish config file
+        default_config = os.path.join(package_root, "config/inertia.py")
+        published_config = config_path("inertia.py")
+        if not os.path.isfile(published_config):
+            shutil.copyfile(default_config, published_config)
+            self.info("Configuration File Created!")
+        else:
+            self.line_error("Configuration File Already Exists!")
+            return -1

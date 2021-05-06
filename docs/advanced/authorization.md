@@ -8,15 +8,14 @@ from masonite.auth import Auth
 from masonite.inertia import InertiaResponse
 
 class UsersController(Controller):
-    
+
     def index(self, auth: Auth, view:InertiaResponse):
         return view.render("Users/Index", {
             "can": {
                 "create_user": # add custom check with the current user auth.user()
             },
             "users": User.all().serialize()
-        })    
-
+        })
 ```
 {% endcode %}
 

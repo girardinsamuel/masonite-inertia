@@ -1,8 +1,6 @@
 # CSRF protection
 
-### CSRF Token
+## CSRF Token
 
-### Handling mismatches <a id="handling-mismatches"></a>
-
-
+## Handling mismatches <a id="handling-mismatches"></a>
 

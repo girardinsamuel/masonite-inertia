@@ -54,4 +54,4 @@ INCLUDE_ROUTES = False
 | default: True
 """
 
-INCLUDE_FLASH_MESSAGES = True
+INCLUDE_FLASH_MESSAGES = False

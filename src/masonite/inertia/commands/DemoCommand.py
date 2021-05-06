@@ -3,12 +3,11 @@ import os
 import json
 import shutil
 from cleo import Command
-from masonite.packages import append_web_routes, create_controller
+
+# from masonite.packages import append_web_routes, create_controller
 
 
-demo_path = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "demo"
-)
+demo_path = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), "demo")
 
 
 class DemoCommand(Command):
@@ -54,9 +53,7 @@ class DemoCommand(Command):
         directory = "resources/js/pages"
         if not os.path.exists(os.path.realpath(directory)):
             os.makedirs(os.path.realpath(directory))
-        shutil.copyfile(
-            os.path.join(demo_path, "static/app.js"), "resources/js/inertia_demo.js"
-        )
+        shutil.copyfile(os.path.join(demo_path, "static/app.js"), "resources/js/inertia_demo.js")
         shutil.copyfile(
             os.path.join(demo_path, "static/pages/Index.vue"),
             "resources/js/pages/Index.vue",
@@ -74,17 +71,16 @@ class DemoCommand(Command):
         )
 
     def handle(self):
-        # add demo routes
-        append_web_routes(os.path.join(demo_path, "web.py"))
+        # TODO: add demo routes
+        # append_web_routes(os.path.join(demo_path, "web.py"))
         # add demo view and controller
         self._add_view()
-        create_controller(os.path.join(demo_path, "InertiaDemoController.py"))
+        # TODO:
+        # create_controller(os.path.join(demo_path, "InertiaDemoController.py"))
         # scaffold app (.js and vue components)
         self._add_assets()
         # update dependencies
         self._update_packages()
         self._update_webpack_configuration()
         self.info("Inertia demo has been installed successfully.")
-        self.comment(
-            'Please run "npm install && npm run dev" to compile your fresh scaffolding.'
-        )
+        self.comment('Please run "npm install && npm run dev" to compile your fresh scaffolding.')
