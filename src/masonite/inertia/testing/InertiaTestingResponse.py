@@ -1,4 +1,5 @@
 import pytest
+
 from masonite.utils.structures import Dot
 
 NOT_FOUND = "#inertia1234567890"

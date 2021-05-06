@@ -1,8 +1,11 @@
 import html
 import json
+
 from jinja2.exceptions import TemplateNotFound
+
 from masonite.views import View
-from src.masonite.inertia.helpers import inertia as inertia_helper
+
+from ..helpers import inertia as inertia_helper
 
 
 class InertiaResponse(View):

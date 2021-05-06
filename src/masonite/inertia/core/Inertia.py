@@ -3,9 +3,9 @@ from inspect import signature
 
 from masonite.utils.helpers import flatten
 from masonite.utils.structures import Dot, load
-from src.masonite.inertia.core.Lazy import LazyProp
 
 from .InertiaResponse import InertiaResponse
+from .Lazy import LazyProp
 
 
 def load_callable_props(d, request):
