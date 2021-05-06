@@ -19,7 +19,6 @@ class AppInertiaMiddleware(InertiaMiddleware):
 
 
 class TestInertiaMiddleware(TestCase):
-
     def setUp(self):
         super().setUp()
         self.setRoutes(

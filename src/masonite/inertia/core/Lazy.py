@@ -1,6 +1,4 @@
-
 class LazyProp:
-
     def __init__(self, callable):
         self.callable = callable
 

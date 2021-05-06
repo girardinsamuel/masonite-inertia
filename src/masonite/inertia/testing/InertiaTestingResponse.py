@@ -77,9 +77,7 @@ class InertiaTestingResponse:
         return self
 
     def assertInertiaHasProp(self, key, value=None):
-        corresponding_value = Dot().dict_dot(
-            key, self._inertia_response.props, NOT_FOUND
-        )
+        corresponding_value = Dot().dict_dot(key, self._inertia_response.props, NOT_FOUND)
         assert corresponding_value != NOT_FOUND
 
         if value:
@@ -87,16 +85,12 @@ class InertiaTestingResponse:
         return self
 
     def assertInertiaMissingProp(self, key):
-        corresponding_value = Dot().dict_dot(
-            key, self._inertia_response.props, NOT_FOUND
-        )
+        corresponding_value = Dot().dict_dot(key, self._inertia_response.props, NOT_FOUND)
         assert corresponding_value == NOT_FOUND
         return self
 
     def assertInertiaPropCount(self, key, count):
-        corresponding_value = Dot().dict_dot(
-            key, self._inertia_response.props, NOT_FOUND
-        )
+        corresponding_value = Dot().dict_dot(key, self._inertia_response.props, NOT_FOUND)
         assert corresponding_value != NOT_FOUND
         if count:
             assert len(corresponding_value) == count

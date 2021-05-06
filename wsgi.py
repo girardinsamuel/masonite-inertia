@@ -10,9 +10,6 @@ application = Application(os.getcwd())
 """First Bind important providers needed to start the server
 """
 
-application.register_providers(
-    Kernel,
-    AppHttpKernel
-)
+application.register_providers(Kernel, AppHttpKernel)
 
 application.add_providers(*PROVIDERS)

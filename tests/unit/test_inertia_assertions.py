@@ -13,12 +13,12 @@ class TestInertiaAssertions(TestCase):
         self.application.bind(
             "router",
             RouteCapsule(
-                Route.set_controller_module_location(
-                    "tests.integrations.controllers"
-                ).get("/nested-props", "TestController@nested_props"),
-                Route.set_controller_module_location(
-                    "tests.integrations.controllers"
-                ).get("/hello-world", "TestController@helloworld"),
+                Route.set_controller_module_location("tests.integrations.controllers").get(
+                    "/nested-props", "TestController@nested_props"
+                ),
+                Route.set_controller_module_location("tests.integrations.controllers").get(
+                    "/hello-world", "TestController@helloworld"
+                ),
             ),
         )
 

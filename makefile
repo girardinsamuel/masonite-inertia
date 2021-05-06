@@ -22,7 +22,7 @@ ci: ## [CI] Run package tests and lint
 lint: ## Run code linting
 	python -m flake8 src/masonite/inertia/
 format: ## Format code with Black
-	black src/masonite/inertia
+	black .
 coverage: ## Run package tests and upload coverage reports
 	python -m pytest --cov-report term --cov-report xml --cov=src/masonite/inertia tests
 publish: ## Publish package to pypi

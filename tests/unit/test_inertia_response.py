@@ -14,12 +14,8 @@ class TestInertiaResponse(TestCase):
             Route.get("/external", "TestController@external").name("testing.external"),
             Route.get("/basic", "TestController@basic").name("testing.basic"),
             Route.get("/custom-root", "TestController@custom_root"),
-            Route.get("/callables", "TestController@lazy_view").name(
-                "testing.lazy_view"
-            ),
-            Route.get("/lazy", "TestController@with_lazy_props").name(
-                "testing.with_lazy_props"
-            ),
+            Route.get("/callables", "TestController@lazy_view").name("testing.lazy_view"),
+            Route.get("/lazy", "TestController@with_lazy_props").name("testing.with_lazy_props"),
         )
 
         # set predictable version for unit testing
@@ -107,9 +103,7 @@ class TestInertiaResponse(TestCase):
             return 4
 
         (
-            self.create_response(
-                request, "Index", {"user": "Sam", "lazy": lazy(callable_prop)}
-            )
+            self.create_response(request, "Index", {"user": "Sam", "lazy": lazy(callable_prop)})
             .assertJsonPath("component", "Index")
             .assertJsonPath("url", "/basic")
             .assertJsonMissing("props.lazy")
@@ -133,9 +127,7 @@ class TestInertiaResponse(TestCase):
             return 4
 
         (
-            self.create_response(
-                request, "Index", {"user": "Sam", "lazy": lazy(callable_prop)}
-            )
+            self.create_response(request, "Index", {"user": "Sam", "lazy": lazy(callable_prop)})
             .assertJsonPath("component", "Index")
             .assertJsonPath("url", "/basic")
             .assertJsonMissing("props.user")

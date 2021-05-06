@@ -35,7 +35,11 @@ class InertiaController(Controller):
 
         return view.render(
             "LazyProps",
-            {"basic": "Normal prop !", "callable": callable_prop, "lazy_prop": lazy(other_callable_prop)}
+            {
+                "basic": "Normal prop !",
+                "callable": callable_prop,
+                "lazy_prop": lazy(other_callable_prop),
+            },
         )
 
     def external(self, request: Request, view: Inertia):

@@ -54,4 +54,6 @@ class TestController(Controller):
         return view.render("Index", {"is_authenticated": is_authenticated})
 
     def nested_props(self, view: Inertia):
-        return view.render("Index", {"count": 3, "array": [1,2,3], "nested": {"a": 1, "b": {"end": "finally"}}})
+        return view.render(
+            "Index", {"count": 3, "array": [1, 2, 3], "nested": {"a": 1, "b": {"end": "finally"}}}
+        )

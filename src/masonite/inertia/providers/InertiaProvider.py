@@ -16,9 +16,7 @@ class InertiaProvider(Provider):
 
     def register(self):
         self.application.bind("config.inertia", "masonite.inertia.config.inertia")
-        inertia = Inertia(
-            self.application, load(self.application.make("config.inertia"))
-        )
+        inertia = Inertia(self.application, load(self.application.make("config.inertia")))
         self.application.bind("inertia", inertia)
         self.application.make("commands").add(InstallCommand(), DemoCommand())
         self.application.make("tests.response").add(InertiaTestingResponse)
