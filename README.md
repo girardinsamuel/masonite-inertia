@@ -1,8 +1,5 @@
-# Masonite Inertia
-
 <p align="center">
-<img src="https://i.imgur.com/rEXcoMn.png" width="130px">
-<img src="https://avatars1.githubusercontent.com/u/47703742?s=200&v=4" width="130px">
+    <img src="https://banners.beyondco.de/Masonite%20Inertia.png?theme=light&packageManager=pip+install&packageName=masonite-inertia&pattern=topography&style=style_1&description=Masonite%20Inertia%20server-side%20adapter&md=1&showWatermark=1&fontSize=100px&images=https%3A%2F%2Fgblobscdn.gitbook.com%2Fspaces%2F-L9uc-9XAlqhXkBwrLMA%2Favatar.png">
 </p>
 
 <p align="center">
