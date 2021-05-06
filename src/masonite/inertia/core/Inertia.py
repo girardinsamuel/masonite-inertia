@@ -2,7 +2,7 @@ import html
 from inspect import signature
 
 from masonite.utils.helpers import flatten
-from masonite.utils.structures import Dot, load
+from masonite.utils.structures import Dot
 
 from .InertiaResponse import InertiaResponse
 from .Lazy import LazyProp
@@ -28,12 +28,12 @@ def load_callable_props(d, request):
 class Inertia:
     def __init__(self, application, config={}):
         self.application = application
-        self.root_view = load("inertia.root_view")
         self.shared_props = {}
         self.rendered_template = ""
         self._version = ""
         # parameters
         self.config = config
+        self.root_view = config.ROOT_VIEW
         # self.include_flash_messages = load("inertia.include_flash_messages")
         # self.include_routes = load("inertia.include_routes")
         if self.config.INCLUDE_ROUTES:
