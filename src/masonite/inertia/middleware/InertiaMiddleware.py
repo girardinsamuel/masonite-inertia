@@ -72,8 +72,7 @@ class InertiaMiddleware(Middleware):
         return response
 
     def get_session(self, request):
-        # TODO: how to get current session driver, not hard coding cookie
-        return request.app.make("session").driver("cookie")
+        return request.app.make("session").get_driver()
 
     def resolve_validation_errors(self, request):
         """Get validation errors in flash session if any and serialize it to be easy to use

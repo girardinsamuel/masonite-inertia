@@ -179,11 +179,11 @@ class Inertia:
         return {"user": user.serialize()}
 
     def get_messages(self):
-        session = self.application.make("session").driver("cookie")
+        session = self.application.make("session").get_driver()
         return session.get_flashed_messages()
 
     def get_errors(self):
-        session = self.application.make("session").driver("cookie")
+        session = self.application.make("session").get_driver()
         return session.get_error_messages()
 
     def get_component(self, component):
