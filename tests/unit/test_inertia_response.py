@@ -1,9 +1,8 @@
-from masonite.response.response import Response
-from masonite.tests import TestCase
-from masonite.routes import Route
 from masonite.request import Request
+from masonite.response.response import Response
+from masonite.routes import Route
+from masonite.tests import TestCase
 from masonite.utils.helpers import generate_wsgi
-
 from src.masonite.inertia import lazy
 
 
@@ -55,7 +54,7 @@ class TestInertiaResponse(TestCase):
     def test_server_response_renders_data_in_template(self):
         response = self.get("/basic")
         response.assertContains(
-            '<div id="app" data-page="{&quot;component&quot;: &quot;Index&quot;, &quot;props&quot;: {&quot;user&quot;: &quot;Sam&quot;, &quot;auth&quot;: {&quot;user&quot;: &quot;&quot;}, &quot;errors&quot;: {}}, &quot;url&quot;: &quot;/basic&quot;, &quot;version&quot;: &quot;123&quot;}"></div>'
+            '<div id="app" data-page="{&quot;component&quot;: &quot;Index&quot;, &quot;props&quot;: {&quot;user&quot;: &quot;Sam&quot;, &quot;auth&quot;: {&quot;user&quot;: &quot;&quot;}, &quot;errors&quot;: {}}, &quot;url&quot;: &quot;/basic&quot;, &quot;version&quot;: &quot;123&quot;}"></div>'  # noqa: E501
         )
 
     def test_xhr_response(self):

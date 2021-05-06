@@ -1,5 +1,4 @@
 """Database Settings """
-from masoniteorm.query import QueryBuilder
 from masoniteorm.connections import ConnectionResolver
 
 """

@@ -1,4 +1,3 @@
-import os
 from ..app.User import User
 
 GUARDS = {

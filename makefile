@@ -20,7 +20,7 @@ ci: ## [CI] Run package tests and lint
 	make test
 	make lint
 lint: ## Run code linting
-	python -m flake8 src/masonite/inertia/
+	python -m flake8 .
 format: ## Format code with Black
 	black .
 coverage: ## Run package tests and upload coverage reports
