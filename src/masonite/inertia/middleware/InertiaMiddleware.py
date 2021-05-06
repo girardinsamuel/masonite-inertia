@@ -1,5 +1,6 @@
 import hashlib
 import os
+
 from masonite.middleware import Middleware
 from masonite.utils.structures import load
 
@@ -9,7 +10,7 @@ from ..helpers import inertia as inertia_view_helper
 
 # TODO: move this as a PR into M4
 def public_path(relative_path, absolute=True):
-    from os.path import join, abspath
+    from os.path import abspath, join
 
     """Build the absolute path to the given relative_path assuming it exists in the configured
     migrations location. The relative path can be returned instead by setting absolute=False."""
@@ -77,7 +78,7 @@ class InertiaMiddleware(Middleware):
     def resolve_validation_errors(self, request):
         """Get validation errors in flash session if any and serialize it to be easy to use
         client-side."""
-        # TODO:
+        # TODO: implement laravel behaviour
         session = self.get_session(request)
         if not session.has("errors"):
             return {}
@@ -85,20 +86,6 @@ class InertiaMiddleware(Middleware):
             # TODO: fix this
             # return session.get_error_messages()
             return {}
-
-        # return (object) collect($request->session()->get('errors')->getBags())->map(function ($bag) {
-        #     return (object) collect($bag->messages())->map(function ($errors) {
-        #         return $errors[0];
-        #     })->toArray();
-        # })->pipe(function ($bags) use ($request) {
-        #     if ($bags->has('default') && $request->header('x-inertia-error-bag')) {
-        #         return [$request->header('x-inertia-error-bag') => $bags->get('default')];
-        #     } elseif ($bags->has('default')) {
-        #         return $bags->get('default');
-        #     } else {
-        #         return $bags->toArray();
-        #     }
-        # });
 
     def share(self, request):
         """Defines the props that are shared by default. Can be overriden."""

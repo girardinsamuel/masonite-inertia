@@ -1,10 +1,10 @@
 import html
-import json
 from inspect import signature
-from masonite.utils.helpers import flatten
-from masonite.utils.structures import load, Dot
 
+from masonite.utils.helpers import flatten
+from masonite.utils.structures import Dot, load
 from src.masonite.inertia.core.Lazy import LazyProp
+
 from .InertiaResponse import InertiaResponse
 
 
@@ -140,9 +140,7 @@ class Inertia:
 
         # partial reload feature
         only_props_header = request.header("X-Inertia-Partial-Data")
-        partial_component_header = request.header("X-Inertia-Partial-Component") or {
-            "name": ""
-        }
+        partial_component_header = request.header("X-Inertia-Partial-Component") or {"name": ""}
         is_partial = only_props_header and partial_component_header.value == component
         props = {}
 
