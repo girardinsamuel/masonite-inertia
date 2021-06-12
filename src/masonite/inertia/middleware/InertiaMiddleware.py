@@ -44,23 +44,16 @@ class InertiaMiddleware(Middleware):
         return response
 
     def is_inertia_request(self, request):
-        if request.header("X-Inertia"):
-            return request.header("X-Inertia").value
-        return False
+        return request.header("X-Inertia")
 
     def check_version(self, request, response):
         """In the event that the assets change, initiate a client-side location visit
         to force an update."""
         inertia = request.app.make("inertia")
-        version_header = (
-            request.header("X-Inertia-Version").value
-            if request.header("X-Inertia-Version")
-            else ""
-        )
         if (
             self.is_inertia_request(request)
             and request.get_request_method() == "GET"
-            and str(version_header) != inertia.get_version()
+            and str(request.header("X-Inertia-Version")) != inertia.get_version()
         ):
             # TODO: implements reflash/keep in M4
             # if ($request->hasSession()) {
