@@ -34,6 +34,13 @@ class InertiaMiddleware(Middleware):
     def after(self, request, response):
         self.check_version(request, response)
         response = self.change_redirect_code(request, response)
+
+        # OLDWAY: request.cookie("XSRF-TOKEN", request.cookie("csrf_token"))
+        # set CSRF token as cookie in response so that axios sent back the token
+        # in a X-XSRF-TOKEN header in the subsequent request
+        # It's important that, the cookie has not HttpOnly and Secure as discussed
+        # here: https://stackoverflow.com/a/54132068/15131933
+        response.cookie("XSRF-TOKEN", request.cookie("csrf_token"), secure=False, http_only=False)
         return response
 
     def is_inertia_request(self, request):

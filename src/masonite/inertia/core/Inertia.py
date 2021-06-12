@@ -165,13 +165,7 @@ class Inertia:
         return props
 
     def get_auth(self):
-        request = self.application.make("request")
-        # user = request.user()
         user = self.application.make("auth").guard("web").user()
-        # TODO: is cookie not automatically added ??
-        # csrf = request.cookie("csrf_token")
-        # request.cookie("XSRF-TOKEN", csrf, http_only=False, encrypt=False)
-        request.cookie("XSRF-TOKEN", request.cookie("csrf_token"))
         if not user:
             return {"user": ""}
         return {"user": user.serialize()}
