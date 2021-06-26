@@ -13,14 +13,16 @@ To avoid hard-coding URLs path into your application client-side it would be goo
 Here the url to create a user is generated in the controller and sent to client through the prop `create_url`.
 
 ```python
+from masonite.routes import Router
+
 class UsersController(Controller):
 
-    def index(self, view: InertiaResponse):
+    def index(self, view: InertiaResponse, router: Router):
         return view.render(
             "Users/Index",
             {
                 "users": User.all().serialize(),
-                "create_url": # TODO
+                "create_url": router.route("users.create"),
             },
         )
 ```
@@ -32,12 +34,14 @@ You can also generate all your routes \(or a selection\) as a JSON payload that 
 To help you in the process you can use the small package [masonite-js-routes](https://github.com/girardinsamuel/masonite-js-routes). It provides a `routes()` helper that you can use in your view to include the routes client-side. After installing the package you just have to add this to your view.
 
 {% code title="app.html" %}
+
 ```markup
 <head>
     <!-- ... -->
     {{ routes() }}
 <head>
 ```
+
 {% endcode %}
 
 It will actually generate this
@@ -64,7 +68,6 @@ Then you're free to use this global variable into your client-side application t
 Hopefully an existing package called [ziggy-js](https://github.com/tighten/ziggy) can be installed to provide some javascript helpers that can parse this `Routes` variable.
 
 ```javascript
-route('home'); // 'https://your-app.com/
-route('users.create'); // 'https://ziggy.test/users'
+route("home"); // 'https://your-app.com/
+route("users.create"); // 'https://your-app.com/users'
 ```
-
