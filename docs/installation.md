@@ -2,35 +2,26 @@
 
 ## Requirements
 
-* a Masonite 4 or 3 project
-* a Node.js environment
+- a Masonite 4 project
+- a Node.js environment
 
 ## Installation
 
 Install the latest Inertia server-side adapter in your project
 
-{% tabs %}
-{% tab title="Masonite 3" %}
 ```text
 pip install masonite-inertia
 ```
-{% endtab %}
-
-{% tab title="Masonite 2" %}
-```text
-pip install 'masonite-inertia < 3'
-```
-{% endtab %}
-{% endtabs %}
 
 {% hint style="warning" %}
-`masonite-inertia 4.X`versions are for Masonite 4.  
-`masonite-inertia 3.X`versions are for Masonite 3.
+`masonite-inertia 4.X` versions are for Masonite 4.
+`masonite-inertia 3.X` versions are for Masonite 3.
 {% endhint %}
 
 Add `InertiaProvider` to your project
 
 {% code title="config/providers.py" %}
+
 ```python
 # ...
 from masonite.inertia import InertiaProvider
@@ -42,22 +33,32 @@ PROVIDERS = [
     InertiaProvider,
 ]
 ```
+
 {% endcode %}
 
-Add `InertiaMiddleware` to your project
+Publish the `HandleInertiaRequests` to your project.
+TODO:
+For now, just create a new middleware in your project:
 
-{% code title="config/middleware.py" %}
 ```python
-# ...
 from masonite.inertia import InertiaMiddleware
 
-HTTP_MIDDLEWARE = [
-    LoadUserMiddleware,
-    CsrfMiddleware,
-    #...
-    InertiaMiddleware,
+
+class HandleInertiaRequests(InertiaMiddleware):
+```
+
+{% code title="config/middleware.py" %}
+
+And add this middleware as the last item of your middleware stack (located in `Kernel` config):
+
+```python
+# ...
+http_middleware = [
+    #...,
+    HandleInertiaRequests
 ]
 ```
+
 {% endcode %}
 
 Finally publish the package configuration file to your project
@@ -66,7 +67,6 @@ Finally publish the package configuration file to your project
 python craft install:inertia
 ```
 
-You should now have a configuration file `config/inertia.py` .
+You should now have a configuration file `config/inertia.py`.
 
 You're ready to start working with Inertia !
-
