@@ -3,7 +3,7 @@ import os
 from masonite.auth import Sign
 from masonite.environment import LoadEnvironment
 from masonite.foundation import response_handler
-from masonite.middleware import SessionMiddleware, VerifyCsrfToken
+from masonite.middleware import SessionMiddleware
 from masonite.routes import Route
 from masonite.storage import StorageCapsule
 from masonite.utils.structures import load, load_routes
@@ -71,19 +71,6 @@ class Kernel:
 
     def register_templates(self):
         self.application.bind("views.location", "tests/integrations/templates")
-
-    def register_storage(self):
-        storage = StorageCapsule(self.application.base_path)
-        storage.add_storage_assets(
-            {
-                # folder                             # template alias
-                "tests/integrations/storage/static": "static/",
-                "tests/integrations/storage/compiled": "static/",
-                "tests/integrations/storage/uploads": "static/",
-                "tests/integrations/storage/public": "/",
-            }
-        )
-        self.application.bind("storage_capsule", storage)
 
     def register_database(self):
         from masoniteorm.query import QueryBuilder
