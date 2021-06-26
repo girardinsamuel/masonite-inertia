@@ -141,11 +141,11 @@ class Inertia:
         # partial reload feature
         only_props_header = request.header("X-Inertia-Partial-Data")
         partial_component_header = request.header("X-Inertia-Partial-Component") or {"name": ""}
-        is_partial = only_props_header and partial_component_header.value == component
+        is_partial = only_props_header and partial_component_header == component
         props = {}
 
         if is_partial:
-            only_props = only_props_header.value
+            only_props = only_props_header
             for key in all_props:
                 if key in only_props:
                     props.update({key: all_props[key]})

@@ -2,6 +2,8 @@ import pytest
 
 from masonite.utils.structures import Dot
 
+from ..core.InertiaResponse import InertiaResponse
+
 NOT_FOUND = "#inertia1234567890"
 
 
@@ -67,10 +69,7 @@ class InertiaTestingResponse:
         return self.response.original
 
     def assertIsInertia(self):
-        self.assertViewHas("page.component")
-        self.assertViewHas("page.props")
-        self.assertViewHas("page.url")
-        self.assertViewHas("page.version")
+        assert isinstance(self._inertia_response, InertiaResponse)
         return self
 
     def assertInertiaComponent(self, component):

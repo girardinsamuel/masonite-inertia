@@ -1,25 +1,20 @@
 """Test controllers using InertiaResponse"""
 import io
 import sys
+
 from _pytest.outcomes import Failed
 
+from masonite.routes import Route
 from masonite.tests import TestCase
-from masonite.routes import Route, RouteCapsule
 
 
 class TestInertiaAssertions(TestCase):
     def setUp(self):
         super().setUp()
-        self.application.bind(
-            "router",
-            RouteCapsule(
-                Route.set_controller_module_location("tests.integrations.controllers").get(
-                    "/nested-props", "TestController@nested_props"
-                ),
-                Route.set_controller_module_location("tests.integrations.controllers").get(
-                    "/hello-world", "TestController@helloworld"
-                ),
-            ),
+        Route.set_controller_module_location("tests.integrations.controllers")
+        self.setRoutes(
+            Route.get("/nested-props", "TestController@nested_props"),
+            Route.get("/hello-world", "TestController@helloworld"),
         )
 
     def test_assert_is_inertia(self):
