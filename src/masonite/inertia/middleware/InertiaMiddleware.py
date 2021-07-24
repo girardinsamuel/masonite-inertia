@@ -59,9 +59,6 @@ class InertiaMiddleware(Middleware):
             # if ($request->hasSession()) {
             #     $request->session()->reflash();
             # }
-            import pdb
-
-            pdb.set_trace()
             return inertia.location(request.get_path())
 
         return response
@@ -86,9 +83,7 @@ class InertiaMiddleware(Middleware):
         if not session.has("errors"):
             return {}
         else:
-            # TODO: fix this
-            # return session.get_error_messages()
-            return {}
+            return session.get_flashed_messages().get("errors", {})
 
     def share(self, request):
         """Defines the props that are shared by default. Can be overriden."""
