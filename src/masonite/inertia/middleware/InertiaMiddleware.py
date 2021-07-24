@@ -59,6 +59,9 @@ class InertiaMiddleware(Middleware):
             # if ($request->hasSession()) {
             #     $request->session()->reflash();
             # }
+            import pdb
+
+            pdb.set_trace()
             return inertia.location(request.get_path())
 
         return response
@@ -73,7 +76,7 @@ class InertiaMiddleware(Middleware):
         return response
 
     def get_session(self, request):
-        return request.app.make("session").get_driver()
+        return request.app.make("session")
 
     def resolve_validation_errors(self, request):
         """Get validation errors in flash session if any and serialize it to be easy to use

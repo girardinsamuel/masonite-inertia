@@ -56,8 +56,8 @@ class TestInertiaMiddleware(TestCase):
 
         request = self.create_request("/basic")
         request.header("X-Inertia", True)
+        request.header("X-Inertia-Version", "")
         response = self.create_response(request, "Index", {"user": "Sam"})
-
         response.assertOk().assertJsonPath("component", "Index")
 
     def test_response_ok_with_correct_version_number(self):
