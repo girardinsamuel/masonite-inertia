@@ -1,6 +1,6 @@
 import pytest
 
-from masonite.utils.structures import Dot
+from masonite.utils.structures import data_get
 
 from ..core.InertiaResponse import InertiaResponse
 
@@ -22,7 +22,7 @@ class InertiaTest:
         return self
 
     def has(self, key, value=None):
-        corresponding_value = Dot().dict_dot(key, self._props, NOT_FOUND)
+        corresponding_value = data_get(self._props, key, NOT_FOUND)
         assert corresponding_value != NOT_FOUND
 
         if value:
@@ -31,14 +31,14 @@ class InertiaTest:
         return self
 
     def hasCount(self, key, count=None):
-        corresponding_value = Dot().dict_dot(key, self._props, NOT_FOUND)
+        corresponding_value = data_get(self._props, key, NOT_FOUND)
         assert corresponding_value != NOT_FOUND
         if count:
             assert len(corresponding_value) == count
         return self
 
     def missing(self, key):
-        corresponding_value = Dot().dict_dot(key, self._props, NOT_FOUND)
+        corresponding_value = data_get(self._props, key, NOT_FOUND)
         assert corresponding_value == NOT_FOUND
         return self
 
@@ -77,7 +77,7 @@ class InertiaTestingResponse:
         return self
 
     def assertInertiaHasProp(self, key, value=None):
-        corresponding_value = Dot().dict_dot(key, self._inertia_response.props, NOT_FOUND)
+        corresponding_value = data_get(self._inertia_response.props, key, NOT_FOUND)
         assert corresponding_value != NOT_FOUND
 
         if value:
@@ -85,12 +85,12 @@ class InertiaTestingResponse:
         return self
 
     def assertInertiaMissingProp(self, key):
-        corresponding_value = Dot().dict_dot(key, self._inertia_response.props, NOT_FOUND)
+        corresponding_value = data_get(self._inertia_response.props, key, NOT_FOUND)
         assert corresponding_value == NOT_FOUND
         return self
 
     def assertInertiaPropCount(self, key, count):
-        corresponding_value = Dot().dict_dot(key, self._inertia_response.props, NOT_FOUND)
+        corresponding_value = data_get(self._inertia_response.props, key, NOT_FOUND)
         assert corresponding_value != NOT_FOUND
         if count:
             assert len(corresponding_value) == count
