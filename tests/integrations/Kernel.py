@@ -10,7 +10,7 @@ from masonite.routes import Route
 from masonite.storage import StorageCapsule
 from masonite.utils.structures import load
 
-from app.middleware.VerifyCsrfToken import VerifyCsrfToken
+from .app.middleware.VerifyCsrfToken import VerifyCsrfToken
 
 
 class Kernel:
