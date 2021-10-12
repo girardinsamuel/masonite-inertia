@@ -75,6 +75,13 @@ setup(
     # $ pip install your-package[dev,test]
     extras_require={
         "test": ["coverage", "pytest", "pytest-cov", "coveralls"],
-        "dev": ["black", "flake8", "twine>=1.5.0", "wheel", "bumpversion"],
+        "dev": [
+            "black",
+            "flake8",
+            "twine>=1.5.0",
+            "wheel",
+            "bumpversion",
+            "masonite-package-sync",
+        ],
     },
 )
