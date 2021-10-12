@@ -5,12 +5,7 @@ from masonite.configuration import config
 from masonite.configuration.Configuration import Configuration
 from masonite.environment import LoadEnvironment
 from masonite.foundation import response_handler
-from masonite.middleware import (
-    EncryptCookies,
-    LoadUserMiddleware,
-    SessionMiddleware,
-    VerifyCsrfToken,
-)
+from masonite.middleware import EncryptCookies, LoadUserMiddleware, SessionMiddleware
 from masonite.routes import Route
 from masonite.storage import StorageCapsule
 from masonite.utils.structures import load
