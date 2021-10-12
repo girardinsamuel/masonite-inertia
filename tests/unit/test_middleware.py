@@ -3,7 +3,7 @@ from masonite.request import Request
 from masonite.response.response import Response
 from masonite.routes import Route
 from masonite.tests import TestCase
-from masonite.utils.helpers import generate_wsgi
+from masonite.utils.http import generate_wsgi
 from src.masonite.inertia import InertiaMiddleware
 
 
@@ -28,7 +28,7 @@ class TestInertiaMiddleware(TestCase):
         self.application.make("inertia").version("")
 
     def create_request(self, url, method="GET"):
-        request = Request(generate_wsgi({"PATH_INFO": url, "REQUEST_METHOD": method}))
+        request = Request(generate_wsgi(path=url, method=method))
         request.app = self.application
         self.application.bind("request", request)
         return request

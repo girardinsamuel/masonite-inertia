@@ -2,7 +2,7 @@ from masonite.request import Request
 from masonite.response.response import Response
 from masonite.routes import Route
 from masonite.tests import TestCase
-from masonite.utils.helpers import generate_wsgi
+from masonite.utils.http import generate_wsgi
 from src.masonite.inertia import lazy
 
 
@@ -26,7 +26,7 @@ class TestInertiaResponse(TestCase):
         self.application.make("inertia").shared_props = {"errors": {}}
 
     def create_request(self, url, method="GET"):
-        request = Request(generate_wsgi({"PATH_INFO": url, "REQUEST_METHOD": method}))
+        request = Request(generate_wsgi(path=url, method=method))
         self.application.bind("request", request)
         return request
 

@@ -1,8 +1,8 @@
 import html
 from inspect import signature
 
-from masonite.utils.helpers import flatten
-from masonite.utils.structures import Dot
+from masonite.utils.collections import flatten
+from masonite.utils.structures import data_get
 
 from .InertiaResponse import InertiaResponse
 from .Lazy import LazyProp
@@ -128,7 +128,7 @@ class Inertia:
 
     def get_shared(self, key=None, default=None):
         if key:
-            return Dot().dot(key, self.shared_props, default)
+            return data_get(self.shared_props, key, default)
         return self.shared_props
 
     def get_props(self, all_props, component):
