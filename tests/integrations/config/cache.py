@@ -1,4 +1,5 @@
-"""Cache Config"""
+from masonite.environment import env
+
 
 STORES = {
     "default": "local",
@@ -12,13 +13,13 @@ STORES = {
         "host": "127.0.0.1",
         "port": "6379",
         "password": "",
-        "name": "masonite4",
+        "name": "project_name",
     },
     "memcache": {
         "driver": "memcache",
         "host": "127.0.0.1",
         "port": "11211",
         "password": "",
-        "name": "masonite4",
+        "name": "project_name",
     },
 }

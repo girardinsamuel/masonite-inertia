@@ -1,22 +1,23 @@
 from masonite.providers import (
-    RouteProvider,
-    FrameworkProvider,
-    ViewProvider,
-    WhitenoiseProvider,
-    ExceptionProvider,
-    MailProvider,
-    SessionProvider,
-    QueueProvider,
+    AuthenticationProvider,
+    BroadcastProvider,
     CacheProvider,
     EventProvider,
-    StorageProvider,
+    ExceptionProvider,
+    FrameworkProvider,
+    HashServiceProvider,
     HelpersProvider,
-    BroadcastProvider,
-    AuthenticationProvider,
+    MailProvider,
+    QueueProvider,
+    RouteProvider,
+    SessionProvider,
+    StorageProvider,
+    ViewProvider,
+    WhitenoiseProvider,
 )
-
+from masonite.scheduling.providers import ScheduleProvider
+from masonite.validation.providers import ValidationProvider
 from src.masonite.inertia import InertiaProvider
-
 
 PROVIDERS = [
     FrameworkProvider,
@@ -29,9 +30,12 @@ PROVIDERS = [
     SessionProvider,
     CacheProvider,
     QueueProvider,
+    ScheduleProvider,
     EventProvider,
     StorageProvider,
     BroadcastProvider,
+    HashServiceProvider,
     AuthenticationProvider,
+    ValidationProvider,
     InertiaProvider,
 ]

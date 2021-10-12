@@ -1,17 +1,14 @@
-"""Cache Config"""
-import os
+from masonite.environment import env
+from masonite.utils.location import base_path
+
 
 DISKS = {
     "default": "local",
-    "local": {
-        "driver": "file",
-        "path": os.path.join(os.getcwd(), "storage/framework/filesystem")
-        #
-    },
+    "local": {"driver": "file", "path": base_path("storage/framework/filesystem")},
     "s3": {
         "driver": "s3",
-        "client": os.getenv("AWS_CLIENT"),
-        "secret": os.getenv("AWS_SECRET"),
-        "bucket": os.getenv("AWS_BUCKET"),
+        "client": env("AWS_CLIENT"),
+        "secret": env("AWS_SECRET"),
+        "bucket": env("AWS_BUCKET"),
     },
 }

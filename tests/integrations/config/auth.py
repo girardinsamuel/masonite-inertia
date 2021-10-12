@@ -1,4 +1,4 @@
-from ..app.User import User
+from app.models.User import User
 
 GUARDS = {
     "default": "web",
