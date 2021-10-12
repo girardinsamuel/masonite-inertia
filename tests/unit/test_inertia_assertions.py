@@ -11,7 +11,6 @@ from masonite.tests import TestCase
 class TestInertiaAssertions(TestCase):
     def setUp(self):
         super().setUp()
-        Route.set_controller_module_location("tests.integrations.controllers")
         self.setRoutes(
             Route.get("/nested-props", "TestController@nested_props"),
             Route.get("/hello-world", "TestController@helloworld"),

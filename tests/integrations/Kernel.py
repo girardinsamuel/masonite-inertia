@@ -39,7 +39,7 @@ class Kernel:
 
     def register_configurations(self):
         # load configuration
-        self.application.bind("config.location", "config")
+        self.application.bind("config.location", "tests/integrations/config")
         configuration = Configuration(self.application)
         configuration.load()
         self.application.bind("config", configuration)
@@ -70,7 +70,7 @@ class Kernel:
         Route.set_controller_module_location(
             self.application.make("controllers.location")
         )
-        self.application.bind("routes.location", "routes/web")
+        self.application.bind("routes.location", "tests/integrations/routes/web")
         self.application.make("router").add(
             Route.group(
                 load(self.application.make("routes.location"), "ROUTES"),
@@ -94,7 +94,7 @@ class Kernel:
         self.application.bind("resolver", config("database.db"))
 
     def register_templates(self):
-        self.application.bind("views.location", "tests/integrations/templates/")
+        self.application.bind("views.location", "tests/integrations/templates")
 
     def register_storage(self):
         storage = StorageCapsule(self.application.base_path)

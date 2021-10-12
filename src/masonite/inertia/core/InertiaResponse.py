@@ -9,8 +9,9 @@ from ..helpers import inertia as inertia_helper
 
 
 class InertiaResponse(View):
-    def __init__(self, container, page_data, root_view):
-        super().__init__(container)
+    def __init__(self, application, page_data, root_view):
+        super().__init__(application)
+        self.loaders = application.make("view").loaders
         # TODO: check if more clean like this ?
         # Maybe also use it to render as JSON for inertia initiated ?
         # def __init__(self, component, props, root_view="app", version=None):
@@ -25,7 +26,6 @@ class InertiaResponse(View):
         self.root_view = root_view
         self.version = page_data["version"]
         self.page_data = page_data
-        self.add(container.make("views.location"))
         self.share({"inertia": inertia_helper})
 
     def render(self):
