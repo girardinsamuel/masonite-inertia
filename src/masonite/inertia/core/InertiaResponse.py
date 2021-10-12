@@ -11,6 +11,7 @@ from ..helpers import inertia as inertia_helper
 class InertiaResponse(View):
     def __init__(self, application, page_data, root_view):
         super().__init__(application)
+        # TODO: weird we have to do this...
         self.loaders = application.make("view").loaders
         # TODO: check if more clean like this ?
         # Maybe also use it to render as JSON for inertia initiated ?
@@ -26,6 +27,7 @@ class InertiaResponse(View):
         self.root_view = root_view
         self.version = page_data["version"]
         self.page_data = page_data
+        # TODO: do this in Provider !
         self.share({"inertia": inertia_helper})
 
     def render(self):

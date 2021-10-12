@@ -1,8 +1,8 @@
 import hashlib
 import os
 
+from masonite.configuration import config
 from masonite.middleware import Middleware
-from masonite.utils.structures import load
 
 # from masonite.utils.location import public_path
 from ..helpers import inertia as inertia_view_helper
@@ -92,7 +92,7 @@ class InertiaMiddleware(Middleware):
 
     def version(self, request):
         """Determines the current asset version. Can be overriden."""
-        assets_url = load(request.app.make("config.inertia")).PUBLIC_PATH
+        assets_url = config("inertia.public_path")
         if assets_url:
             return hashlib.md5(assets_url.encode()).hexdigest()
 

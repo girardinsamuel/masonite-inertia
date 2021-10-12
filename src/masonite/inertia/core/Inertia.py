@@ -2,7 +2,7 @@ import html
 from inspect import signature
 
 from masonite.utils.collections import flatten
-from masonite.utils.structures import data_get
+from masonite.utils.structures import data_get, load
 
 from .InertiaResponse import InertiaResponse
 from .Lazy import LazyProp
@@ -33,10 +33,10 @@ class Inertia:
         self._version = ""
         # parameters
         self.config = config
-        self.root_view = config.ROOT_VIEW
+        self.root_view = config["root_view"]
         # self.include_flash_messages = load("inertia.include_flash_messages")
         # self.include_routes = load("inertia.include_routes")
-        if self.config.INCLUDE_ROUTES:
+        if self.config["include_routes"]:
             self._load_routes()
 
     def set_configuration(self, config):
@@ -47,10 +47,9 @@ class Inertia:
         self.root_view = root_view
 
     def _load_routes(self):
-        from routes.web import ROUTES
-
+        routes = (load(self.application.make("routes.location"), "ROUTES", []),)
         self.routes = {}
-        for route in flatten(ROUTES):
+        for route in flatten(routes):
             if route.named_route:
                 self.routes.update({route.named_route: route.route_url})
 
@@ -95,7 +94,7 @@ class Inertia:
             "url": request.get_path(),
             "version": self.get_version(),
         }
-        if self.config.INCLUDE_ROUTES:
+        if self.config["include_routes"]:
             page_data.update({"routes": self.routes})
 
         return page_data
@@ -158,9 +157,9 @@ class Inertia:
         # add adapter data to props
         props.update({"auth": self.get_auth()})
 
-        # if self.config.INCLUDE_FLASH_MESSAGES:
+        # if self.config["include_flash_messages"]:
         #     props.update({"messages": self.get_messages()})
-        if self.config.INCLUDE_ROUTES:
+        if self.config["include_routes"]:
             props.update({"routes": self.routes})
         return props
 
