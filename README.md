@@ -20,14 +20,12 @@ Inertia is a new approach to building classic server-driven web apps. From their
 
 > Inertia allows you to create fully client-side rendered, single-page apps, without much of the complexity that comes with modern SPAs. It does this by leveraging existing server-side frameworks.
 
-Inertia requires an adapter for each backend framework.
-
-This repo contains the Masonite server-side adapter for [Inertia.js](https://inertiajs.com/).
+Inertia requires an adapter for each backend framework. This repo contains the Masonite server-side adapter for [Inertia.js](https://inertiajs.com/).
 You can find the legacy Inertia PingCRM demo with Masonite here [demo (WIP)](https://github.com/girardinsamuel/pingcrm-masonite).
 
 This package is compatible with both Masonite 2, 3 and 4 [see below](#installation).
 
-[Browse documentation 📚](https://samuelgirardin.gitbook.io/masonite-inertia).
+[Documentation 📚](https://samuelgirardin.gitbook.io/masonite-inertia).
 
 ## Features
 
@@ -55,7 +53,7 @@ Also be sure to join the [Slack channel](http://slack.masoniteproject.com/)!
 
 To get started you will need the following:
 
-- Masonite 4.X.X (use `masonite-inertia>=4.0`) / Masonite 3.X.X (use `masonite-inertia>=3.0`) / Masonite 2.3.X (use `masonite-inertia>=2.X<3.0`)
+- Masonite 4.X (use `masonite-inertia>=4.0`) / Masonite 3.X(use `masonite-inertia>=3.0`) / Masonite 2.3 (use `masonite-inertia>=2.X<3.0`)
 - Laravel Mix installed (new Masonite projects come with this installed already)
 - a Node.js environment (npm or yarn)
 
@@ -65,11 +63,10 @@ pip install masonite-inertia
 
 **Install NPM dependencies**
 
-First we'll need to install some NPM packages (we are using Vue here as frontend framework and `inertia-vue` as Inertia.js client-side adapter):
-You can find more info on this on [Inertia.js documentation](https://inertiajs.com/client-side-setup).
+First we'll need to install some NPM packages (we are using Vue here as frontend framework and `inertia-vue3` as Inertia.js client-side adapter). You can find more info on this on [Inertia.js documentation](https://inertiajs.com/client-side-setup).
 
 ```
-$ npm install vue @inertiajs/inertia @inertiajs/inertia-vue
+npm install vue @inertiajs/inertia @inertiajs/inertia-vue3
 ```
 
 ## Configuration
@@ -123,7 +120,7 @@ We will create two routes and a controller which will load the two components sc
 If you scaffolded the inertia demo you will already have the files, else:
 
 ```
-$ craft controller WelcomeController
+python craft controller WelcomeController
 ```
 
 This will create a controller `WelcomeController` but you can name it whatever you like. It would be good to keep the standard of whatever setup you have now for your home page. Then create two routes to that controller if you don't have them already:
@@ -159,13 +156,13 @@ Note that instead of specifying a Jinja template like we normally do we can just
 Ok now we need to do 2 more commands. The first thing is to run `npm run dev` (at root) to compile all of this (with webpack mix):
 
 ```
-$ npm run dev
+npm run dev
 ```
 
 Now we can run the server like we normally do:
 
 ```
-$ python craft serve
+python craft serve
 ```
 
 When we go to our homepage we will see we see `Index.vue` component:
