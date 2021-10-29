@@ -1,8 +1,5 @@
-# Masonite Inertia
-
 <p align="center">
-<img src="https://i.imgur.com/rEXcoMn.png" width="130px">
-<img src="https://avatars1.githubusercontent.com/u/47703742?s=200&v=4" width="130px">
+    <img src="https://banners.beyondco.de/Masonite%20Inertia.png?theme=light&packageManager=pip+install&packageName=masonite-inertia&pattern=topography&style=style_1&description=Masonite%20Inertia%20server-side%20adapter&md=1&showWatermark=1&fontSize=100px&images=https%3A%2F%2Fgblobscdn.gitbook.com%2Fspaces%2F-L9uc-9XAlqhXkBwrLMA%2Favatar.png">
 </p>
 
 <p align="center">
@@ -28,9 +25,9 @@ Inertia requires an adapter for each backend framework.
 This repo contains the Masonite server-side adapter for [Inertia.js](https://inertiajs.com/).
 You can find the legacy Inertia PingCRM demo with Masonite here [demo (WIP)](https://github.com/girardinsamuel/pingcrm-masonite).
 
-This package is compatible with both Masonite 2.X and Masonite 3.X [see below](#installation).
+This package is compatible with both Masonite 2, 3 and 4 [see below](#installation).
 
-A [new documentation 📚](https://samuelgirardin.gitbook.io/masonite-inertia) is coming in January 2021, stay tuned !
+[Browse documentation 📚](https://samuelgirardin.gitbook.io/masonite-inertia).
 
 ## Features
 
@@ -58,8 +55,8 @@ Also be sure to join the [Slack channel](http://slack.masoniteproject.com/)!
 
 To get started you will need the following:
 
-- Masonite 3.X.X (use `masonite-inertia>=3.0`) or Masonite 2.3.X (use `masonite-inertia>=2.X<3.0`)
-- Laravel Mix installed (new Masonite 2.3 projects come with this installed already)
+- Masonite 4.X.X (use `masonite-inertia>=4.0`) / Masonite 3.X.X (use `masonite-inertia>=3.0`) / Masonite 2.3.X (use `masonite-inertia>=2.X<3.0`)
+- Laravel Mix installed (new Masonite projects come with this installed already)
 - a Node.js environment (npm or yarn)
 
 ```bash
@@ -93,20 +90,15 @@ PROVIDERS = [
 ]
 ```
 
-Inertia adapter comes with a middleware that will control some of the flow of data. Add InertiaMiddleware to your project in `config/middleware.py`:
+Inertia adapter comes with a middleware that will control some of the flow of data. Add InertiaMiddleware to your project in `HttpKernel`:
 
 ```python
-# config/middleware.py
-# ...
+# AppHttpKernel.py
+
 from masonite.inertia import InertiaMiddleware
 
-# ...
-HTTP_MIDDLEWARE = [
-    LoadUserMiddleware,
-    CsrfMiddleware,
-    #...
-    InertiaMiddleware,
-]
+class AppHttpKernel(HttpKernel):
+    http_middleware = [InertiaMiddleware]
 ```
 
 Finally publish the package configuration (to get `config/inertia.py`) to your project:
@@ -117,56 +109,40 @@ python craft install:inertia
 
 Congratulations! You have now setup Inertia in your project! For more information on how to use Inertia.js got to its [documentation](https://inertiajs.com/installation).
 
+## Getting started
 
-## Install demo (optional)
-To get started quickly, you can scaffold a demo to your project, by running:
-```
-python craft inertia:demo
-```
-
-This will automatically :
-- publish a demo controller
-- publish two routes
-- create a demo view
-- update npm dependencies and webpack.mix.js
-- create Vue 3 demo app in `resources/js`
-
-Then run `npm install && npm run watch` and start the server `python craft serve`.
-
-Finally browse to `http://localhost:8000/inertia` 🚀!
-
-## Usage [Doc In Progress]
+This section quickly explains how to use Inertia.js with Masonite. For more details please [read the documentation 📚](https://samuelgirardin.gitbook.io/masonite-inertia).
 
 ### How to use Inertia.js with Masonite adapter
 
-We will create two routes and a controller which will load the two components scaffolded with previous command and see Inertia.js behaviour. In order to create Inertia response in our Controller, we are going to use newly available response `InertiaResponse`. And that's it !
+We will create two routes and a controller which will load the two components scaffolded with previous command and see Inertia.js behaviour. In order to create Inertia response in our Controller, we are going to use newly available response `Inertia`. And that's it !
 
 If you scaffolded the inertia demo you will already have the files, else:
 
 ```
-$ craft controller InertiaController
+$ craft controller WelcomeController
 ```
 
-This will create a controller `InertiaController` but you can name it whatever you like. It would be good to keep the standard of whatever setup you have now for your home page. Then create two routes to that controller if you don't have them already:
+This will create a controller `WelcomeController` but you can name it whatever you like. It would be good to keep the standard of whatever setup you have now for your home page. Then create two routes to that controller if you don't have them already:
 
 ```python
 ROUTES = [
-    Get('/', 'InertiaController@index'),
-    Get('/helloworld', 'InertiaController@helloworld')
+    Route.get('/', 'WelcomeController@index'),
+    Route.get('/helloworld', 'WelcomeController@helloworld')
 ]
 ```
 
-And finally create the controller methods. We just need to use the new `InertiaResponse` to render our controller.
+And finally create the controller methods. We just need to use the new `Inertia` to render our controller.
 
 ```python
 # app/controllers/InertiaController.py
-from masonite.inertia import InertiaResponse
+from masonite.inertia import Inertia
 
 ## ..
-def inertia(self, view: InertiaResponse):
+def inertia(self, view: Inertia):
     return view.render('Index')
 
-def helloworld(self, view: InertiaResponse):
+def helloworld(self, view: Inertia):
   return view.render('HelloWorld')
 
 ## ..
@@ -186,7 +162,7 @@ $ npm run dev
 Now we can run the server like we normally do:
 
 ```
-$ craft serve
+$ python craft serve
 ```
 
 When we go to our homepage we will see we see `Index.vue` component:
@@ -201,10 +177,11 @@ Click on the link you can now see `HelloWorld` without page refresh !!!!
 
 Please read the [Contributing Documentation](CONTRIBUTING.md) here.
 
-**CONTRIBUTORS**
+## Maintainers
 
-- [josephmancuso](https://github.com/josephmancuso)
-- [girardinsamuel](https://github.com/girardinsamuel)
+- [Samuel Girardin](https://www.github.com/girardinsamuel)
+
+Thanks to [Joseph Mancuso](https://github.com/josephmancuso) for making the PoC to couple Masonite and Inertia.js !
 
 ## License
 

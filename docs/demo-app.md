@@ -43,7 +43,7 @@ npm install
 npm run watch
 ```
 
-Finally run your server 
+Finally run your server
 
 ```text
 python craft serve

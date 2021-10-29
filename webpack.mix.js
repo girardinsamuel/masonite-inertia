@@ -10,9 +10,16 @@ const path = require("path");
  | file for the application as well as bundling up all the JS files.
  |
  */
-mix.js("storage/static/js/app.js", "public/js").vue({ version: 3 });
-
-// New Alias plugin
-mix.alias({
-  "@": path.resolve("storage/static/js"),
-});
+mix
+  .js("tests/integrations/resources/js/app.js", "app.js")
+  .vue({ version: 3 })
+  .setPublicPath("tests/integrations/storage/compiled/js")
+  .setResourceRoot("/static/")
+  .webpackConfig(webpack => {
+    return {
+      output: { chunkFilename: "[name].js", publicPath: "/static/js/" },
+    }
+  })
+  .alias({
+    "@": path.resolve("tests/integrations/resources/js"),
+  })

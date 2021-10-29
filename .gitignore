@@ -16,5 +16,5 @@ dist
 *.db
 masonite_inertia.egg-info
 node_modules
-storage/compiled/
+tests/integrations/storage/compiled/
 storage/logs/

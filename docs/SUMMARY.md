@@ -11,6 +11,7 @@
 * [Redirects](the-basics/redirects.md)
 * [Validation](the-basics/forms.md)
 * [Shared data](the-basics/shared-data.md)
+* [File uploads](the-basics/file-uploads.md)
 
 ## Advanced
 
@@ -22,6 +23,7 @@
 * [Error handling](advanced/error-handling.md)
 * [Assets versioning](advanced/assets-versioning.md)
 * [Server-side rendering](advanced/server-side-rendering.md)
+* [Testing](advanced/testing.md)
 
 ## Development
 
