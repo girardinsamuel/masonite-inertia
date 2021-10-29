@@ -103,10 +103,10 @@ class Kernel:
         storage.add_storage_assets(
             {
                 # folder          # template alias
-                "storage/static": "static/",
-                "storage/compiled": "static/",
-                "storage/uploads": "static/",
-                "storage/public": "/",
+                "tests/integrations/storage/static": "static/",
+                "tests/integrations/storage/compiled": "static/",
+                "tests/integrations/storage/uploads": "static/",
+                "tests/integrations/storage/public": "/",
             }
         )
         self.application.bind("storage_capsule", storage)

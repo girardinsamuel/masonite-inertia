@@ -17,7 +17,7 @@ mix
   .setResourceRoot("/static/")
   .webpackConfig(webpack => {
     return {
-      output: { chunkFilename: "[name].js", publicPath: "/static/" },
+      output: { chunkFilename: "[name].js", publicPath: "/static/js/" },
     }
   })
   .alias({
