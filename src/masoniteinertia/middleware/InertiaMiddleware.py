@@ -1,7 +1,7 @@
 from masonite.request import Request
 from masonite.response import Response
 
-from masonite.inertia.core.InertiaAssetVersion import inertia_asset_version
+from masoniteinertia.core.InertiaAssetVersion import inertia_asset_version
 
 
 class InertiaMiddleware:

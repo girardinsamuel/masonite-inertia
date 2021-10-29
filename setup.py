@@ -8,15 +8,15 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version="3.1.2",
+    version="4.0.0",
     packages=[
-        "masonite.inertia",
-        "masonite.inertia.config",
-        "masonite.inertia.demo",
-        "masonite.inertia.providers",
-        "masonite.inertia.middleware",
-        "masonite.inertia.commands",
-        "masonite.inertia.core",
+        "masoniteinertia",
+        "masoniteinertia.config",
+        "masoniteinertia.demo",
+        "masoniteinertia.providers",
+        "masoniteinertia.middleware",
+        "masoniteinertia.commands",
+        "masoniteinertia.core",
     ],
     package_dir={"": "src"},
     description="Server-side Masonite adapter for Inertia.js",

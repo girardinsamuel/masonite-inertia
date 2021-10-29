@@ -4,7 +4,7 @@ from inspect import signature
 from masonite.utils.collections import flatten
 from masonite.response import Response
 from masonite.configuration import config
-from masonite.inertia.core.InertiaAssetVersion import inertia_asset_version
+from masoniteinertia.core.InertiaAssetVersion import inertia_asset_version
 
 
 def load_lazy_props(d, request):
