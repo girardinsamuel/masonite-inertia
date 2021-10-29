@@ -11,7 +11,7 @@ const path = require("path");
  |
  */
 mix
-  .js("tests/integrations/storage/static/js/app.js", "app.js")
+  .js("tests/integrations/resources/js/app.js", "app.js")
   .vue({ version: 3 })
   .setPublicPath("tests/integrations/storage/compiled/js")
   .setResourceRoot("/static/")
@@ -21,5 +21,5 @@ mix
     }
   })
   .alias({
-    "@": path.resolve("tests/integrations/storage/static/js"),
+    "@": path.resolve("tests/integrations/resources/js"),
   })

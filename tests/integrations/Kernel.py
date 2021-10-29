@@ -1,13 +1,17 @@
-import os
-
 from masonite.auth import Sign
 from masonite.configuration import config
 from masonite.configuration.Configuration import Configuration
 from masonite.environment import LoadEnvironment
 from masonite.foundation import response_handler
-from masonite.middleware import EncryptCookies, LoadUserMiddleware, SessionMiddleware
+from masonite.middleware import (
+    EncryptCookies,
+    LoadUserMiddleware,
+    SessionMiddleware,
+    VerifyCsrfToken,
+)
 from masonite.routes import Route
 from masonite.storage import StorageCapsule
+from masonite.utils.location import base_path
 from masonite.utils.structures import load
 
 from .app.middleware.VerifyCsrfToken import VerifyCsrfToken
@@ -67,9 +71,7 @@ class Kernel:
         )
 
     def register_routes(self):
-        Route.set_controller_module_location(
-            self.application.make("controllers.location")
-        )
+        Route.set_controller_locations(self.application.make("controllers.location"))
         self.application.bind("routes.location", "tests/integrations/routes/web")
         self.application.make("router").add(
             Route.group(
@@ -97,7 +99,7 @@ class Kernel:
         self.application.bind("views.location", "tests/integrations/templates")
 
     def register_storage(self):
-        storage = StorageCapsule(self.application.base_path)
+        storage = StorageCapsule()
         storage.add_storage_assets(
             {
                 # folder          # template alias
@@ -110,6 +112,4 @@ class Kernel:
         self.application.bind("storage_capsule", storage)
 
         self.application.set_response_handler(response_handler)
-        self.application.use_storage_path(
-            os.path.join(self.application.base_path, "storage")
-        )
+        self.application.use_storage_path(base_path("storage"))

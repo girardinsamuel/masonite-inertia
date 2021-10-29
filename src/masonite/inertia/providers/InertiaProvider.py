@@ -8,7 +8,10 @@ from masonite.providers import Provider
 from ..commands.DemoCommand import DemoCommand
 from ..commands.InstallCommand import InstallCommand
 from ..core.Inertia import Inertia
+from ..helpers import inertia
 from ..testing import InertiaTestingResponse
+
+package_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 class InertiaProvider(Provider):
@@ -18,12 +21,7 @@ class InertiaProvider(Provider):
         self.application = application
 
     def register(self):
-        # Config.merge_with(
-        #     "inertia",
-        #     os.path.join(
-        #         os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "config/inertia.py"
-        #     ),
-        # )
+        # Config.merge_with("inertia", os.path.join(package_root, "config/inertia.py"))
         Config.merge_with("inertia", "masonite.inertia.config.inertia")
         inertia = Inertia(self.application, config("inertia"))
         self.application.bind("inertia", inertia)
@@ -32,4 +30,4 @@ class InertiaProvider(Provider):
         self.application.make("tests.response").add(InertiaTestingResponse)
 
     def boot(self):
-        pass
+        self.application.make("view").share({"inertia": inertia})

@@ -29,7 +29,6 @@ class InertiaMiddleware(Middleware):
             inertia.version(self.version(request))
         inertia.share(self.share(request))
         inertia.set_root_view(self.set_root_view(request))
-        request.app.make("view").share({"inertia": inertia_view_helper})
 
     def after(self, request, response):
         self.check_version(request, response)
