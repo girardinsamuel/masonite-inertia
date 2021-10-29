@@ -1,5 +1,3 @@
-import pytest
-
 from masonite.utils.structures import data_get
 
 from ..core.InertiaResponse import InertiaResponse
@@ -57,6 +55,8 @@ class InertiaTest:
         return self
 
     def dd(self):
+        import pytest
+
         self.dump()
         pytest.fail("Inertia: test stopped when calling dd()")
         return self
