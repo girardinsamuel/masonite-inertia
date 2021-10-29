@@ -8,13 +8,14 @@ from masonite.routes import Route
 from masonite.storage import StorageCapsule
 from masonite.utils.location import base_path
 from masonite.utils.structures import load
+from src.masonite.inertia import InertiaMiddleware
 
 from .app.middleware.VerifyCsrfToken import VerifyCsrfToken
 
 
 class Kernel:
 
-    http_middleware = [EncryptCookies]
+    http_middleware = [InertiaMiddleware, EncryptCookies]
 
     route_middleware = {
         "web": [SessionMiddleware, LoadUserMiddleware, VerifyCsrfToken],
