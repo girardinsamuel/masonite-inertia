@@ -3,7 +3,7 @@ import os
 import json
 import shutil
 from cleo import Command
-from masonite.packages import append_web_routes, create_controller
+# from masonite.packages import append_web_routes, create_controller
 
 
 demo_path = os.path.join(
@@ -75,10 +75,10 @@ class DemoCommand(Command):
 
     def handle(self):
         # add demo routes
-        append_web_routes(os.path.join(demo_path, "web.py"))
+        # append_web_routes(os.path.join(demo_path, "web.py"))
         # add demo view and controller
         self._add_view()
-        create_controller(os.path.join(demo_path, "InertiaDemoController.py"))
+        # create_controller(os.path.join(demo_path, "InertiaDemoController.py"))
         # scaffold app (.js and vue components)
         self._add_assets()
         # update dependencies

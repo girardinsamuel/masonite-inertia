@@ -1,6 +1,6 @@
 import hashlib
 
-from masonite.helpers import config
+from masonite.configuration import config
 
 
 def inertia_asset_version():

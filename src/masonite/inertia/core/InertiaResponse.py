@@ -1,9 +1,9 @@
 import html
 import json
 from inspect import signature
-from masonite.helpers.routes import flatten_routes
-from masonite.response import Responsable, Response
-from masonite.helpers import config
+from masonite.utils.collections import flatten
+from masonite.response import Response
+from masonite.configuration import config
 from masonite.inertia.core.InertiaAssetVersion import inertia_asset_version
 
 
@@ -19,10 +19,10 @@ def load_lazy_props(d, request):
                 d[k] = v()
 
 
-class InertiaResponse(Responsable):
+class InertiaResponse:
     def __init__(self, container):
         self.container = container
-        self.view = self.container.make("View")
+        self.view = self.container.make("view")
         self.root_view = config("inertia.root_view")
         self.shared_props = {}
         self.rendered_template = ""
@@ -39,19 +39,19 @@ class InertiaResponse(Responsable):
         from routes.web import ROUTES
 
         self.routes = {}
-        for route in flatten_routes(ROUTES):
+        for route in flatten(ROUTES):
             if route.named_route:
                 self.routes.update({route.named_route: route.route_url})
 
     def render(self, component, props={}, custom_root_view="app"):
-        request = self.container.make("Request")
+        request = self.container.make("request")
         page_data = self.get_page_data(component, props)
 
         if request.is_inertia:
             self.rendered_template = json.dumps(page_data)
             return self
 
-        self.rendered_template = self.view(
+        self.rendered_template = self.container.make("view").render(
             custom_root_view if custom_root_view else self.root_view,
             {"page": html.escape(json.dumps(page_data))},
         ).rendered_template
@@ -70,7 +70,7 @@ class InertiaResponse(Responsable):
 
     def get_page_data(self, component, props):
         # merge shared props with page props (lazy props are resolved now)
-        request = self.container.make("Request")
+        request = self.container.make("request")
         props = {**self.get_props(props, component), **self.get_shared_props()}
 
         # lazy load props and make request available to props being lazy loaded
@@ -79,7 +79,7 @@ class InertiaResponse(Responsable):
         page_data = {
             "component": self.get_component(component),
             "props": props,
-            "url": request.path,
+            "url": request.get_path(),
             "version": inertia_asset_version(),
         }
         if self.include_routes:
@@ -105,7 +105,7 @@ class InertiaResponse(Responsable):
         - when partial reload, required return 'only' props
         - add adapter props along view props (errors, message, auth ...)"""
 
-        request = self.container.make("Request")
+        request = self.container.make("request")
 
         # partial reload feature
         only_props = request.header("HTTP_X_INERTIA_PARTIAL_DATA")
@@ -130,28 +130,28 @@ class InertiaResponse(Responsable):
         return props
 
     def get_auth(self):
-        request = self.container.make("Request")
+        request = self.container.make("request")
         user = request.user()
-        csrf = request.get_cookie("csrf_token", decrypt=False)
-        request.cookie("XSRF-TOKEN", csrf, http_only=False, encrypt=False)
+        csrf = request.cookie("csrf_token")
+        request.cookie("XSRF-TOKEN", csrf)
         if not user:
             return {"user": None}
         user.__hidden__ = ["password", "remember_token"]
         return {"user": user.serialize()}
 
     def get_messages(self):
-        request = self.container.make("Request")
+        request = self.container.make("request")
         return {
-            "success": (request.session.get_flashed("success") or ""),
-            "error": (request.session.get_flashed("error") or ""),
-            "danger": (request.session.get_flashed("danger") or ""),
-            "warning": (request.session.get_flashed("warning") or ""),
-            "info": (request.session.get_flashed("info") or ""),
+            "success": (request.session.get("success") or ""),
+            "error": (request.session.get("error") or ""),
+            "danger": (request.session.get("danger") or ""),
+            "warning": (request.session.get("warning") or ""),
+            "info": (request.session.get("info") or ""),
         }
 
     def get_errors(self):
-        request = self.container.make("Request")
-        return request.session.get_flashed("errors") or {}
+        request = self.container.make("request")
+        return request.session.get("errors") or {}
 
     def get_component(self, component):
         return html.escape(component)
