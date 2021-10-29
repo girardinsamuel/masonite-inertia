@@ -23,9 +23,8 @@ Inertia is a new approach to building classic server-driven web apps. From their
 Inertia requires an adapter for each backend framework. This repo contains the Masonite server-side adapter for [Inertia.js](https://inertiajs.com/).
 You can find the legacy Inertia PingCRM demo with Masonite here [demo (WIP)](https://github.com/girardinsamuel/pingcrm-masonite).
 
-This package is compatible with both Masonite 2, 3 and 4 [see below](#installation).
-
-[Documentation 📚](https://samuelgirardin.gitbook.io/masonite-inertia).
+[Documentation 📚](https://samuelgirardin.gitbook.io/masonite-inertia)
+[Quick Start ⚡️](#installation)
 
 ## Features
 
@@ -63,7 +62,7 @@ pip install masonite-inertia
 
 **Install NPM dependencies**
 
-First we'll need to install some NPM packages (we are using Vue here as frontend framework and `inertia-vue3` as Inertia.js client-side adapter). You can find more info on this on [Inertia.js documentation](https://inertiajs.com/client-side-setup).
+First we'll need to install some NPM packages (we are using Vue 3 here as frontend framework and `inertia-vue3` as Inertia.js client-side adapter). You can find more info on this on [Inertia.js documentation](https://inertiajs.com/client-side-setup).
 
 ```
 npm install vue @inertiajs/inertia @inertiajs/inertia-vue3
