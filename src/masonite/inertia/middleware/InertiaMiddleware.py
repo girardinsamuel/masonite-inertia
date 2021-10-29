@@ -5,7 +5,6 @@ from masonite.configuration import config
 from masonite.middleware import Middleware
 
 # from masonite.utils.location import public_path
-from ..helpers import inertia as inertia_view_helper
 
 
 # TODO: move this as a PR into M4
