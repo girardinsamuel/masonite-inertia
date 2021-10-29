@@ -36,7 +36,7 @@ class InertiaMiddleware(Middleware):
         # in a X-XSRF-TOKEN header in the subsequent request
         # It's important that, the cookie has not HttpOnly and Secure as discussed
         # here: https://stackoverflow.com/a/54132068/15131933
-        request.cookie("XSRF-TOKEN", request.cookie("csrf_token"), secure=False, http_only=False)
+        response.cookie("XSRF-TOKEN", request.cookie("csrf_token"), secure=False, http_only=False)
         return response
 
     def is_inertia_request(self, request):
