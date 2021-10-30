@@ -42,16 +42,3 @@ ROOT_VIEW = "app"
 """
 
 INCLUDE_ROUTES = False
-
-"""
-|--------------------------------------------------------------------------
-| Share flash message
-|--------------------------------------------------------------------------
-|
-| Include flash messages as JSON payload in Inertia response (props)
-| You can also do it yourself with Inertia share helper.
-|
-| default: True
-"""
-
-INCLUDE_FLASH_MESSAGES = False

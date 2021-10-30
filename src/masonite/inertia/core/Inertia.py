@@ -26,21 +26,18 @@ def load_callable_props(d, request):
 
 
 class Inertia:
-    def __init__(self, application, config={}):
+    def __init__(self, application, options={}):
         self.application = application
         self.shared_props = {}
         self.rendered_template = ""
         self._version = ""
-        # parameters
-        self.config = config
-        self.root_view = config["root_view"]
-        # self.include_flash_messages = load("inertia.include_flash_messages")
-        # self.include_routes = load("inertia.include_routes")
-        if self.config["include_routes"]:
+        self.options = options
+        self.root_view = options.get("root_view")
+        if self.options.get("include_routes"):
             self._load_routes()
 
-    def set_configuration(self, config):
-        self.config = config
+    def set_configuration(self, options):
+        self.options = options
         return self
 
     def set_root_view(self, root_view):
@@ -50,8 +47,8 @@ class Inertia:
         routes = (load(self.application.make("routes.location"), "ROUTES", []),)
         self.routes = {}
         for route in flatten(routes):
-            if route.named_route:
-                self.routes.update({route.named_route: route.route_url})
+            if route._name:
+                self.routes.update({route._name: route.url})
 
     def render(self, component, props={}, custom_root_view=None):
         request = self.application.make("request")
@@ -62,11 +59,6 @@ class Inertia:
             response.header("X-Inertia", "true")
             response.header("Vary", "Accept")
             return response.json(page_data)
-
-        # return self.application.make("view").render(
-        #     custom_root_view if custom_root_view else self.root_view,
-        #     {"page": html.escape(json.dumps(page_data))}
-        # )
         return InertiaResponse(
             self.application,
             page_data,
@@ -94,7 +86,7 @@ class Inertia:
             "url": request.get_path(),
             "version": self.get_version(),
         }
-        if self.config["include_routes"]:
+        if self.options.get("include_routes"):
             page_data.update({"routes": self.routes})
 
         return page_data
@@ -157,9 +149,7 @@ class Inertia:
         # add adapter data to props
         props.update({"auth": self.get_auth()})
 
-        # if self.config["include_flash_messages"]:
-        #     props.update({"messages": self.get_messages()})
-        if self.config["include_routes"]:
+        if self.options.get("include_routes"):
             props.update({"routes": self.routes})
         return props
 
