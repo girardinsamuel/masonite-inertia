@@ -100,10 +100,10 @@ class AppHttpKernel(HttpKernel):
 Make sure that this middleware is added before the EncryptCookies middleware else you will get
 some issues with CSRF token validation as `XSRF-TOKEN` value won't be encrypted.
 
-Finally publish the package configuration (to get `config/inertia.py`) to your project:
+Finally if you want to change some parameters you can publish the package configuration file in your project:
 
 ```bash
-python craft install:inertia
+python craft package:publish inertia
 ```
 
 Congratulations! You have now setup Inertia in your project! For more information on how to use Inertia.js got to its [documentation](https://inertiajs.com/installation).

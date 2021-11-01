@@ -2,8 +2,8 @@
 
 ## Requirements
 
-* a Masonite 4 project
-* a Node.js environment
+- a Masonite 4 project
+- a Node.js environment
 
 ## Installation
 
@@ -20,6 +20,7 @@ pip install masonite-inertia
 Add `InertiaProvider` to your project
 
 {% code title="config/providers.py" %}
+
 ```python
 # ...
 from masonite.inertia import InertiaProvider
@@ -31,6 +32,7 @@ PROVIDERS = [
     InertiaProvider,
 ]
 ```
+
 {% endcode %}
 
 Add the Inertia middleware to your project
@@ -47,6 +49,7 @@ It's important to put this middleware before the `EncryptCookies` middleware !
 {% endhint %}
 
 {% code title="config/middleware.py" %}
+
 ```python
 # ...
 http_middleware = [
@@ -55,14 +58,16 @@ http_middleware = [
     EncryptCookies
 ]
 ```
+
 {% endcode %}
 
-Finally publish the package configuration file to your project
+Finally you can (optionally) publish the package configuration file to your project if you want to
+change some configuration parameters:
 
 ```python
-python craft install:inertia
+python craft package:publish inertia
 ```
 
-You should now have a configuration file `config/inertia.py`.
+You should now have a configuration file `inertia.py` in your project configuration folder.
 
 You're ready to start working with Inertia !

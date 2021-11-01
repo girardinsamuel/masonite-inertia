@@ -1,6 +1,7 @@
 from masonite.notification.providers import NotificationProvider
 from masonite.providers import (
     AuthenticationProvider,
+    AuthorizationProvider,
     BroadcastProvider,
     CacheProvider,
     EventProvider,
@@ -38,6 +39,7 @@ PROVIDERS = [
     BroadcastProvider,
     HashServiceProvider,
     AuthenticationProvider,
+    AuthorizationProvider,
     ValidationProvider,
     InertiaProvider,
 ]

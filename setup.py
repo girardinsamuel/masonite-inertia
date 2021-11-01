@@ -14,7 +14,6 @@ setup(
         "masonite.inertia.config",
         "masonite.inertia.providers",
         "masonite.inertia.middleware",
-        "masonite.inertia.commands",
         "masonite.inertia.core",
         "masonite.inertia.testing",
     ],
