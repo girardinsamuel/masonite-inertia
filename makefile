@@ -7,13 +7,8 @@ init: ## Install package dependencies
 	pip install --upgrade pip
 	# install test project and package dependencies
 	pip install -r requirements.txt
-	# install package
-	pip install .
-	# install dev dependencies (see setup.py)
-	pip install 'masonite-inertia[test,dev]'
-	# force correct version of cleo for tests for now
-	pip install cleo==0.8.1
-
+	# install package and dev dependencies
+	pip install '.[test,dev]'
 test: ## Run package tests
 	python -m pytest tests
 ci: ## [CI] Run package tests and lint
