@@ -79,7 +79,7 @@ class InertiaMiddleware(Middleware):
         if not session.has("errors"):
             return {}
         else:
-            return session.get_flashed_messages().get("errors", {})
+            return session.get("errors")
 
     def share(self, request):
         """Defines the props that are shared by default. Can be overriden."""
