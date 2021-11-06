@@ -1,7 +1,7 @@
 from masonite.controllers import Controller
 from masonite.request import Request
-from src.masonite.inertia import Inertia
-from src.masonite.inertia import lazy
+from masonite.sessions import Session
+from src.masonite.inertia import Inertia, lazy
 
 
 class TestController(Controller):
@@ -17,11 +17,13 @@ class TestController(Controller):
         def lazy_prop():
             return "6"
 
-        return request.app.make("inertia").render("Index", {"user": "Sam", "lazy": lazy_prop})
+        return request.app.make("inertia").render(
+            "Index", {"user": "Sam", "lazy": lazy_prop}
+        )
 
-    def inertia_with_error(self, request: Request):
-        request.session.flash("error", "form error")
-        return request.redirect("/")
+    def inertia_with_error(self, session: Session, inertia: Inertia):
+        session.flash("errors", "An error occured.")
+        return inertia.render("HelloWorld")
 
     def helloworld(self, inertia: Inertia):
         return inertia.render("HelloWorld", {"first_name": "Sam"}, "spa_view_2")
@@ -55,5 +57,10 @@ class TestController(Controller):
 
     def nested_props(self, view: Inertia):
         return view.render(
-            "Index", {"count": 3, "array": [1, 2, 3], "nested": {"a": 1, "b": {"end": "finally"}}}
+            "Index",
+            {
+                "count": 3,
+                "array": [1, 2, 3],
+                "nested": {"a": 1, "b": {"end": "finally"}},
+            },
         )
