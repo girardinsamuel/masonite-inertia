@@ -13,21 +13,13 @@ class InertiaResponse(View):
         super().__init__(application)
         # TODO: weird we have to do this...
         self.loaders = application.make("view").loaders
-        # TODO: check if more clean like this ?
-        # Maybe also use it to render as JSON for inertia initiated ?
-        # def __init__(self, component, props, root_view="app", version=None):
-        #     self.component = component
-        #     self.props = props
-        #     self.root_view = root_view
-        #     self.version = version
-
         # inertia specifics
         self.component = page_data["component"]
         self.props = page_data["props"]
         self.root_view = root_view
         self.version = page_data["version"]
         self.page_data = page_data
-        # TODO: do this in Provider !
+        # looks like it's this one which is working
         self.share({"inertia": inertia_helper})
 
     def render(self):
