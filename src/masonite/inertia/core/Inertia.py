@@ -153,16 +153,6 @@ class Inertia:
             return {"user": ""}
         return {"user": user.serialize()}
 
-    def get_session(self):
-        return self.application.make("session")
-
-    def get_errors(self):
-        session = self.get_session()
-        if not session.has("errors"):
-            return {}
-        else:
-            return session.get("errors")
-
     def get_component(self, component):
         # TODO: check if escaping before here is needed
         return html.escape(component)
