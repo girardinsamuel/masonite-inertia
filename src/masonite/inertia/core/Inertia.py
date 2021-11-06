@@ -91,10 +91,10 @@ class Inertia:
 
         return page_data
 
-    def get_shared_props(self, key=None):
+    def get_shared_props(self, key=None, default=None):
         """Get all Inertia shared props or the one with the given key."""
         if key:
-            return self.shared_props.get(key, None)
+            return data_get(self.shared_props, key, default)
         else:
             return self.shared_props
 
@@ -117,11 +117,6 @@ class Inertia:
     def flush_shared(self):
         self.shared_props = {}
 
-    def get_shared(self, key=None, default=None):
-        if key:
-            return data_get(self.shared_props, key, default)
-        return self.shared_props
-
     def get_props(self, all_props, component):
         """Get props to return to the page:
         - when partial reload, required return 'only' props
@@ -141,7 +136,6 @@ class Inertia:
                 if key in only_props:
                     props.update({key: all_props[key]})
         else:
-            # remove lazy props
             for prop_key, value in all_props.items():
                 if not isinstance(value, LazyProp):
                     props.update({prop_key: value})
@@ -159,13 +153,15 @@ class Inertia:
             return {"user": ""}
         return {"user": user.serialize()}
 
-    def get_messages(self):
-        session = self.application.make("session").get_driver()
-        return session.get_flashed_messages()
+    def get_session(self):
+        return self.application.make("session")
 
     def get_errors(self):
-        session = self.application.make("session").get_driver()
-        return session.get_error_messages()
+        session = self.get_session()
+        if not session.has("errors"):
+            return {}
+        else:
+            return session.get("errors")
 
     def get_component(self, component):
         # TODO: check if escaping before here is needed
