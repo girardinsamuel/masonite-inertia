@@ -27,6 +27,7 @@ class InertiaMiddleware(Middleware):
         if not inertia.get_version():
             inertia.version(self.version(request))
         inertia.share(self.share(request))
+
         inertia.set_root_view(self.set_root_view(request))
 
     def after(self, request, response):
@@ -79,11 +80,11 @@ class InertiaMiddleware(Middleware):
         if not session.has("errors"):
             return {}
         else:
-            return session.get_flashed_messages().get("errors", {})
+            return session.get("errors")
 
     def share(self, request):
         """Defines the props that are shared by default. Can be overriden."""
-        errors = self.resolve_validation_errors(request)
+        errors = self.resolve_validation_errors
         return {"errors": errors}
 
     def version(self, request):

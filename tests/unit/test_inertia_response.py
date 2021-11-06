@@ -15,6 +15,7 @@ class TestInertiaResponse(TestCase):
             Route.get("/custom-root", "TestController@custom_root"),
             Route.get("/callables", "TestController@lazy_view").name("testing.lazy_view"),
             Route.get("/lazy", "TestController@with_lazy_props").name("testing.with_lazy_props"),
+            Route.get("/errors", "TestController@inertia_with_error").name("testing.errors"),
         )
 
         # set predictable version for unit testing
@@ -152,17 +153,17 @@ class TestInertiaResponse(TestCase):
 
     def test_shared_data_can_be_flushed(self):
         self.application.make("inertia").share({"test": "key"})
-        assert self.application.make("inertia").get_shared() == {
+        assert self.application.make("inertia").get_shared_props() == {
             "test": "key",
             "errors": {},
         }
         self.application.make("inertia").flush_shared()
-        assert self.application.make("inertia").get_shared() == {}
+        assert self.application.make("inertia").get_shared_props() == {}
 
     def test_get_shared(self):
         self.application.make("inertia").share({"nested": {"key": "4"}})
-        assert self.application.make("inertia").get_shared("nested.key") == "4"
-        assert self.application.make("inertia").get_shared("unknown", "nope") == "nope"
+        assert self.application.make("inertia").get_shared_props("nested.key") == "4"
+        assert self.application.make("inertia").get_shared_props("unknown", "nope") == "nope"
 
     def test_data_can_be_shared_at_anytime(self):
         self.application.make("inertia").share({"test": "key2"})
@@ -175,3 +176,7 @@ class TestInertiaResponse(TestCase):
 
     def test_customizing_root_view_in_controller(self):
         self.get("/custom-root").assertViewIs("spa_view")
+
+    def test_that_errors_flashed_in_session_are_shared(self):
+        res = self.get("/errors")
+        res.assertInertiaHasProp("errors", "An error occured.")

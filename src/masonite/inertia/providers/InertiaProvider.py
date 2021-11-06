@@ -21,4 +21,5 @@ class InertiaProvider(PackageProvider):
         self.application.make("tests.response").add(InertiaTestingResponse)
 
     def boot(self):
+        # looks like here it's not doing anything.
         self.application.make("view").share({"inertia": inertia})
