@@ -10,9 +10,6 @@ description: >-
 
 Test
 
-
-
-````diff
 {% diff %}
 ```
 old code
@@ -20,21 +17,6 @@ old code
 ```
 new code
 ```
-{% enddiff %}
-````
-
-{% diff %}
-
-\`\`\`
-
-old code\
-\`\`\`
-
-\`\`\`
-
-new code
-
-\`\`\` \
 {% enddiff %}
 
 
