@@ -12,7 +12,7 @@ Test
 
 
 
-````
+````diff
 {% diff %}
 ```
 old code
@@ -23,9 +23,19 @@ new code
 {% enddiff %}
 ````
 
+{% diff %}
 
+\`\`\`
 
+old code\
+\`\`\`
 
+\`\`\`
+
+new code
+
+\`\`\` \
+{% enddiff %}
 
 
 
