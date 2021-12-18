@@ -10,11 +10,18 @@ description: >-
 
 Test
 
+
+
+````
+{% diff %}
 ```
-test
-- test
-+ test b
+old code
 ```
+```
+new code
+```
+{% enddiff %}
+````
 
 
 
