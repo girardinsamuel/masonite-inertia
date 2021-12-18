@@ -10,12 +10,20 @@ description: >-
 
 Test
 
-{% diff %}
+{% diff method="diffJson" %}
+```json
+{
+  "name": "gitbook-plugin-simple-mind-map",
+  "version": "0.2.1",
+  "description": "A gitBook plugin for generating and exporting mind map within markdown"
+}
 ```
-old code
-```
-```
-new code
+```json
+{
+  "name": "gitbook-plugin-diff",
+  "version": "0.2.1",
+  "description": "A gitbook plugin for showing the differences between the codes within markdown"
+}
 ```
 {% enddiff %}
 
