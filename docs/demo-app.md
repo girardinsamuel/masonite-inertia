@@ -8,6 +8,16 @@ description: >-
 
 ## Official Ping CRM demo
 
+Test
+
+\`\`\`diff\
+test\
+\- test\
+\+ test b\
+\`\`\`
+
+
+
 There is an official demo called `PingCRM` to demonstrate Inertia.js capabilities with Laravel framework.
 
 You can now see this demo with MasoniteFramework here [https://pingcrm-masonite.herokuapp.com/](https://pingcrm-masonite.herokuapp.com)
