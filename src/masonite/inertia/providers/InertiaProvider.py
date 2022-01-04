@@ -12,7 +12,7 @@ class InertiaProvider(PackageProvider):
 
     def configure(self):
         (
-            self.root("src/masonite/inertia")
+            self.root("masonite/inertia")
             .name("inertia")
             .config("config/inertia.py", publish=True)
         )
