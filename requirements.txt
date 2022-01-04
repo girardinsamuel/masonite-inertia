@@ -1,1 +1,2 @@
 masonite>=4,<5
+masonite-orm>=2,<3
