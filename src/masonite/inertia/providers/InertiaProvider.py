@@ -11,7 +11,7 @@ class InertiaProvider(PackageProvider):
     """Masonite adapter for Inertia.js Service Provider."""
 
     def configure(self):
-        (self.root("masonite/inertia").name("inertia").config("config/inertia.py", publish=True))
+        self.root("masonite/inertia").name("inertia").config("config/inertia.py", publish=True)
         inertia = Inertia(self.application, config("inertia"))
         self.application.bind("inertia", inertia)
         self.application.make("tests.response").add(InertiaTestingResponse)
