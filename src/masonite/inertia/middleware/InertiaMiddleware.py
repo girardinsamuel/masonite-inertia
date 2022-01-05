@@ -20,8 +20,6 @@ def public_path(relative_path, absolute=True):
 class InertiaMiddleware(Middleware):
     """Inertia Middleware to check whether this is an Inertia request."""
 
-    root_view = "app"
-
     def before(self, request, response):
         inertia = request.app.make("inertia")
         if not inertia.get_version():
@@ -104,4 +102,4 @@ class InertiaMiddleware(Middleware):
 
     def set_root_view(self, request):
         """Can be overriden."""
-        return self.root_view
+        return config("inertia.root_view")
