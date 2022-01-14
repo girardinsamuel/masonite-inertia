@@ -34,7 +34,6 @@ setup(
     include_package_data=True,
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
-        "Development Status :: 3 - Beta",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3.7",
@@ -44,9 +43,6 @@ setup(
         "Topic :: Software Development :: Libraries :: Application Frameworks",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Framework :: Masonite",
-        "Framework :: Masonite :: 4.0",
-        "Framework :: Masonite :: 4.1",
-        "Framework :: Masonite :: 4.2",
     ],
     # What does your project relate to?
     keywords="Masonite, Python, Inertia.js",
