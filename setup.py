@@ -34,32 +34,22 @@ setup(
     include_package_data=True,
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
-        # How mature is this project? Common values are
-        #   3 - Alpha
-        #   4 - Beta
-        #   5 - Production/Stable
-        "Development Status :: 3 - Alpha",
-        # Indicate who your project is intended for
+        "Development Status :: 3 - Beta",
         "Intended Audience :: Developers",
-        "Topic :: Software Development :: Build Tools",
-        "Environment :: Web Environment",
-        # Pick your license as you wish (should match "license" above)
         "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
-        # Specify the Python versions you support here. In particular, ensure
-        # that you indicate whether you support Python 2, Python 3 or both.
-        "Programming Language :: Python :: 3.4",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
-        "Topic :: Internet :: WWW/HTTP",
-        "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
-        "Topic :: Internet :: WWW/HTTP :: WSGI",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Topic :: Software Development :: Libraries :: Application Frameworks",
         "Topic :: Software Development :: Libraries :: Python Modules",
+        "Framework :: Masonite",
+        "Framework :: Masonite :: 4.0",
+        "Framework :: Masonite :: 4.1",
+        "Framework :: Masonite :: 4.2",
     ],
     # What does your project relate to?
-    keywords="Masonite, Python, Inertia.js, Adapter",
+    keywords="Masonite, Python, Inertia.js",
     # List run-time dependencies here.  These will be installed by pip when
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
