@@ -44,7 +44,7 @@ New to Masonite ? Please first read the [Official Documentation](https://docs.ma
 Masonite strives to have extremely comprehensive documentation 😃. It would be wise to go through the tutorials there.
 If you find any discrepencies or anything that doesn't make sense, be sure to comment directly on the documentation to start a discussion!
 
-Also be sure to join the [Slack channel](http://slack.masoniteproject.com/)!
+Hop on [Masonite Discord Community](https://discord.gg/TwKeFahmPZ) to ask any questions you need!
 
 ## Installation
 
