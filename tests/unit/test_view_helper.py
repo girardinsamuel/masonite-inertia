@@ -1,5 +1,3 @@
-import pdb
-
 from markupsafe import Markup
 
 from masonite.routes import Route
@@ -31,7 +29,6 @@ class TestInertiaViewHelper(TestCase):
         response = self.get("/root-with-helper")
         response.assertContains(
             '<div id="app" data-page="{&quot;component&quot;: &quot;Index&quot;, &quot;props&quot;: {&quot;auth&quot;: {&quot;user&quot;: &quot;&quot;}, &quot;errors&quot;: {}}, &quot;url&quot;: &quot;/root-with-helper&quot;, &quot;version&quot;: &quot;123&quot;}"></div>'
-            # "<div id='app' data-page='\"{&quot;component&quot;: &quot;Index&quot;, &quot;props&quot;: {&quot;auth&quot;: {&quot;user&quot;: &quot;&quot;}, &quot;errors&quot;: {}}, &quot;url&quot;: &quot;/root-with-helper&quot;, &quot;version&quot;: &quot;123&quot;}\"'></div>"  # noqa: E501
         )
 
     def test_can_customize_app_id_through_helper(self):
