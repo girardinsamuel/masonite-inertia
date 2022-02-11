@@ -28,7 +28,7 @@ class TestInertiaViewHelper(TestCase):
     def test_helper_renders_page_data_correctly_inside_template(self):
         response = self.get("/root-with-helper")
         response.assertContains(
-            '<div id="app" data-page="{&quot;component&quot;: &quot;Index&quot;, &quot;props&quot;: {&quot;auth&quot;: {&quot;user&quot;: &quot;&quot;}, &quot;errors&quot;: {}}, &quot;url&quot;: &quot;/root-with-helper&quot;, &quot;version&quot;: &quot;123&quot;}"></div>'
+            '<div id="app" data-page="{&quot;component&quot;: &quot;Index&quot;, &quot;props&quot;: {&quot;auth&quot;: {&quot;user&quot;: &quot;&quot;}, &quot;errors&quot;: {}}, &quot;url&quot;: &quot;/root-with-helper&quot;, &quot;version&quot;: &quot;123&quot;}"></div>'  # noqa: E501
         )
 
     def test_can_customize_app_id_through_helper(self):
