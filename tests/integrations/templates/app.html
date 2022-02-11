@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <div id="app" data-page="{{ page | safe }}"></div>
+    {{ inertia(page) }}
     <script src="/static/js/app.js"></script>
   </body>
 </html>
