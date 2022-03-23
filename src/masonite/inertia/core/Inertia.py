@@ -83,7 +83,7 @@ class Inertia:
         page_data = {
             "component": self.get_component(component),
             "props": props,
-            "url": request.get_path(),
+            "url": request.get_path_with_query(),
             "version": self.get_version(),
         }
         if self.options.get("include_routes"):
