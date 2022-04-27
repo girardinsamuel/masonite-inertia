@@ -15,10 +15,10 @@ from .app.middleware.VerifyCsrfToken import VerifyCsrfToken
 
 class Kernel:
 
-    http_middleware = [InertiaMiddleware, EncryptCookies]
+    http_middleware = [InertiaMiddleware]
 
     route_middleware = {
-        "web": [SessionMiddleware, LoadUserMiddleware, VerifyCsrfToken],
+        "web": [EncryptCookies, SessionMiddleware, LoadUserMiddleware, VerifyCsrfToken],
     }
 
     def __init__(self, app):

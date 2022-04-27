@@ -94,11 +94,13 @@ Inertia adapter comes with a middleware that will control some of the flow of da
 from masonite.inertia import InertiaMiddleware
 
 class AppHttpKernel(HttpKernel):
-    http_middleware = [InertiaMiddleware, EncryptCookies]
+    http_middleware = [InertiaMiddleware]
+    route_middleware = {
+      "web": [EncryptCookies, SessionMiddleware, VerifyCsrfToken]
+    }
 ```
 
-Make sure that this middleware is added before the EncryptCookies middleware else you will get
-some issues with CSRF token validation as `XSRF-TOKEN` value won't be encrypted.
+Make sure that this middleware is added in HTTP middlewares and that EncryptCookies middleware is added as a route middleware else you will get some issues with CSRF token validation as `XSRF-TOKEN` value won't be encrypted.
 
 Finally if you want to change some parameters you can publish the package configuration file in your project:
 

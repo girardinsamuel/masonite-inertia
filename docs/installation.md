@@ -45,7 +45,7 @@ class HandleInertiaRequests(InertiaMiddleware):
 ```
 
 {% hint style="warning" %}
-It's important to put this middleware before the `EncryptCookies` middleware !
+It's important to put this middleware in your HTTP middleware and `EncryptCookies` in route middlewares !
 {% endhint %}
 
 {% code title="config/middleware.py" %}
@@ -55,8 +55,10 @@ It's important to put this middleware before the `EncryptCookies` middleware !
 http_middleware = [
     #...,
     HandleInertiaRequests,
-    EncryptCookies
 ]
+route_middleware = {
+    "web": [EncryptCookies, SessionMiddleware,...]
+}
 ```
 
 {% endcode %}

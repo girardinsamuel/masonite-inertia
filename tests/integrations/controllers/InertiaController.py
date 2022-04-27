@@ -1,9 +1,8 @@
 """Inertia Demo Controller"""
 from masonite.controllers import Controller
-from masonite.views import View
 from masonite.request import Request
 from masonite.response import Response
-
+from masonite.views import View
 from src.masonite.inertia import Inertia, lazy
 
 
@@ -46,7 +45,7 @@ class InertiaController(Controller):
         return view.location("https://inertiajs.com")
 
     def add_errors(self, request: Request, response: Response):
-        request.app.make("session").driver("cookie").flash("errors", {"form": "Form error !"})
+        request.app.make("session").flash("errors", {"form": "Form error !"})
         return response.redirect("/inertia")
 
     def other_root_view(self, view: Inertia):
