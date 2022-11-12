@@ -4,6 +4,7 @@ import json
 from jinja2.exceptions import TemplateNotFound
 
 from masonite.views import View
+from masonite.facades import View as ViewFacade
 
 from ..helpers import inertia as inertia_helper
 
@@ -12,7 +13,8 @@ class InertiaResponse(View):
     def __init__(self, application, page_data, root_view):
         super().__init__(application)
         # TODO: weird we have to do this...
-        self.loaders = application.make("view").loaders
+        self.loaders = ViewFacade.loaders
+        self._shared = ViewFacade._shared
         # inertia specifics
         self.component = page_data["component"]
         self.props = page_data["props"]
