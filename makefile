@@ -21,6 +21,7 @@ format: ## Format code with Black
 coverage: ## Run package tests and upload coverage reports
 	python -m pytest --cov-report term --cov-report xml --cov=src/masonite/inertia tests
 publish: ## Publish package to pypi
+	rm -rf dist
 	python setup.py sdist bdist_wheel
 	twine upload dist/*
 	rm -fr build dist .egg src/masonite_inertia.egg-info

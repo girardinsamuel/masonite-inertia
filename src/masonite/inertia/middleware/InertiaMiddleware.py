@@ -83,7 +83,7 @@ class InertiaMiddleware(Middleware):
 
     def share(self, request):
         """Defines the props that are shared by default. Can be overriden."""
-        errors = self.resolve_validation_errors
+        errors = self.resolve_validation_errors(request)
         return {"errors": errors}
 
     def version(self, request):

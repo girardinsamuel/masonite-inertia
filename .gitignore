@@ -14,7 +14,7 @@ coverage.xml
 dist
 .env
 *.db
-masonite_inertia.egg-info
+*.egg-info
 node_modules
 tests/integrations/storage/compiled/
 storage/logs/
