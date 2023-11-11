@@ -14,7 +14,7 @@
     "laravel-mix": "^6.0.41",
     "postcss": "^8.4.6",
     "resolve-url-loader": "^5.0.0",
-    "vue-loader": "^16.8.3"
+    "vue-loader": "^17.0.1"
   },
   "dependencies": {
     "@inertiajs/inertia-vue3": "^0.3.14",
