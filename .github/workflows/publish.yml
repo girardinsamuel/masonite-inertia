@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # The branch checked out here is the one the tag/release has been created on
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.1.0
         with:
           fetch-depth: 0
       - uses: actions/setup-python@v2
