@@ -15,6 +15,7 @@ class InertiaResponse(View):
         # TODO: weird we have to do this...
         self.loaders = ViewFacade.loaders
         self._shared = ViewFacade._shared
+        self.namespaces = ViewFacade.namespaces
         # inertia specifics
         self.component = page_data["component"]
         self.props = page_data["props"]
