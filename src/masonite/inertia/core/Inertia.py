@@ -50,8 +50,17 @@ class Inertia:
             if route._name:
                 self.routes.update({route._name: route.url})
 
+    def hydrate_errors(self, request):
+        errors = request.session.get("errors") or {}
+
+        if "errors" in self.shared_props:
+            self.shared_props["errors"] = {**self.shared_props["errors"], **errors}
+
+        return self
+
     def render(self, component, props={}, custom_root_view=None):
         request = self.application.make("request")
+        self.hydrate_errors(request)
         page_data = self.get_page_data(component, props)
 
         if request.header("X-Inertia"):
