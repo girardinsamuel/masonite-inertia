@@ -1,6 +1,5 @@
 from masonite.pipeline import Pipeline
 from masonite.request import Request
-from masonite.response.response import Response
 from masonite.routes import Route
 from masonite.tests import TestCase
 from masonite.utils.http import generate_wsgi
@@ -34,6 +33,8 @@ class TestInertiaMiddleware(TestCase):
         return request
 
     def create_response(self, request, component, props):
+        from masonite.response.response import Response
+
         self.application.bind("response", Response(self.application))
         view = self.application.make("inertia").render(component, props)
         Pipeline(request, self.application.make("response")).through(
@@ -46,7 +47,7 @@ class TestInertiaMiddleware(TestCase):
             handler="after",
         )
         test_response = self.application.make("tests.response").build(
-            self.application, request, self.application.make("response"), ""
+            self, self.application, request, self.application.make("response"), ""
         )
         return test_response
 
