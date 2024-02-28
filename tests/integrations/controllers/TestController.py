@@ -22,7 +22,7 @@ class TestController(Controller):
         )
 
     def inertia_with_error(self, session: Session, inertia: Inertia):
-        session.flash("errors", "An error occured.")
+        session.flash("errors", {"global": "An error occured."})
         return inertia.render("HelloWorld")
 
     def helloworld(self, inertia: Inertia):

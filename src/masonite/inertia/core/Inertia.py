@@ -51,10 +51,12 @@ class Inertia:
                 self.routes.update({route._name: route.url})
 
     def hydrate_errors(self, request):
-        errors = request.session.get("errors") or {}
+        errors = request.session.get("errors") or {} if hasattr(request, "session") else {}
 
         if "errors" in self.shared_props:
             self.shared_props["errors"] = {**self.shared_props["errors"], **errors}
+        else:
+            self.share({"errors": errors})
 
         return self
 
