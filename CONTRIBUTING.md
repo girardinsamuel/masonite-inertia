@@ -6,14 +6,9 @@ When contributing to this repository, **please first discuss the change you wish
 
 ## Versions
 
-This package aims to support (for now) both Masonite 2.X and Masonite 3.X versions.
-There are two branches for each:
+This package aims to support Masonite 4.X versions.
 
-- [master](https://github.com/girardinsamuel/masonite-inertia): `>= 3.X.X` for Masonite 3
-- [2.X](https://github.com/girardinsamuel/masonite-inertia/tree/2.X): `>= 2.X.X` Masonite 2.X
-
-New features will be added to Masonite 3 in priority, I will try to maintain important features in Masonite 2.X
-Bug fixes will be done in both versions.
+- [master](https://github.com/eaguad1337/masonite-inertia): `>= 4.X.X` for Masonite 4
 
 ## Getting Started
 
@@ -21,7 +16,7 @@ Bug fixes will be done in both versions.
 
 First you should configure your local environment to be able to make changes in this package.
 
-1. Fork the `https://github.com/girardinsamuel/masonite-inertia` repo.
+1. Fork the `https://github.com/eaguad1337/masonite-inertia` repo.
 2. Clone that repo into your computer: `git clone http://github.com/your-username/masonite-inertia.git`.
 3. Run `git pull origin master` to get the latest version.
 
