@@ -1,5 +1,5 @@
 from masonite.request import Request
-from masonite.response.response import Response
+# from masonite.response import Response
 from masonite.routes import Route
 from masonite.tests import TestCase
 from masonite.utils.http import generate_wsgi
@@ -32,11 +32,12 @@ class TestInertiaResponse(TestCase):
         return request
 
     def create_response(self, request, component, props):
+        from masonite.response import Response
         self.application.bind("response", Response(self.application))
         view = self.application.make("inertia").render(component, props)
         self.application.make("response").view(view)
         test_response = self.application.make("tests.response").build(
-            self.application, request, self.application.make("response"), ""
+            self, self.application, request, self.application.make("response"), ""
         )
         return test_response
 
@@ -179,4 +180,4 @@ class TestInertiaResponse(TestCase):
 
     def test_that_errors_flashed_in_session_are_shared(self):
         res = self.get("/errors")
-        res.assertInertiaHasProp("errors", "An error occured.")
+        res.assertInertiaHasProp("errors", {"global": "An error occured."})

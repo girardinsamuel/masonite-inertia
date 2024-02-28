@@ -4,8 +4,6 @@ import os
 from masonite.configuration import config
 from masonite.middleware import Middleware
 
-# from masonite.utils.location import public_path
-
 
 # TODO: move this as a PR into M4
 def public_path(relative_path, absolute=True):
@@ -24,9 +22,7 @@ class InertiaMiddleware(Middleware):
         inertia = request.app.make("inertia")
         if not inertia.get_version():
             inertia.version(self.version(request))
-        inertia.share(self.share(request))
 
-        inertia.set_root_view(self.set_root_view(request))
         return request
 
     def after(self, request, response):
@@ -68,24 +64,6 @@ class InertiaMiddleware(Middleware):
             response.status(303)
         return response
 
-    def get_session(self, request):
-        return request.app.make("session")
-
-    def resolve_validation_errors(self, request):
-        """Get validation errors in flash session if any and serialize it to be easy to use
-        client-side."""
-        # TODO: implement laravel behaviour
-        session = self.get_session(request)
-        if not session.has("errors"):
-            return {}
-        else:
-            return session.get("errors")
-
-    def share(self, request):
-        """Defines the props that are shared by default. Can be overriden."""
-        errors = self.resolve_validation_errors(request)
-        return {"errors": errors}
-
     def version(self, request):
         """Determines the current asset version. Can be overriden."""
         assets_url = config("inertia.public_path")
@@ -100,6 +78,28 @@ class InertiaMiddleware(Middleware):
                 hasher.update(buf)
             return hasher.hexdigest()
 
+    # @deprecated
+    def get_session(self, request):
+        return request.app.make("session")
+
+    # @deprecated
+    def resolve_validation_errors(self, request):
+        """Get validation errors in flash session if any and serialize it to be easy to use
+        client-side."""
+        # TODO: implement laravel behaviour
+        session = self.get_session(request)
+        if not session.has("errors"):
+            return {}
+        else:
+            return session.get("errors")
+
+    # @deprecated("Sharing erros from middleware is deprecated.")
+    def share(self, request):
+        """Defines the props that are shared by default. Can be overriden."""
+        errors = self.resolve_validation_errors(request)
+        return {"errors": errors}
+
+    # @deprecated("Setting a root view from middelware is deprecated.")
     def set_root_view(self, request):
         """Can be overriden."""
         return config("inertia.root_view")
