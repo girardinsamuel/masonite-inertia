@@ -23,6 +23,8 @@ class InertiaMiddleware(Middleware):
         if not inertia.get_version():
             inertia.version(self.version(request))
 
+        inertia.set_root_view(self.set_root_view(request))
+
         return request
 
     def after(self, request, response):
