@@ -51,12 +51,14 @@ class Inertia:
                 self.routes.update({route._name: route.url})
 
     def hydrate_errors(self, request):
-        errors = request.session.get("errors") or {} if hasattr(request, "session") else {}
+        if self.application.make("session").has("errors"):
+            self.share({"errors": self.application.make("session").get("errors")})
 
-        if "errors" in self.shared_props:
-            self.shared_props["errors"] = {**self.shared_props["errors"], **errors}
-        else:
-            self.share({"errors": errors})
+        if "bag" in self.application.make("view")._shared:
+            bag = self.application.make("view")._shared["bag"]
+
+            if callable(bag) and bag.__name__ == "helper" and bag().any():
+                self.share({"errors": bag().all()})
 
         return self
 
@@ -120,6 +122,9 @@ class Inertia:
         return str(version)
 
     def share(self, key, value=None):
+        if key is None:
+            return
+
         if isinstance(key, dict):
             self.shared_props = {**self.shared_props, **key}
         else:

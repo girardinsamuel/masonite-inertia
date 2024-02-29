@@ -18,3 +18,4 @@ dist
 node_modules
 tests/integrations/storage/compiled/
 storage/logs/
+*.sqlite*

@@ -16,6 +16,7 @@ from masonite.providers import (
     StorageProvider,
     ViewProvider,
     WhitenoiseProvider,
+    ORMProvider,
 )
 from masonite.scheduling.providers import ScheduleProvider
 from masonite.validation.providers import ValidationProvider
@@ -42,4 +43,5 @@ PROVIDERS = [
     AuthorizationProvider,
     ValidationProvider,
     InertiaProvider,
+    ORMProvider,
 ]

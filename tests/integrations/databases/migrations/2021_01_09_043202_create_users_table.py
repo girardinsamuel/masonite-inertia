@@ -13,6 +13,7 @@ class CreateUsersTable(Migration):
             table.string("remember_token").nullable()
             table.string("phone").nullable()
             table.timestamp("verified_at").nullable()
+            table.timestamp("deleted_at").nullable()
             table.timestamps()
 
     def down(self):

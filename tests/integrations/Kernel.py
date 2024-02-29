@@ -58,8 +58,10 @@ class Kernel:
         )
         self.application.bind("events.location", "tests/integrations/events")
         self.application.bind("tasks.location", "tests/integrations/tasks")
-
+        self.application.bind("commands.location", "tests/integrations/app/commands")
         self.application.bind("server.runner", "masonite.commands.ServeCommand.main")
+        self.application.bind("models.location", "tests/integrations/app/models")
+        self.application.bind("observers.location", "tests/integrations/app/models/observers")
 
     def register_middleware(self):
         self.application.make("middleware").add(self.route_middleware).add(
