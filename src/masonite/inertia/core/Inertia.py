@@ -51,9 +51,14 @@ class Inertia:
                 self.routes.update({route._name: route.url})
 
     def hydrate_errors(self, request):
+        # clean errors to avoid them to persist after success calls
+        self.shared_props["errors"] = {}
+
+        # check if there are flashed errors
         if self.application.make("session").has("errors"):
             self.share({"errors": self.application.make("session").get("errors")})
 
+        # check if view has a MessageBag and hydrate these errors
         if "bag" in self.application.make("view")._shared:
             bag = self.application.make("view")._shared["bag"]
 
